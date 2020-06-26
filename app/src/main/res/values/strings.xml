@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">first_project</string>
+    <string name="app_name">edupi</string>
+    <string name="skip">Skip</string>
 </resources>
