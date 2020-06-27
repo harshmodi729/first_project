@@ -1,16 +1,17 @@
 package com.hmatter.first_project.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.IntroAdapter
+import com.hmatter.first_project.base.BaseActivity
 import com.hmatter.first_project.model.IntroItem
 import kotlinx.android.synthetic.main.activity_intro.*
 
-class IntroActivity : AppCompatActivity() {
+class IntroActivity : BaseActivity() {
     private val alIntroItem = ArrayList<IntroItem>()
     private lateinit var introAdapter: IntroAdapter
     private var dots = ArrayList<TextView>()
@@ -26,7 +27,6 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.colorBackground)
         introAdapter = IntroAdapter(this, getIntroItem())
         introPager.adapter = introAdapter
         introPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -37,6 +37,10 @@ class IntroActivity : AppCompatActivity() {
         })
         dots = ArrayList()
         indicatorDots(0)
+
+        btnSkip.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+        }
     }
 
     private fun indicatorDots(position: Int) {

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.SignInActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/lay_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:hint="@string/hint_username"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:hint="@string/hint_password"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintEnd_toEndOf="@id/edUserName"
+            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintTop_toBottomOf="@id/edUserName" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xlarge_margin"
+            android:background="@drawable/bg_rounded_btn"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/colorIntroTitle"
+            android:textSize="@dimen/btn_text"
+            app:layout_constraintEnd_toEndOf="@id/edUserName"
+            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintTop_toBottomOf="@id/edPassword" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:padding="4dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorIntroTitle"
+            android:textSize="@dimen/small_text"
+            app:layout_constraintStart_toStartOf="@id/tvForgotPassword"
+            app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/forgot_your_password"
+            android:textColor="@color/colorIntroTitle"
+            android:textSize="@dimen/small_text"
+            app:layout_constraintEnd_toEndOf="@id/edUserName"
+            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintTop_toBottomOf="@id/tvSignUp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/bg_fb_rounded_btn"
+            android:text="@string/log_in_with_facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/small_text"
+            app:layout_constraintEnd_toEndOf="@id/edUserName"
+            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGoogle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@drawable/bg_google_rounded_btn"
+            android:text="@string/log_in_with_google"
+            android:textAllCaps="false"
+            android:textColor="@color/colorIntroDetail"
+            android:textSize="@dimen/small_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/edUserName"
+            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintTop_toBottomOf="@id/btnFb" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
