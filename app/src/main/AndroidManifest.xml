@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.SignInActivity" />
+        <activity android:name=".ui.SignupActivity" />
         <activity android:name=".ui.IntroActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/SplashFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -5,6 +5,10 @@
     <string name="sign_up">Sign up</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="terms_conditions">I have read and agree to the Terms and Conditions.</string>
+    <string name="hint_confirm_password">Confirm password</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="log_in_with_facebook">Log in With Facebook</string>
     <string name="log_in_with_google">Log in With Google</string>

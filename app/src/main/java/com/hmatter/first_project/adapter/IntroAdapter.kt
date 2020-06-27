@@ -24,7 +24,7 @@ class IntroAdapter(private val context: Context, private val alIntroItem: ArrayL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alIntroItem[position]
         holder.tvIntroTitle.text = item.title
-        holder.ivIntro.setBackgroundResource(R.drawable.ic_launcher_background)
+        holder.ivIntro.setBackgroundResource(R.drawable.slider_image)
         holder.tvIntroDetail.text = item.detail
     }
 
