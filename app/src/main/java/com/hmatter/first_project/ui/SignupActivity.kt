@@ -12,6 +12,8 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         btnToolbarBack.visibility = View.GONE
+        btnToolbarBack.visibility = View.GONE
+
 
     }
 }
