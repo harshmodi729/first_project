@@ -17,5 +17,6 @@ class SignInActivity : BaseActivity() {
         btnToolbarBack.visibility = View.GONE
         tvToolbarTitle.text = getString(R.string.sign_in)
         tvSignUp.setOnClickListener { startActivity(Intent(this, SignUpActivity::class.java)) }
+        tvForgotPassword.setOnClickListener { startActivity(Intent(this,ForgotPasswordActivity::class.java)) }
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="splash_logo_text">56sp</dimen>
+    <dimen name="welcome_text">40sp</dimen>
     <dimen name="medium_text">20sp</dimen>
     <dimen name="small_text">16sp</dimen>
     <dimen name="default_margin">8dp</dimen>
