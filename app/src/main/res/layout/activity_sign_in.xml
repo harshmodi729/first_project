@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
@@ -27,42 +27,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/medium_margin"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edUserNameLay"
+            style="@style/EditTextStyle"
             android:hint="@string/hint_username"
-            android:textSize="@dimen/medium_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edPassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edPasswordLay"
+            style="@style/EditTextStyle"
             android:layout_marginTop="@dimen/small_margin"
             android:hint="@string/hint_password"
-            android:textSize="@dimen/medium_text"
-            app:layout_constraintEnd_toEndOf="@id/edUserName"
-            app:layout_constraintStart_toStartOf="@id/edUserName"
-            app:layout_constraintTop_toBottomOf="@id/edUserName" />
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edUserNameLay">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignIn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
             android:layout_marginTop="@dimen/xlarge_margin"
-            android:background="@drawable/bg_rounded_btn"
             android:text="@string/sign_in"
-            android:textAllCaps="false"
-            android:textColor="@color/colorIntroTitle"
-            android:textSize="@dimen/btn_text"
-            app:layout_constraintEnd_toEndOf="@id/edUserName"
-            app:layout_constraintStart_toStartOf="@id/edUserName"
-            app:layout_constraintTop_toBottomOf="@id/edPassword" />
+            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
+            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintTop_toBottomOf="@id/edPasswordLay" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSignUp"
@@ -84,38 +88,43 @@
             android:text="@string/forgot_your_password"
             android:textColor="@color/colorIntroTitle"
             android:textSize="@dimen/small_text"
-            app:layout_constraintEnd_toEndOf="@id/edUserName"
-            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
+            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
             app:layout_constraintTop_toBottomOf="@id/tvSignUp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
-            android:background="@drawable/bg_fb_rounded_btn"
             android:text="@string/log_in_with_facebook"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/small_text"
-            app:layout_constraintEnd_toEndOf="@id/edUserName"
-            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:backgroundTint="#4460a0"
+            app:icon="@drawable/ic_facebook_f"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
+            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
             app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
-            android:background="@drawable/bg_google_rounded_btn"
             android:text="@string/log_in_with_google"
             android:textAllCaps="false"
             android:textColor="@color/colorIntroDetail"
             android:textSize="@dimen/small_text"
+            app:backgroundTint="@color/colorWhite"
+            app:icon="@drawable/ic_google_g"
+            app:iconGravity="textStart"
+            app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/edUserName"
-            app:layout_constraintStart_toStartOf="@id/edUserName"
+            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
+            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
             app:layout_constraintTop_toBottomOf="@id/btnFb" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

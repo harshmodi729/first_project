@@ -16,7 +16,7 @@
         app:layout_constraintHeight_percent="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintVertical_bias="0.35" />
 
     <LinearLayout
         android:id="@+id/layDots"
@@ -29,18 +29,13 @@
         app:layout_constraintStart_toStartOf="@id/introPager"
         app:layout_constraintTop_toBottomOf="@id/introPager" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSkip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/large_margin"
         android:layout_marginEnd="@dimen/medium_margin"
-        android:background="@drawable/bg_rounded_btn"
         android:text="@string/skip"
-        android:textAllCaps="false"
-        android:textColor="@color/colorIntroTitle"
-        android:textSize="@dimen/btn_text"
         app:layout_constraintEnd_toEndOf="@id/introPager"
         app:layout_constraintStart_toStartOf="@id/introPager"
         app:layout_constraintTop_toBottomOf="@id/layDots" />

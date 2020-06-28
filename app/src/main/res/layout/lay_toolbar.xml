@@ -19,6 +19,7 @@
         android:layout_width="50dp"
         android:layout_height="?actionBarSize"
         android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
         android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"

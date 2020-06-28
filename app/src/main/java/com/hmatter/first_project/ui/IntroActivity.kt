@@ -40,6 +40,7 @@ class IntroActivity : BaseActivity() {
 
         btnSkip.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 
