@@ -37,4 +37,13 @@
         app:layout_constraintBottom_toBottomOf="@id/toolbarBg"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivUserProfile"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:src="@drawable/person"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvToolbarTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
