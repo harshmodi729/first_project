@@ -1,9 +1,11 @@
 package com.hmatter.first_project.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
@@ -17,5 +19,8 @@ class SignUpActivity : BaseActivity() {
         btnToolbarBack.setOnClickListener {
             onBackPressed()
         }
+
+        btnSignUp.setOnClickListener { startActivity(Intent(this, OTPActivity::class.java)) }
+
     }
 }

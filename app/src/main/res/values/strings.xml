@@ -6,6 +6,9 @@
     <string name="sign_up">Sign up</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="reset_password">Reset Password</string>
+    <string name="otp_header_text">Enter 6-digit Verification Code</string>
+    <string name="otp_heading_text">The Verification code was sent to this phone number +84 960238026. Please enter the code.</string>
+    <string name="otp_resend">Resend varification code</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
