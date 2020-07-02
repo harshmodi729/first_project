@@ -1,10 +1,9 @@
-package com.hmatter.first_project.ui
+package com.hmatter.first_project.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.hmatter.first_project.MainActivity
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_sign_in.*

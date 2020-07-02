@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.WelcomeTextActivity">
+    tools:context=".ui.activity.WelcomeTextActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
