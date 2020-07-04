@@ -1,4 +1,4 @@
-package com.hmatter.first_project.ui
+package com.hmatter.first_project.ui.activity
 
 import android.os.Bundle
 import android.util.Log

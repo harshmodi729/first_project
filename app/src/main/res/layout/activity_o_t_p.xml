@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.OTPActivity">
+    tools:context=".ui.activity.OTPActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -54,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:lineColor="@color/colorAccent"
-            app:lineWidth="3dp"
+            app:lineWidth="2dp"
             app:state_filled="true"
             app:viewType="line" />
 
