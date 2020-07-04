@@ -9,15 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.OTPActivity"></activity>
+        <activity android:name=".ui.OTPActivity" />
         <activity android:name=".ui.activity.ForgotPasswordActivity" />
         <activity android:name=".ui.activity.WelcomeTextActivity" />
-        <activity
-            android:name=".ui.activity.SignInActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize|stateHidden" />
-        <activity
-            android:name=".ui.activity.SignUpActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize|stateHidden" />
+        <activity android:name=".ui.activity.SignInActivity" />
+        <activity android:name=".ui.activity.SignUpActivity" />
         <activity android:name=".ui.activity.IntroActivity" />
         <activity
             android:name=".ui.activity.SplashActivity"

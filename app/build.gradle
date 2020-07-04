@@ -38,7 +38,7 @@ dependencies {
     //endregion
 
     //region OTP PinView
-    implementation 'com.github.alahammad:android-OTP-View:1.0.2'
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
     //endregion
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

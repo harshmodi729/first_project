@@ -6,7 +6,6 @@ import android.text.method.LinkMovementMethod
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseActivity
 import com.hmatter.first_project.ui.OTPActivity
-import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
