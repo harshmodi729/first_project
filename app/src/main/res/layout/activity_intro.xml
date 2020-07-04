@@ -20,10 +20,9 @@
 
     <LinearLayout
         android:id="@+id/layDots"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_margin"
-        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/introPager"
         app:layout_constraintStart_toStartOf="@id/introPager"

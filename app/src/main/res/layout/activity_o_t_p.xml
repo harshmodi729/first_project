@@ -59,7 +59,7 @@
             app:viewType="line" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/otp_resend"
+            android:id="@+id/otpResend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"

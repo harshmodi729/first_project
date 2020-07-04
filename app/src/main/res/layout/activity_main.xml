@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     tools:context=".ui.activity.MainActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
@@ -23,8 +23,10 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_bottombar"
         app:itemIconTint="@drawable/bg_bottom_nav_item"
         app:itemTextColor="@color/colorAccent"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

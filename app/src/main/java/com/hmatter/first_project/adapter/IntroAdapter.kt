@@ -8,10 +8,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
-import com.hmatter.first_project.model.IntroItem
+import com.hmatter.first_project.model.SliderItem
 import kotlinx.android.synthetic.main.lay_intro_item.view.*
 
-class IntroAdapter(private val context: Context, private val alIntroItem: ArrayList<IntroItem>) :
+class IntroAdapter(private val context: Context, private val alSliderItem: ArrayList<SliderItem>) :
     RecyclerView.Adapter<IntroAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(context).inflate(
@@ -19,10 +19,10 @@ class IntroAdapter(private val context: Context, private val alIntroItem: ArrayL
         )
     )
 
-    override fun getItemCount() = alIntroItem.size
+    override fun getItemCount() = alSliderItem.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = alIntroItem[position]
+        val item = alSliderItem[position]
         holder.tvIntroTitle.text = item.title
         holder.ivIntro.setBackgroundResource(R.drawable.slider_image)
         holder.tvIntroDetail.text = item.detail
