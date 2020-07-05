@@ -5,9 +5,11 @@ import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.HomeSliderAdapter
+import com.hmatter.first_project.adapter.PopularClassesAdapter
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.model.SliderItem
 import kotlinx.android.synthetic.main.activity_intro.layDots
@@ -17,6 +19,7 @@ import kotlinx.coroutines.Runnable
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private lateinit var homeSliderAdapter: HomeSliderAdapter
+    private lateinit var popularClassesAdapter: PopularClassesAdapter
     private var homeSliderHandler = Handler()
     private val alSliderItem = ArrayList<SliderItem>()
     private var dots = ArrayList<TextView>()
@@ -47,6 +50,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         })
         dots = ArrayList()
         indicatorDots(0)
+
+        popularClassesAdapter = PopularClassesAdapter(mContext)
+        rvPopularClasses.layoutManager = LinearLayoutManager(mContext)
+        rvPopularClasses.adapter = popularClassesAdapter
     }
 
     override fun onResume() {

@@ -21,11 +21,11 @@
         android:id="@+id/tvNewestClassesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/large_margin"
-        android:text="@string/newset_classes"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        android:text="@string/newest_classes"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/small_text"
+        android:textSize="@dimen/medium_text"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -34,7 +34,8 @@
         android:id="@+id/homePager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,4 +52,31 @@
         app:layout_constraintTop_toTopOf="@id/homePager"
         app:layout_constraintVertical_bias="0.75" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPopularClassesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        android:text="@string/popular_classes"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
+        app:layout_constraintTop_toBottomOf="@id/homePager" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPopularClasses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPopularClassesLabel" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupPopularClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvPopularClassesLabel,rvPopularClasses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

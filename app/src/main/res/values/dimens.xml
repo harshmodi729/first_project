@@ -2,15 +2,17 @@
 <resources>
     <dimen name="splash_logo_text">56sp</dimen>
     <dimen name="welcome_text">40sp</dimen>
-    <dimen name="medium_text">20sp</dimen>
-    <dimen name="large_text">28sp</dimen>
-    <dimen name="small_text">16sp</dimen>
+    <dimen name="xsmall_text">12sp</dimen>
+    <dimen name="small_text">14sp</dimen>
+    <dimen name="medium_text">16sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+    <dimen name="xlarge_text">28sp</dimen>
     <dimen name="xsmall_margin">4dp</dimen>
-    <dimen name="default_margin">8dp</dimen>
-    <dimen name="small_margin">16dp</dimen>
-    <dimen name="medium_margin">24dp</dimen>
-    <dimen name="large_margin">36dp</dimen>
-    <dimen name="xlarge_margin">42dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+    <dimen name="large_margin">24dp</dimen>
+    <dimen name="xlarge_margin">36dp</dimen>
+    <dimen name="xxlarge_margin">42dp</dimen>
     <dimen name="btn_text">18sp</dimen>
     <dimen name="toolbar_title_text">28sp</dimen>
 </resources>

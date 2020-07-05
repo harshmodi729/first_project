@@ -45,7 +45,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edEmailLay"
             style="@style/EditTextStyle"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:hint="@string/hint_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edPhoneLay"
             style="@style/EditTextStyle"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:hint="@string/hint_phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edPasswordLay"
             style="@style/EditTextStyle"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:hint="@string/hint_password"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edConfirmPasswordLay"
             style="@style/EditTextStyle"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:hint="@string/hint_confirm_password"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +112,8 @@
             android:id="@+id/chTerms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:padding="@dimen/default_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:padding="@dimen/small_margin"
             android:text="@string/terms_conditions"
             android:textColor="@color/colorAccent"
             android:textColorLink="@color/colorPrimary"
@@ -124,8 +124,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
             style="@style/ButtonStyle"
-            android:layout_marginTop="@dimen/xlarge_margin"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginTop="@dimen/xxlarge_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
