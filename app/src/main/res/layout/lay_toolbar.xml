@@ -46,4 +46,20 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tvToolbarTitle"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/ivSearchLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:textSize="@dimen/small_text"
+        android:background="@drawable/layout_bg"
+        android:layout_margin="24dp"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:padding="10dp"
+        android:hint="@string/search_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/ivUserProfile"
+        app:layout_constraintEnd_toEndOf="parent">
+    </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
