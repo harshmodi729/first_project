@@ -2,7 +2,7 @@ package com.hmatter.first_project.remote
 
 import com.google.gson.annotations.SerializedName
 
-class ApiResponse<T> {
+open class ApiResponse<T> {
     @SerializedName("data")
     val data: T? = null
 
@@ -11,4 +11,8 @@ class ApiResponse<T> {
 
     @SerializedName("message")
     val message: String = ""
+
+    fun isSuccess(): Boolean {
+        return result > 0
+    }
 }
