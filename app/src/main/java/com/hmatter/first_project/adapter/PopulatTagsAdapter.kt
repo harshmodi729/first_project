@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
+import com.hmatter.first_project.extension.makeToast
 import kotlinx.android.synthetic.main.list_item_tags.view.*
 
 class PopularTagsAdapter(
@@ -20,18 +21,16 @@ class PopularTagsAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return tagList.size
-    }
+    override fun getItemCount() = tagList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tagName?.text = tagList.get(position)
+        holder.tagName.text = tagList[position]
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, tagList.get(position), Toast.LENGTH_LONG).show()
+            context.makeToast(tagList[position])
         }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tagName = view.tvTagName
+        val tagName: AppCompatTextView = view.tvTagName
     }
 }

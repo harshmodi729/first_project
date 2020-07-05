@@ -6,18 +6,25 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTagName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="@string/text_placeholder"
-        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/xsmall_margin"
         android:background="#80c0c0c0"
+        app:layout_constraintEnd_toEndOf="@id/tvTagName"
         app:layout_constraintStart_toStartOf="@id/tvTagName"
-        app:layout_constraintTop_toBottomOf="@id/tvTagName"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTagName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

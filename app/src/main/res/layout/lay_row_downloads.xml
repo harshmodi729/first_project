@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/small_margin"
+    android:layout_marginStart="@dimen/large_margin"
     android:layout_marginTop="@dimen/small_margin"
-    android:layout_marginEnd="@dimen/small_margin"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_marginEnd="@dimen/large_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,6 +40,7 @@
             android:text="Gordon Ramsay"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivGuideline"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,10 +55,9 @@
             android:text="This is sample text. Class Detail"
             android:textColor="@color/colorIntroDetail"
             android:textSize="@dimen/small_text"
+            app:layout_constraintEnd_toEndOf="@id/tvClassName"
             app:layout_constraintStart_toStartOf="@id/tvClassName"
             app:layout_constraintTop_toBottomOf="@id/tvClassName" />
-
-
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingClass"
@@ -70,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:numStars="5"
             android:progressDrawable="@drawable/bg_rating_bar"
             android:rating="3.5"

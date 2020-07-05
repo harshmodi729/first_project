@@ -3,6 +3,7 @@ package com.hmatter.first_project.ui.fragment
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.PopularTagsAdapter
@@ -25,7 +26,12 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         val adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, cooking) }
         ivSearchLayout.setAdapter(adapter)
-        ivSearchLayout.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.layout_bg_dropdown));
+        ivSearchLayout.setDropDownBackgroundDrawable(
+            ContextCompat.getDrawable(
+                mContext,
+                R.drawable.layout_bg_dropdown
+            )
+        )
 
         tagList.add("Business & Management")
         tagList.add("Creative Art & Media")
@@ -39,6 +45,5 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         var layoutManager = LinearLayoutManager(activity)
         rcvTag.layoutManager = layoutManager
         rcvTag.adapter = activity?.let { PopularTagsAdapter(it, tagList) }
-
     }
 }

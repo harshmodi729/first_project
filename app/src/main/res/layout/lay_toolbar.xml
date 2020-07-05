@@ -49,17 +49,17 @@
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/ivSearchLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:textSize="@dimen/small_text"
+        android:layout_margin="@dimen/large_margin"
         android:background="@drawable/layout_bg"
-        android:layout_margin="24dp"
         android:drawableStart="@drawable/ic_baseline_search_24"
-        android:padding="10dp"
         android:hint="@string/search_placeholder"
+        android:padding="10dp"
+        android:textSize="@dimen/small_text"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/ivUserProfile"
-        app:layout_constraintEnd_toEndOf="parent">
-    </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
