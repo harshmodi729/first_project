@@ -23,6 +23,16 @@
     <string name="download">Download</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
+    <string name="search_tag_text">Popular Tags</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="cooking_array">
+        <item>Cooking lessons</item>
+        <item>Cooking Art</item>
+        <item>Cooking at home</item>
+        <item>Cooking a good meal</item>
+    </string-array>
+    <string name="text_placeholder">Placeholder</string>
+    <string name="search_placeholder">Try "Easy ways write a novel"</string>
+
 </resources>
