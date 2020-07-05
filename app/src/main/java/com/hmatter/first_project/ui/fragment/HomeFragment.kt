@@ -54,6 +54,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         popularClassesAdapter = PopularClassesAdapter(mContext)
         rvPopularClasses.layoutManager = LinearLayoutManager(mContext)
         rvPopularClasses.adapter = popularClassesAdapter
+
+//        https://run.mocky.io/v3/9756db14-2aa0-44dd-8bc9-30629ea66ddd
     }
 
     override fun onResume() {
