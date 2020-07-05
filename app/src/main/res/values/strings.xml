@@ -8,7 +8,7 @@
     <string name="reset_password">Reset Password</string>
     <string name="otp_header_text">Enter 6-digit Verification Code</string>
     <string name="otp_heading_text">The Verification code was sent to this phone number +84 960238026. Please enter the code.</string>
-    <string name="otp_resend">Resend varification code</string>
+    <string name="otp_resend">Resend verification code</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
@@ -23,9 +23,9 @@
     <string name="download">Download</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
+    <string name="newest_classes">Newest Classes</string>
+    <string name="popular_classes">Popular Classes</string>
     <string name="search_tag_text">Popular Tags</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="cooking_array">
         <item>Cooking lessons</item>
         <item>Cooking Art</item>

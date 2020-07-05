@@ -18,15 +18,75 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNewestClassesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        android:text="@string/newest_classes"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/btn_text"
+        android:textSize="@dimen/medium_text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/homePager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNewestClassesLabel" />
+
+    <LinearLayout
+        android:id="@+id/layDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/homePager"
+        app:layout_constraintEnd_toEndOf="@id/homePager"
+        app:layout_constraintStart_toStartOf="@id/homePager"
+        app:layout_constraintTop_toTopOf="@id/homePager"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPopularClassesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        android:text="@string/popular_classes"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
+        app:layout_constraintTop_toBottomOf="@id/homePager" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPopularClasses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPopularClassesLabel" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupPopularClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvPopularClassesLabel,rvPopularClasses" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

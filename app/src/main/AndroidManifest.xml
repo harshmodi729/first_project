@@ -11,10 +11,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.OTPActivity" />
         <activity android:name=".ui.activity.ForgotPasswordActivity" />
-        <activity android:name=".ui.activity.WelcomeTextActivity" />
         <activity android:name=".ui.activity.SignInActivity" />
         <activity android:name=".ui.activity.SignUpActivity" />
         <activity android:name=".ui.activity.IntroActivity" />
+        <activity
+            android:name=".ui.activity.WelcomeTextActivity"
+            android:theme="@style/SplashFullscreen" />
         <activity
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/SplashFullscreen">

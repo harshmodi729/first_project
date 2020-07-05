@@ -7,9 +7,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseActivity
+import com.hmatter.first_project.extension.makeToast
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.lay_reset_forgot_password.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
@@ -36,11 +36,7 @@ class ForgotPasswordActivity : BaseActivity(), TextWatcher {
                         layReset.visibility = View.VISIBLE
                         return true
                     }
-                } else Toast.makeText(
-                    this@ForgotPasswordActivity,
-                    "Please enter username",
-                    Toast.LENGTH_SHORT
-                ).show()
+                } else makeToast("Please enter username")
                 return false
             }
         })

@@ -33,7 +33,7 @@
             android:padding="4dp"
             android:text="@string/otp_heading_text"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/medium_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,10 +42,10 @@
             android:id="@+id/otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/large_margin"
             android:inputType="number"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/large_text"
+            android:textSize="@dimen/xlarge_text"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
             app:itemSpacing="5dp"
@@ -59,14 +59,14 @@
             app:viewType="line" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/otp_resend"
+            android:id="@+id/otpResend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/large_margin"
             android:padding="4dp"
             android:text="@string/otp_resend"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/medium_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/otp" />

@@ -8,11 +8,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.IntroAdapter
 import com.hmatter.first_project.base.BaseActivity
-import com.hmatter.first_project.model.IntroItem
+import com.hmatter.first_project.model.SliderItem
 import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : BaseActivity() {
-    private val alIntroItem = ArrayList<IntroItem>()
+    private val alSliderItem = ArrayList<SliderItem>()
     private lateinit var introAdapter: IntroAdapter
     private var dots = ArrayList<TextView>()
     private val titles =
@@ -46,7 +46,7 @@ class IntroActivity : BaseActivity() {
 
     private fun indicatorDots(position: Int) {
         layDots.removeAllViews()
-        for (i in 0 until alIntroItem.size) {
+        for (i in 0 until alSliderItem.size) {
             val tvDot = TextView(this)
             dots.add(tvDot)
             dots[i].text = "\u25CF"
@@ -60,13 +60,13 @@ class IntroActivity : BaseActivity() {
         }
     }
 
-    private fun getIntroItem(): ArrayList<IntroItem> {
+    private fun getIntroItem(): ArrayList<SliderItem> {
         for (i in 0..2) {
-            val introItem = IntroItem()
+            val introItem = SliderItem()
             introItem.title = titles[i]
             introItem.detail = details[i]
-            alIntroItem.add(introItem)
+            alSliderItem.add(introItem)
         }
-        return alIntroItem
+        return alSliderItem
     }
 }
