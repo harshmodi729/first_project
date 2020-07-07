@@ -33,5 +33,7 @@
         <item>Cooking a good meal</item>
     </string-array>
     <string name="text_placeholder">Placeholder</string>
+    <string name="app_setting">App Settings</string>
+    <string name="acc_setting">Account Settings</string>
     <string name="search_placeholder">Try "Easy ways write a novel"</string>
 </resources>
