@@ -5,13 +5,18 @@ import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.HomeSliderAdapter
 import com.hmatter.first_project.adapter.PopularClassesAdapter
 import com.hmatter.first_project.base.BaseFragment
+import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.SliderItem
+import com.hmatter.first_project.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_intro.layDots
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
@@ -54,6 +59,22 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         popularClassesAdapter = PopularClassesAdapter(mContext)
         rvPopularClasses.layoutManager = LinearLayoutManager(mContext)
         rvPopularClasses.adapter = popularClassesAdapter
+
+        val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
+        homeViewModel.getPopularClasses().apply {
+            progressBar.visibility = View.VISIBLE
+        }
+        homeViewModel.alPopularClasses.observe(viewLifecycleOwner, Observer {
+            progressBar.visibility = View.GONE
+            when (it) {
+                is BaseResult.Success -> {
+                    mContext.makeToast("Done")
+                }
+                is BaseResult.Error -> {
+                    mContext.makeToast("OOps")
+                }
+            }
+        })
 
 //        https://run.mocky.io/v3/9756db14-2aa0-44dd-8bc9-30629ea66ddd
     }

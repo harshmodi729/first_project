@@ -1,14 +1,18 @@
 package com.hmatter.first_project.remote
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-open class ApiResponse<T> {
+class ApiResponse<T> {
+    @Expose
     @SerializedName("data")
     val data: T? = null
 
+    @Expose
     @SerializedName("result")
     val result: Int = 0
 
+    @Expose
     @SerializedName("message")
     val message: String = ""
 

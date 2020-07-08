@@ -1,30 +1,38 @@
 package com.hmatter.first_project.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class PopularClassItem {
+data class PopularClassItem(
+    @Expose
     @SerializedName("tutor_name")
-    val tutorName: String = ""
+    val tutorName: String = "",
 
+    @Expose
     @SerializedName("class_price")
-    val classPrice: String = ""
+    val classPrice: String = "",
 
+    @Expose
     @SerializedName("class_category")
-    val classCategory: ArrayList<CategoryItem> = ArrayList()
+    val classCategory: List<CategoryItem> = ArrayList(),
 
+    @Expose
     @SerializedName("class_rating")
-    val classRating: Double = 0.0
+    val classRating: Double = 0.0,
 
+    @Expose
     @SerializedName("class_detail")
-    val classDetail: String = ""
+    val classDetail: String = "",
 
+    @Expose
     @SerializedName("total_videos")
     val totalVideos: Int = 0
-}
+)
 
-class CategoryItem {
+data class CategoryItem(
+    @Expose
     @SerializedName("category_name")
     val categoryName: String = ""
-}
+)
 
 
