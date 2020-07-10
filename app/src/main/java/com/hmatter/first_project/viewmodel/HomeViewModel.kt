@@ -1,21 +1,19 @@
 package com.hmatter.first_project.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
-import com.hmatter.first_project.remote.ApiManager
+import com.hmatter.first_project.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : BaseViewModel() {
 
     val alPopularClasses = MutableLiveData<BaseResult<Any>>()
 
     fun getPopularClasses() {
         viewModelScope.launch {
             try {
-                val response =
-                    ApiManager.getApiServices().getPopularClasses()
+                val response = getApiServiceManager().getPopularClasses()
                 if (response.isSuccess()) {
                     response.data?.let {
                         if (response.isSuccess())

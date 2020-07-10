@@ -30,14 +30,14 @@
             android:theme="@style/SplashFullscreen" />
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:theme="@style/SplashFullscreen"></activity>
-        <activity android:name=".ui.activity.MainActivity">
+            android:theme="@style/SplashFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.MainActivity" />
     </application>
 
 </manifest>
