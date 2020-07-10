@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 
 class ApiResponse<T> {
     @Expose
-    @SerializedName("data")
-    val data: T? = null
-
-    @Expose
     @SerializedName("result")
     val result: Int = 0
+
+    @Expose
+    @SerializedName("data")
+    val data: T? = null
 
     @Expose
     @SerializedName("message")

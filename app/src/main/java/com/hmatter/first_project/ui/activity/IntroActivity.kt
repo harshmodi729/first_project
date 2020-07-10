@@ -49,7 +49,7 @@ class IntroActivity : BaseActivity() {
         for (i in 0 until alSliderItem.size) {
             val tvDot = TextView(this)
             dots.add(tvDot)
-            dots[i].text = "\u25CF"
+            dots[i].text = getString(R.string.bullet)
             dots[i].textSize = 10F
             dots[i].setTextColor(ContextCompat.getColor(this, R.color.colorInactiveIndicator))
             dots[i].setPadding(8, 8, 8, 8)

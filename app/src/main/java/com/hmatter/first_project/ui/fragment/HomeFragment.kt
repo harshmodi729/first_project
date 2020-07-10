@@ -15,6 +15,7 @@ import com.hmatter.first_project.adapter.PopularClassesAdapter
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.extension.makeToast
+import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.SliderItem
 import com.hmatter.first_project.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_intro.layDots
@@ -68,7 +69,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             progressBar.visibility = View.GONE
             when (it) {
                 is BaseResult.Success -> {
-                    mContext.makeToast("Done")
+                    popularClassesAdapter.addData(it.item as ArrayList<PopularClassItem>)
                 }
                 is BaseResult.Error -> {
                     mContext.makeToast("OOps")
@@ -111,7 +112,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         for (i in 0 until alSliderItem.size) {
             val tvDot = TextView(mContext)
             dots.add(tvDot)
-            dots[i].text = "\u25CF"
+            dots[i].text = mContext.getString(R.string.bullet)
             dots[i].textSize = 10F
             dots[i].setTextColor(ContextCompat.getColor(mContext, R.color.colorInactiveIndicator))
             dots[i].setPadding(8, 8, 8, 8)

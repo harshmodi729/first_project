@@ -14,11 +14,11 @@ data class PopularClassItem(
 
     @Expose
     @SerializedName("class_category")
-    val classCategory: List<CategoryItem> = ArrayList(),
+    val classCategory: ArrayList<CategoryItem> = ArrayList(),
 
     @Expose
     @SerializedName("class_rating")
-    val classRating: Double = 0.0,
+    val classRating: Float = 0F,
 
     @Expose
     @SerializedName("class_detail")

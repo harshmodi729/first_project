@@ -34,4 +34,5 @@
     </string-array>
     <string name="text_placeholder">Placeholder</string>
     <string name="search_placeholder">Try "Easy ways write a novel"</string>
+    <string name="bullet">●</string>
 </resources>
