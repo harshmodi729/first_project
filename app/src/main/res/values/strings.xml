@@ -34,5 +34,9 @@
     </string-array>
     <string name="text_placeholder">Placeholder</string>
     <string name="search_placeholder">Try "Easy ways write a novel"</string>
+    <string name="indicator_bullet">\u25CF</string>
     <string name="bullet">\u2022</string>
+    <string name="progress_dialog_text">Wait a few seconds…</string>
+    <string name="account_created_successfully">Your account created successfully!</string>
+    <string name="no_data_available">No data available.</string>
 </resources>

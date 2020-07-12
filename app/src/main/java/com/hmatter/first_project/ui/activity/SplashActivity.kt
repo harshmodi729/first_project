@@ -13,7 +13,7 @@ class SplashActivity : BaseActivity() {
 
         Handler().run {
             postDelayed(Runnable {
-                startActivity(Intent(this@SplashActivity, WelcomeTextActivity::class.java))
+                startActivity(Intent(this@SplashActivity, StartupActivity::class.java))
                 finish()
             }, 1500)
         }

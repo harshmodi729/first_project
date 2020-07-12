@@ -36,4 +36,9 @@
         <item name="android:textColor">@color/colorIntroTitle</item>
         <item name="android:textSize">@dimen/btn_text</item>
     </style>
+
+    <style name="DialogStyle" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
 </resources>

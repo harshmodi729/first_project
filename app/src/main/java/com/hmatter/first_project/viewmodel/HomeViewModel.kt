@@ -20,13 +20,20 @@ class HomeViewModel : BaseViewModel() {
                             alPopularClasses.value = BaseResult.Success(it)
                         else
                             alPopularClasses.value =
-                                BaseResult.Error(IllegalStateException("Something wrong, please try again later"))
+                                BaseResult.Error(
+                                    IllegalStateException(),
+                                    "Something wrong, please try again later"
+                                )
                     } ?: kotlin.run {
-                        BaseResult.Error(IllegalStateException("Something wrong, please try again later"))
+                        BaseResult.Error(
+                            IllegalStateException(),
+                            "Something wrong, please try again later"
+                        )
                     }
                 }
             } catch (exception: Exception) {
-                alPopularClasses.value = BaseResult.Error(exception)
+                alPopularClasses.value =
+                    BaseResult.Error(exception, "Something wrong, please try again later")
             }
         }
     }

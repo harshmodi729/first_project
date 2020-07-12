@@ -5,11 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import com.hmatter.first_project.R
+import com.hmatter.first_project.extension.getProgressDialog
+import com.hmatter.first_project.extension.setBlurImage
 
 abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
 
     lateinit var mContext: Activity
+    private var progressDialog: AlertDialog? = null
+    private var successDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +24,46 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         savedInstanceState: Bundle?
     ): View? {
         mContext = context as BaseActivity
-
+        progressDialog = mContext.getProgressDialog(R.layout.lay_progress_dialog)
+        successDialog = mContext.getProgressDialog(
+            R.layout.lay_success_dialog,
+            getString(R.string.account_created_successfully),
+            true
+        )
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    fun showProgressDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!progressDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            progressDialog?.show()
+        }
+    }
+
+    fun showSuccessDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!successDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            successDialog?.show()
+        }
+    }
+
+    fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
+        if (progressDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            progressDialog?.hide()
+        }
+    }
+
+    fun hideSuccessDialog(ivDialogBg: AppCompatImageView) {
+        if (successDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            successDialog?.hide()
+        }
     }
 }

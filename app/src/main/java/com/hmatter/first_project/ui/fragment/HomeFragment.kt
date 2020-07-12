@@ -18,8 +18,9 @@ import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.SliderItem
 import com.hmatter.first_project.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.activity_intro.layDots
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_intro.layDots
+import kotlinx.android.synthetic.main.lay_no_data.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 import kotlinx.coroutines.Runnable
 
@@ -63,16 +64,20 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
         homeViewModel.getPopularClasses().apply {
-            progressBar.visibility = View.VISIBLE
+            layHome.post {
+                showProgressDialog(layHome, ivDialogBg)
+            }
         }
         homeViewModel.alPopularClasses.observe(viewLifecycleOwner, Observer {
-            progressBar.visibility = View.GONE
+            hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
                     popularClassesAdapter.addData(it.item as ArrayList<PopularClassItem>)
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast("OOps")
+                    rvPopularClasses.visibility = View.GONE
+                    tvNoData.visibility = View.VISIBLE
+                    mContext.makeToast(it.errorMessage)
                 }
             }
         })
@@ -112,7 +117,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         for (i in 0 until alSliderItem.size) {
             val tvDot = TextView(mContext)
             dots.add(tvDot)
-            dots[i].text = mContext.getString(R.string.bullet)
+            dots[i].text = getString(R.string.indicator_bullet)
             dots[i].textSize = 10F
             dots[i].setTextColor(ContextCompat.getColor(mContext, R.color.colorInactiveIndicator))
             dots[i].setPadding(8, 8, 8, 8)

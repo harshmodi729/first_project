@@ -1,17 +1,17 @@
-package com.hmatter.first_project.ui.activity
+package com.hmatter.first_project.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.IntroAdapter
-import com.hmatter.first_project.base.BaseActivity
+import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.model.SliderItem
-import kotlinx.android.synthetic.main.activity_intro.*
+import kotlinx.android.synthetic.main.fragment_intro.*
 
-class IntroActivity : BaseActivity() {
+class IntroFragment : BaseFragment(R.layout.fragment_intro) {
     private val alSliderItem = ArrayList<SliderItem>()
     private lateinit var introAdapter: IntroAdapter
     private var dots = ArrayList<TextView>()
@@ -23,11 +23,9 @@ class IntroActivity : BaseActivity() {
         "Perfect homemade paste, or write a novel... All wit acess to 100+ class."
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
-
-        introAdapter = IntroAdapter(this, getIntroItem())
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        introAdapter = IntroAdapter(mContext, getIntroItem())
         introPager.adapter = introAdapter
         introPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -39,24 +37,23 @@ class IntroActivity : BaseActivity() {
         indicatorDots(0)
 
         btnSkip.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
+            it.findNavController().navigate(R.id.action_nav_intro_to_nav_sign_in)
         }
     }
 
     private fun indicatorDots(position: Int) {
         layDots.removeAllViews()
         for (i in 0 until alSliderItem.size) {
-            val tvDot = TextView(this)
+            val tvDot = TextView(mContext)
             dots.add(tvDot)
-            dots[i].text = getString(R.string.bullet)
+            dots[i].text = getString(R.string.indicator_bullet)
             dots[i].textSize = 10F
-            dots[i].setTextColor(ContextCompat.getColor(this, R.color.colorInactiveIndicator))
+            dots[i].setTextColor(ContextCompat.getColor(mContext, R.color.colorInactiveIndicator))
             dots[i].setPadding(8, 8, 8, 8)
             layDots.addView(dots[i])
         }
         if (dots.size > 0) {
-            dots[position].setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            dots[position].setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary))
         }
     }
 
