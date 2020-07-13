@@ -73,6 +73,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
+                    rvPopularClasses.visibility = View.VISIBLE
+                    tvNoData.visibility = View.GONE
                     popularClassesAdapter.addData(it.item as ArrayList<PopularClassItem>)
                 }
                 is BaseResult.Error -> {
