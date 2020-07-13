@@ -17,14 +17,54 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvAccountSetting"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/settings"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/btn_text"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="@string/acc_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/xsmall_margin"
+        android:background="#80c0c0c0"
+        app:layout_constraintEnd_toEndOf="@id/tvAccountSetting"
+        app:layout_constraintStart_toStartOf="@id/tvAccountSetting"
+        app:layout_constraintTop_toBottomOf="@id/tvAccountSetting" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAppSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="@string/app_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAccountSetting" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/xsmall_margin"
+        android:background="#80c0c0c0"
+        app:layout_constraintEnd_toEndOf="@id/tvAppSettings"
+        app:layout_constraintStart_toStartOf="@id/tvAppSettings"
+        app:layout_constraintTop_toBottomOf="@id/tvAppSettings" />
 </androidx.constraintlayout.widget.ConstraintLayout>
