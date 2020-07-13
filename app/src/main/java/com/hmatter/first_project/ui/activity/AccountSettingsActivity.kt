@@ -17,8 +17,6 @@ class AccountSettingsActivity : BaseActivity() {
             onBackPressed()
         }
         btnLogout.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
         }
     }
 }
