@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <View
-        android:layout_width="0dp"
+        android:layout_width="0.5dp"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/xsmall_margin"
         android:background="#80c0c0c0"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvAccountSetting"/>
 
     <View
-        android:layout_width="0dp"
+        android:layout_width="0.5dp"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/xsmall_margin"
         android:background="#80c0c0c0"
