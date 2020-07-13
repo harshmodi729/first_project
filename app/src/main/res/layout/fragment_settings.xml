@@ -23,18 +23,19 @@
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/large_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="10dp"
-        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
         android:text="@string/acc_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <View
-        android:layout_width="0.5dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
         android:layout_marginTop="@dimen/xsmall_margin"
         android:background="#80c0c0c0"
         app:layout_constraintEnd_toEndOf="@id/tvAccountSetting"
@@ -48,22 +49,22 @@
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/large_margin"
-        android:ellipsize="end"
-        android:padding="10dp"
-        android:maxLines="1"
+        android:background="?android:attr/selectableItemBackground"
         android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="10dp"
         android:text="@string/app_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAccountSetting"/>
+        app:layout_constraintTop_toBottomOf="@id/tvAccountSetting" />
 
     <View
-        android:layout_width="0.5dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
         android:layout_marginTop="@dimen/xsmall_margin"
         android:background="#80c0c0c0"
         app:layout_constraintEnd_toEndOf="@id/tvAppSettings"
         app:layout_constraintStart_toStartOf="@id/tvAppSettings"
         app:layout_constraintTop_toBottomOf="@id/tvAppSettings" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
