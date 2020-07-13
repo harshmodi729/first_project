@@ -61,6 +61,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         popularClassesAdapter = PopularClassesAdapter(mContext)
         rvPopularClasses.layoutManager = LinearLayoutManager(mContext)
         rvPopularClasses.adapter = popularClassesAdapter
+        rvPopularClasses.isNestedScrollingEnabled = false
 
         val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
         homeViewModel.getPopularClasses().apply {
