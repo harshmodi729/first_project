@@ -1,6 +1,7 @@
 package com.hmatter.first_project.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.hmatter.first_project.R
@@ -15,5 +16,12 @@ class MainActivity : BaseActivity() {
         val navigationHost =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigation, navigationHost.navController)
+
+        navigationHost.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.nav_account_settings -> bottomNavigation.visibility = View.GONE
+                else -> bottomNavigation.visibility = View.VISIBLE
+            }
+        }
     }
 }

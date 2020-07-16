@@ -38,5 +38,21 @@
         android:id="@+id/nav_settings"
         android:name="com.hmatter.first_project.ui.fragment.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_nav_settings_to_nav_account_settings"
+            app:destination="@id/nav_account_settings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_account_settings"
+        android:name="com.hmatter.first_project.ui.fragment.AccountSettingsFragment"
+        android:label="@string/account_settings"
+        tools:layout="@layout/fragment_account_settings">
+        <action
+            android:id="@+id/action_nav_account_settings_to_nav_settings"
+            app:destination="@id/nav_settings"
+            app:popUpTo="@id/nav_settings"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

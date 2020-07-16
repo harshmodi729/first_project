@@ -42,4 +42,5 @@
     <string name="progress_dialog_text">Wait a few seconds…</string>
     <string name="account_created_successfully">Your account created successfully!</string>
     <string name="no_data_available">No data available.</string>
+    <string name="logout">Logout</string>
 </resources>
