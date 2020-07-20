@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.hmatter.first_project.R
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.getProgressDialog
 import com.hmatter.first_project.extension.setBlurImage
 
@@ -24,11 +25,11 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         savedInstanceState: Bundle?
     ): View? {
         mContext = context as BaseActivity
-        progressDialog = mContext.getProgressDialog(R.layout.lay_progress_dialog)
+        progressDialog = mContext.getProgressDialog(R.layout.lay_dialog_progress)
         successDialog = mContext.getProgressDialog(
-            R.layout.lay_success_dialog,
+            R.layout.lay_dialog_success,
             getString(R.string.account_created_successfully),
-            true
+            Constants.SUCCESS_DIALOG
         )
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -43,6 +44,13 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         }
     }
 
+    fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
+        if (progressDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            progressDialog?.hide()
+        }
+    }
+
     fun showSuccessDialog(
         rootView: View,
         ivDialogBg: AppCompatImageView
@@ -53,17 +61,20 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         }
     }
 
-    fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
-        if (progressDialog?.isShowing!!) {
-            ivDialogBg.visibility = View.GONE
-            progressDialog?.hide()
-        }
-    }
-
     fun hideSuccessDialog(ivDialogBg: AppCompatImageView) {
         if (successDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
             successDialog?.hide()
+        }
+    }
+
+    fun showDeleteDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!successDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            successDialog?.show()
         }
     }
 }

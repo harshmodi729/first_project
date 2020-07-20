@@ -1,38 +1,50 @@
 package com.hmatter.first_project.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
-import kotlinx.android.synthetic.main.lay_row_downloads.view.*
+import com.zerobranch.layout.SwipeLayout
+import kotlinx.android.synthetic.main.lay_downloads_item.view.*
 
-class DownloadAdapter(private val items: MutableList<String>) : RecyclerView.Adapter<DownloadAdapter.VH>() {
+class DownloadAdapter(private val context: Context) :
+    RecyclerView.Adapter<DownloadAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(parent)
+    private var alDownloadItem = ArrayList<String>()
+    var onDeleteClickListener: ((item: String, position: Int) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.lay_downloads_item, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-       holder.bind(items[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.swipeLayout.close()
+        holder.tvClassName.text = alDownloadItem[position]
+        holder.deleteView.setOnClickListener {
+            onDeleteClickListener?.invoke(alDownloadItem[position], position)
+        }
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = alDownloadItem.size
 
-    fun addItem(name: String) {
-        items.add(name)
-        notifyItemInserted(items.size)
+    fun addData(alDownloadItem: ArrayList<String>) {
+        this.alDownloadItem = alDownloadItem
+        notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int) {
-        items.removeAt(position)
+    fun removeItem(position: Int) {
+        alDownloadItem.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    class VH(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.lay_row_downloads, parent, false)) {
-
-        fun bind(name: String) = with(itemView) {
-            tvClassName.text = name
-        }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val swipeLayout: SwipeLayout = itemView.swipeLayout
+        val tvClassName: AppCompatTextView = itemView.tvClassName
+        val deleteView: ViewGroup = itemView.deleteView
     }
 }

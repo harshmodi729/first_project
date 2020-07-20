@@ -43,4 +43,7 @@
     <string name="account_created_successfully">Your account created successfully!</string>
     <string name="no_data_available">No data available.</string>
     <string name="logout">Logout</string>
+    <string name="you_want_to_delete">You want to delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 </resources>

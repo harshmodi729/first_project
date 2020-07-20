@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.getProgressDialog
 import com.hmatter.first_project.extension.setBlurImage
 import com.jaeger.library.StatusBarUtil
@@ -19,11 +20,11 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         StatusBarUtil.setTransparent(this)
-        progressDialog = getProgressDialog(R.layout.lay_progress_dialog)
+        progressDialog = getProgressDialog(R.layout.lay_dialog_progress)
         successDialog = getProgressDialog(
-            R.layout.lay_success_dialog,
+            R.layout.lay_dialog_success,
             getString(R.string.account_created_successfully),
-            true
+            Constants.SUCCESS_DIALOG
         )
     }
 
@@ -37,6 +38,13 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
+        if (progressDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            progressDialog?.hide()
+        }
+    }
+
     fun showSuccessDialog(
         rootView: View,
         ivDialogBg: AppCompatImageView
@@ -44,13 +52,6 @@ abstract class BaseActivity : AppCompatActivity() {
         if (!successDialog?.isShowing!!) {
             setBlurImage(rootView, ivDialogBg)
             successDialog?.show()
-        }
-    }
-
-    fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
-        if (progressDialog?.isShowing!!) {
-            ivDialogBg.visibility = View.GONE
-            progressDialog?.hide()
         }
     }
 

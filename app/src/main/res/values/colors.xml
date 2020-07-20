@@ -5,9 +5,11 @@
     <color name="colorAccent">#2C3051</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGray">#F3F3F3</color>
     <color name="colorIntroTitle">#2C3051</color>
     <color name="colorIntroDetail">#A9A9A9</color>
     <color name="colorInactiveIndicator">#E9E7E7</color>
     <color name="colorBackground">#F8F8F8</color>
     <color name="colorPrice">#A12727</color>
+    <color name="colorLogoutAndDelete">#FF2A2A</color>
 </resources>

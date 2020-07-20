@@ -6,9 +6,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
-import com.hmatter.first_project.extension.getSuccessDialog
 import com.hmatter.first_project.extension.makeToast
-import com.hmatter.first_project.extension.onSuccessClick
+import com.hmatter.first_project.extension.onDialogButtonClick
 import kotlinx.android.synthetic.main.fragment_o_t_p.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
@@ -29,15 +28,13 @@ class OTPFragment : BaseFragment(R.layout.fragment_o_t_p) {
         btnToolbarBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        successDialog = mContext.getSuccessDialog(getString(R.string.account_created_successfully))
-
         otpResend.setOnClickListener {
             mContext.makeToast("Otp resend request successfully.")
         }
         otp.setOtpCompletionListener {
             showSuccessDialog(layOtp, ivDialogBg)
         }
-        onSuccessClick = {
+        onDialogButtonClick = {
             hideSuccessDialog(ivDialogBg)
             findNavController().navigate(R.id.action_nav_otp_to_nav_sign_in)
         }

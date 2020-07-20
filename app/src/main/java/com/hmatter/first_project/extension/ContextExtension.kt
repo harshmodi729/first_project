@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
-import kotlinx.android.synthetic.main.lay_success_dialog.view.*
+import com.hmatter.first_project.common.Constants
+import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
+import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -56,32 +58,30 @@ fun Context.setBlurImage(rootView: View, ivBackground: AppCompatImageView) {
 /**
  * Invoke progress dialog
  */
+var onDialogButtonClick: ((isPositive: Boolean) -> Unit)? = null
 fun Context.getProgressDialog(
     layout: Int,
     message: String = "",
-    isButtonAvailable: Boolean = false
+    dialogType: String = Constants.PROGRESS_DIALOG
 ): AlertDialog {
     val dialog = AlertDialog.Builder(this, R.style.DialogStyle).create()
     val view = View.inflate(this, layout, null)
-    if (message.isNotEmpty()) {
-        view.tvSuccessDialogMessage.text = message
-        if (isButtonAvailable)
+    when (dialogType) {
+        Constants.SUCCESS_DIALOG -> {
+            view.tvSuccessDialogMessage.text = message
             view.btnSuccessDialog.setOnClickListener {
-                onSuccessClick?.invoke()
+                onDialogButtonClick?.invoke(true)
             }
-    }
-    dialog.setView(view)
-    dialog.setCancelable(false)
-    return dialog
-}
-
-var onSuccessClick: (() -> Unit)? = null
-fun Context.getSuccessDialog(message: String): AlertDialog {
-    val dialog = AlertDialog.Builder(this, R.style.DialogStyle).create()
-    val view = View.inflate(this, R.layout.lay_success_dialog, null)
-    view.tvSuccessDialogMessage.text = message
-    view.btnSuccessDialog.setOnClickListener {
-        onSuccessClick?.invoke()
+        }
+        Constants.DELETE_DIALOG -> {
+            view.tvDeleteLabel.text = message
+            view.btnDelete.setOnClickListener {
+                onDialogButtonClick?.invoke(true)
+            }
+            view.btnCancel.setOnClickListener {
+                onDialogButtonClick?.invoke(false)
+            }
+        }
     }
     dialog.setView(view)
     dialog.setCancelable(false)

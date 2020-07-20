@@ -17,7 +17,7 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigation, navigationHost.navController)
 
-        navigationHost.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navigationHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_account_settings -> bottomNavigation.visibility = View.GONE
                 else -> bottomNavigation.visibility = View.VISIBLE
