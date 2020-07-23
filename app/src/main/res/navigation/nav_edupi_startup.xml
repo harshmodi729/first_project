@@ -38,7 +38,7 @@
             app:enterAnim="@anim/slide_left_to_right"
             app:popEnterAnim="@anim/slide_right_to_left" />
         <action
-            android:id="@+id/action_nav_sign_in_to_forgotPasswordActivity"
+            android:id="@+id/action_nav_sign_in_to_forgotPasswordFragment"
             app:destination="@id/nav_forgot_password"
             app:enterAnim="@anim/slide_left_to_right"
             app:popEnterAnim="@anim/slide_right_to_left" />

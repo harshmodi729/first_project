@@ -28,7 +28,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             it.findNavController().navigate(R.id.action_nav_sign_in_to_nav_sign_up)
         }
         tvForgotPassword.setOnClickListener {
-            it.findNavController().navigate(R.id.action_nav_sign_in_to_forgotPasswordActivity)
+            it.findNavController().navigate(R.id.action_nav_sign_in_to_forgotPasswordFragment)
         }
         btnSignIn.setOnClickListener {
             mContext.hideKeyboard(edUserName)
@@ -37,6 +37,8 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                     showProgressDialog(laySigIn, ivDialogBg)
                 }
                 Handler().postDelayed({
+                    edUserName.setText("")
+                    edPassword.setText("")
                     hideProgressDialog(ivDialogBg)
                     startActivity(Intent(mContext, MainActivity::class.java))
                 }, 3000)

@@ -12,4 +12,5 @@
     <color name="colorBackground">#F8F8F8</color>
     <color name="colorPrice">#A12727</color>
     <color name="colorLogoutAndDelete">#FF2A2A</color>
+    <color name="colorDivider">#C0C0C0</color>
 </resources>

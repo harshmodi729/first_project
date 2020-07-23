@@ -28,7 +28,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         btnToolbarBack.visibility = View.GONE
         tvToolbarTitle.text = getString(R.string.search)
         tvToolbarTitle.visibility = View.GONE
-        ivSearchLayout.visibility = View.VISIBLE
+        edSearch.visibility = View.VISIBLE
 
         videoCategoryAdapter = VideoCategoryAdapter(mContext)
         rvVideoCategory.adapter = videoCategoryAdapter
@@ -59,8 +59,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         // Create the adapter and set it to the AutoCompleteTextView
         val adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, cooking) }
-        ivSearchLayout.setAdapter(adapter)
-        ivSearchLayout.setDropDownBackgroundDrawable(
+        edSearch.setAdapter(adapter)
+        edSearch.setDropDownBackgroundDrawable(
             ContextCompat.getDrawable(
                 mContext,
                 R.drawable.layout_bg_dropdown

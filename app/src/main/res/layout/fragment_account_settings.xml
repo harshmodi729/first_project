@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/ivProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
@@ -36,9 +36,9 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/large_text"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/profile_image"
-        app:layout_constraintStart_toStartOf="@id/profile_image"
-        app:layout_constraintTop_toBottomOf="@id/profile_image" />
+        app:layout_constraintEnd_toEndOf="@id/ivProfile"
+        app:layout_constraintStart_toStartOf="@id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvEditProfileLabel"
@@ -46,69 +46,53 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/large_margin"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/xsmall_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUserName" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edMobileLay"
-        style="@style/EditTextStyle"
+    <com.hmatter.first_project.widget.AccountSettingEditDetailContainer
+        android:id="@+id/panelPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:hint="@string/hint_phone"
-        app:endIconDrawable="@drawable/ic_baseline_edit_24"
-        app:endIconMode="custom"
-        app:hintTextColor="@color/colorAccent"
+        app:hint="@string/edit_phone_number"
+        app:label="@string/hint_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvEditProfileLabel">
+        app:layout_constraintTop_toBottomOf="@id/tvEditProfileLabel"
+        app:type="number" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="@dimen/xsmall_text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edEmailLay"
-        style="@style/EditTextStyle"
+    <com.hmatter.first_project.widget.AccountSettingEditDetailContainer
+        android:id="@+id/panelEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:hint="@string/hint_email"
-        app:endIconDrawable="@drawable/ic_baseline_edit_24"
-        app:endIconMode="custom"
+        android:layout_marginEnd="@dimen/large_margin"
+        app:hint="@string/edit_email"
+        app:label="@string/hint_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edMobileLay">
+        app:layout_constraintTop_toBottomOf="@id/panelPhoneNumber"
+        app:type="email" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/xsmall_text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edPasswordLay"
-        style="@style/EditTextStyle"
+    <com.hmatter.first_project.widget.AccountSettingEditDetailContainer
+        android:id="@+id/panelPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:hint="@string/hint_password"
-        app:endIconDrawable="@drawable/ic_baseline_edit_24"
-        app:endIconMode="custom"
+        android:layout_marginEnd="@dimen/large_margin"
+        app:hint="@string/edit_password"
+        app:label="@string/hint_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edEmailLay">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textSize="@dimen/xsmall_text" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@id/panelEmail"
+        app:type="password" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
@@ -119,9 +103,9 @@
         android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="#FF2A2A"
-        app:layout_constraintEnd_toEndOf="@id/edPasswordLay"
-        app:layout_constraintStart_toStartOf="@id/edPasswordLay"
-        app:layout_constraintTop_toBottomOf="@id/edPasswordLay"
+        app:layout_constraintEnd_toEndOf="@id/panelPassword"
+        app:layout_constraintStart_toStartOf="@id/panelPassword"
+        app:layout_constraintTop_toBottomOf="@id/panelPassword"
         app:rippleColor="#FF2A2A" />
 
     <View
