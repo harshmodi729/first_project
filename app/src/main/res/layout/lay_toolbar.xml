@@ -55,6 +55,8 @@
         android:background="@drawable/layout_bg"
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:hint="@string/search_placeholder"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
         android:padding="10dp"
         android:textSize="@dimen/small_text"
         android:visibility="gone"

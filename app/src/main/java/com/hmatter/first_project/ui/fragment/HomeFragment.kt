@@ -15,7 +15,6 @@ import com.hmatter.first_project.adapter.PopularClassesAdapter
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.extension.makeToast
-import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.SliderItem
 import com.hmatter.first_project.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -75,7 +74,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 is BaseResult.Success -> {
                     rvPopularClasses.visibility = View.VISIBLE
                     tvNoData.visibility = View.GONE
-                    popularClassesAdapter.addData(it.item as ArrayList<PopularClassItem>)
+                    popularClassesAdapter.addData(it.item)
                 }
                 is BaseResult.Error -> {
                     rvPopularClasses.visibility = View.GONE

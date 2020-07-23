@@ -8,6 +8,7 @@ import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
@@ -96,4 +97,13 @@ fun Context.getProgressDialog(
     dialog.setView(view)
     dialog.setCancelable(false)
     return dialog
+}
+
+/**
+ * Method is invoke when app needs to hide a keyboard
+ * @param view
+ */
+fun Context.hideKeyboard(view: View) {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
+import com.hmatter.first_project.extension.hideKeyboard
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.ui.activity.MainActivity
 import com.hmatter.first_project.viewmodel.SignInViewModel
@@ -30,6 +31,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             it.findNavController().navigate(R.id.action_nav_sign_in_to_forgotPasswordActivity)
         }
         btnSignIn.setOnClickListener {
+            mContext.hideKeyboard(edUserName)
             if (edUserName.text!!.isNotEmpty() && edPassword.text!!.isNotEmpty()) {
                 laySigIn.post {
                     showProgressDialog(laySigIn, ivDialogBg)

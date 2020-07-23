@@ -4,11 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
+import com.hmatter.first_project.model.PopularClassItem
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
 
-    val alPopularClasses = MutableLiveData<BaseResult<Any>>()
+    val alPopularClasses = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
 
     fun getPopularClasses() {
         viewModelScope.launch {
@@ -30,7 +31,12 @@ class HomeViewModel : BaseViewModel() {
                             "Something wrong, please try again later"
                         )
                     }
-                }
+                } else
+                    alPopularClasses.value =
+                        BaseResult.Error(
+                            IllegalStateException(),
+                            "Something wrong, please try again later"
+                        )
             } catch (exception: Exception) {
                 alPopularClasses.value =
                     BaseResult.Error(exception, "Something wrong, please try again later")
