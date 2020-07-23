@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layAccountSettings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -92,7 +93,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edPasswordLay"
+        android:id="@+id/edChangePasswordLay"
         style="@style/EditTextStyle"
         android:layout_marginTop="@dimen/small_margin"
         android:hint="@string/hint_password"
@@ -102,13 +103,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edEmailLay">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textSize="@dimen/xsmall_text" />
+<!--        <androidx.appcompat.widget.AppCompatEditText-->
+<!--            android:id="@+id/edPassword"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:textSize="@dimen/xsmall_text" />-->
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDialogBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/edChangePasswordLay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+     />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
@@ -119,9 +130,9 @@
         android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="#FF2A2A"
-        app:layout_constraintEnd_toEndOf="@id/edPasswordLay"
-        app:layout_constraintStart_toStartOf="@id/edPasswordLay"
-        app:layout_constraintTop_toBottomOf="@id/edPasswordLay"
+        app:layout_constraintEnd_toEndOf="@id/edChangePasswordLay"
+        app:layout_constraintStart_toStartOf="@id/edChangePasswordLay"
+        app:layout_constraintTop_toBottomOf="@id/edChangePasswordLay"
         app:rippleColor="#FF2A2A" />
 
     <View
