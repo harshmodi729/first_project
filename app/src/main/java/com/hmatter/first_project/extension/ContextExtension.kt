@@ -14,7 +14,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.common.Constants
+import kotlinx.android.synthetic.main.lay_dialog_changepassword.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
+import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
 import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
 
@@ -80,6 +82,14 @@ fun Context.getProgressDialog(
                 onDialogButtonClick?.invoke(true)
             }
             view.btnCancel.setOnClickListener {
+                onDialogButtonClick?.invoke(false)
+            }
+        }
+        Constants.CHANGEPASSWORD_DIALOG -> {
+            view.btnCancel.setOnClickListener {
+                onDialogButtonClick?.invoke(false)
+            }
+            view.btnOkay.setOnClickListener {
                 onDialogButtonClick?.invoke(false)
             }
         }

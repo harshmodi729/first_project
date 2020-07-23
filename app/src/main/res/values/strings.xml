@@ -11,6 +11,9 @@
     <string name="otp_resend">Resend verification code</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="hint_oldpassword">Old password</string>
+    <string name="hint_newpassword">New password</string>
+    <string name="hint_new_confirm_password">Confirm new password</string>
     <string name="hint_email">Email</string>
     <string name="hint_phone">Phone number</string>
     <string name="terms_conditions">I have read and agree to <a href="https://www.google.com">the Terms and Conditions.</a></string>
@@ -50,4 +53,6 @@
     <string name="edit_phone_number">Edit Phone Number</string>
     <string name="edit_email">Edit Email</string>
     <string name="edit_password">Edit Password</string>
+    <string name="okay">Okay</string>
+    <string name="change_password_text">Change your password</string>
 </resources>

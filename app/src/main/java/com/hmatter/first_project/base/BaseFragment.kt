@@ -18,6 +18,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     lateinit var mContext: Activity
     private var progressDialog: AlertDialog? = null
     private var successDialog: AlertDialog? = null
+    private var changePasswordDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +32,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
             getString(R.string.account_created_successfully),
             Constants.SUCCESS_DIALOG
         )
+        changePasswordDialog = mContext.getProgressDialog(R.layout.lay_dialog_changepassword,getString(R.string.change_password_text),Constants.CHANGEPASSWORD_DIALOG)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -77,4 +79,20 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
             successDialog?.show()
         }
     }
+
+    fun showChangePasswordDialog(rootView: View,ivDialogBg: AppCompatImageView){
+        if(!changePasswordDialog?.isShowing!!){
+            mContext.setBlurImage(rootView,ivDialogBg)
+            changePasswordDialog?.show()
+        }
+    }
+
+    fun hideChangePasswordDialog(ivDialogBg: AppCompatImageView){
+        if(changePasswordDialog?.isShowing!!){
+            ivDialogBg.visibility = View.GONE
+            changePasswordDialog?.hide()
+        }
+    }
+
+
 }
