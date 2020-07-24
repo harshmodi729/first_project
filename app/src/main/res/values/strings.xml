@@ -55,4 +55,5 @@
     <string name="edit_password">Edit Password</string>
     <string name="okay">Okay</string>
     <string name="change_password_text">Change your password</string>
+    <string name="you_sure_want_to_log_out">You sure want to log out?</string>
 </resources>

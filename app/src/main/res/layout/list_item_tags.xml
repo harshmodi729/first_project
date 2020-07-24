@@ -20,7 +20,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="@color/colorDivider"
+        android:layout_height="@dimen/divider_height"
         android:layout_marginTop="@dimen/xsmall_margin"
         android:background="@color/colorDivider"
         app:layout_constraintEnd_toEndOf="@id/tvTagName"

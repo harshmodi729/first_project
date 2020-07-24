@@ -32,6 +32,8 @@ class AccountSettingEditDetailContainer(
 
         tvLabel.text = attributes.getString(R.styleable.AccountSettingEditDetailContainer_label)
         edChangeProfile.setText(attributes.getString(R.styleable.AccountSettingEditDetailContainer_value))
+        edChangeProfile.isEnabled =
+            attributes.getBoolean(R.styleable.AccountSettingEditDetailContainer_enabled, false)
         edChangeProfile.hint =
             attributes.getString(R.styleable.AccountSettingEditDetailContainer_hint)
         val type =

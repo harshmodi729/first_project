@@ -14,9 +14,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.common.Constants
-import kotlinx.android.synthetic.main.lay_dialog_changepassword.view.*
+import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
+import kotlinx.android.synthetic.main.lay_dialog_logout.view.*
 import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
 
@@ -62,6 +63,11 @@ fun Context.setBlurImage(rootView: View, ivBackground: AppCompatImageView) {
  * Invoke progress dialog
  */
 var onDialogButtonClick: ((isPositive: Boolean) -> Unit)? = null
+var onChangePasswordDialogButtonClick: ((
+    isPositive: Boolean,
+    dialogView: View
+) -> Unit)? = null
+
 fun Context.getProgressDialog(
     layout: Int,
     message: String = "",
@@ -85,11 +91,19 @@ fun Context.getProgressDialog(
                 onDialogButtonClick?.invoke(false)
             }
         }
-        Constants.CHANGEPASSWORD_DIALOG -> {
-            view.btnCancel.setOnClickListener {
-                onDialogButtonClick?.invoke(false)
-            }
+        Constants.CHANGE_PASSWORD_DIALOG -> {
             view.btnOkay.setOnClickListener {
+                onChangePasswordDialogButtonClick?.invoke(true, view)
+            }
+            view.btnCancel.setOnClickListener {
+                onChangePasswordDialogButtonClick?.invoke(false, view)
+            }
+        }
+        Constants.LOGOUT_DIALOG -> {
+            view.btnLogout.setOnClickListener {
+                onDialogButtonClick?.invoke(true)
+            }
+            view.btnCancel.setOnClickListener {
                 onDialogButtonClick?.invoke(false)
             }
         }

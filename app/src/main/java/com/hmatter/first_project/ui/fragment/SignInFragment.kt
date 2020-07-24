@@ -41,6 +41,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                     edPassword.setText("")
                     hideProgressDialog(ivDialogBg)
                     startActivity(Intent(mContext, MainActivity::class.java))
+                    mContext.finish()
                 }, 3000)
             } else {
                 mContext.makeToast("Please enter valid username and password.")

@@ -19,6 +19,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     private var progressDialog: AlertDialog? = null
     private var successDialog: AlertDialog? = null
     private var changePasswordDialog: AlertDialog? = null
+    private var logoutDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +33,11 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
             getString(R.string.account_created_successfully),
             Constants.SUCCESS_DIALOG
         )
-        changePasswordDialog = mContext.getProgressDialog(R.layout.lay_dialog_changepassword,getString(R.string.change_password_text),Constants.CHANGEPASSWORD_DIALOG)
+        logoutDialog = mContext.getProgressDialog(
+            R.layout.lay_dialog_logout,
+            dialogType = Constants.LOGOUT_DIALOG
+        )
+
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -80,17 +85,44 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         }
     }
 
-    fun showChangePasswordDialog(rootView: View,ivDialogBg: AppCompatImageView){
-        if(!changePasswordDialog?.isShowing!!){
-            mContext.setBlurImage(rootView,ivDialogBg)
-            changePasswordDialog?.show()
+    fun hideDeleteDialog(ivDialogBg: AppCompatImageView) {
+        if (changePasswordDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            changePasswordDialog?.dismiss()
         }
     }
 
-    fun hideChangePasswordDialog(ivDialogBg: AppCompatImageView){
-        if(changePasswordDialog?.isShowing!!){
+    fun showLogoutDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!logoutDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            logoutDialog?.show()
+        }
+    }
+
+    fun hideLogoutDialog(ivDialogBg: AppCompatImageView) {
+        if (logoutDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
-            changePasswordDialog?.hide()
+            logoutDialog?.dismiss()
+        }
+    }
+
+    fun showChangePasswordDialog(rootView: View, ivDialogBg: AppCompatImageView) {
+        changePasswordDialog = mContext.getProgressDialog(
+            R.layout.lay_dialog_change_password,
+            getString(R.string.change_password_text),
+            Constants.CHANGE_PASSWORD_DIALOG
+        )
+        mContext.setBlurImage(rootView, ivDialogBg)
+        changePasswordDialog?.show()
+    }
+
+    fun hideChangePasswordDialog(ivDialogBg: AppCompatImageView) {
+        if (changePasswordDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            changePasswordDialog?.dismiss()
         }
     }
 

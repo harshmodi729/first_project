@@ -24,7 +24,7 @@
         android:layout_marginBottom="40dp"
         android:text="@string/account_created_successfully"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/xsmall_text"
+        android:textSize="@dimen/small_text"
         app:layout_constraintBottom_toTopOf="@id/btnSuccessDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
