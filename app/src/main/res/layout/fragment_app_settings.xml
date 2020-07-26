@@ -150,11 +150,10 @@
         android:id="@+id/btnHighDefinition"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="@dimen/large_margin"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_check_unchecked"
         app:layout_constraintBottom_toBottomOf="@id/tvHighDefinitionDetail"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btnStandardQuality"
         app:layout_constraintTop_toTopOf="@id/tvHighDefinitionTitle" />
 
     <View
