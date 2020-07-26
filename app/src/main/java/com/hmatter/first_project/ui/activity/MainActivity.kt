@@ -19,7 +19,8 @@ class MainActivity : BaseActivity() {
 
         navigationHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.nav_account_settings -> bottomNavigation.visibility = View.GONE
+                R.id.nav_account_settings,
+                R.id.nav_app_settings -> bottomNavigation.visibility = View.GONE
                 else -> bottomNavigation.visibility = View.VISIBLE
             }
         }

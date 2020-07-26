@@ -1,4 +1,4 @@
-package com.hmatter.first_project.ui.fragment
+package com.hmatter.first_project.ui.fragment.main
 
 import android.os.Bundle
 import android.view.View

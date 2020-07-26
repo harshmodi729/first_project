@@ -3,10 +3,12 @@ package com.hmatter.first_project.extension
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.os.Build
 import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
+import android.text.Html
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -83,7 +85,10 @@ fun Context.getProgressDialog(
             }
         }
         Constants.DELETE_DIALOG -> {
-            view.tvDeleteLabel.text = message
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                view.tvDeleteLabel.text = Html.fromHtml(message, Html.FROM_HTML_MODE_LEGACY)
+            else
+                view.tvDeleteLabel.text = Html.fromHtml(message)
             view.btnDelete.setOnClickListener {
                 onDialogButtonClick?.invoke(true)
             }

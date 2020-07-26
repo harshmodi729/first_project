@@ -1,4 +1,4 @@
-package com.hmatter.first_project.ui.fragment
+package com.hmatter.first_project.ui.fragment.main
 
 import android.os.Bundle
 import android.view.View
@@ -30,10 +30,11 @@ class DownloadFragment : BaseFragment(R.layout.fragment_download) {
 
         downloadAdapter.onDeleteClickListener = { item, position ->
             deletedPosition = position
-            val message: String = mContext.getString(R.string.you_want_to_delete)
+            val message: String =
+                String.format(mContext.getString(R.string.you_want_to_delete), item)
             deleteDialog = mContext.getProgressDialog(
                 R.layout.lay_dialog_delete,
-                message.plus(" $item ?"),
+                message,
                 Constants.DELETE_DIALOG
             )
             deleteDialog.show()

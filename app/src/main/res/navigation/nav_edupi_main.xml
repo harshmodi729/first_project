@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.hmatter.first_project.ui.fragment.HomeFragment"
+        android:name="com.hmatter.first_project.ui.fragment.main.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.hmatter.first_project.ui.fragment.SearchFragment"
+        android:name="com.hmatter.first_project.ui.fragment.main.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search">
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@id/nav_download"
-        android:name="com.hmatter.first_project.ui.fragment.DownloadFragment"
+        android:name="com.hmatter.first_project.ui.fragment.main.DownloadFragment"
         android:label="@string/download"
         tools:layout="@layout/fragment_download">
         <action
@@ -36,12 +36,15 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.hmatter.first_project.ui.fragment.SettingsFragment"
+        android:name="com.hmatter.first_project.ui.fragment.main.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_nav_settings_to_nav_account_settings"
             app:destination="@id/nav_account_settings" />
+        <action
+            android:id="@+id/action_nav_settings_to_nav_app_settings"
+            app:destination="@id/nav_app_settings" />
     </fragment>
 
     <fragment
@@ -54,5 +57,14 @@
             app:destination="@id/nav_settings"
             app:popUpTo="@id/nav_settings"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_app_settings"
+        android:name="com.hmatter.first_project.ui.fragment.AppSettingsFragment"
+        android:label="fragment_app_settings"
+        tools:layout="@layout/fragment_app_settings">
+        <action
+            android:id="@+id/action_nav_app_settings_to_nav_settings"
+            app:destination="@id/nav_settings" />
     </fragment>
 </navigation>

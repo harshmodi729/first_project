@@ -2,6 +2,7 @@
 <resources>
     <dimen name="splash_logo_text">56sp</dimen>
     <dimen name="welcome_text">40sp</dimen>
+    <dimen name="xxsmall_text">10sp</dimen>
     <dimen name="xsmall_text">12sp</dimen>
     <dimen name="small_text">14sp</dimen>
     <dimen name="medium_text">16sp</dimen>

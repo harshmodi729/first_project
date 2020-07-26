@@ -1,23 +1,21 @@
-package com.hmatter.first_project.ui.fragment
+package com.hmatter.first_project.ui.fragment.startup
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
-import com.hmatter.first_project.extension.makeToast
-import com.hmatter.first_project.extension.onDialogButtonClick
-import kotlinx.android.synthetic.main.fragment_o_t_p.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
-class OTPFragment : BaseFragment(R.layout.fragment_o_t_p) {
-    private lateinit var successDialog: AlertDialog
-
+class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        tvToolbarTitle.text = getString(R.string.otp_header_text)
+        tvToolbarTitle.text = getString(R.string.sign_up)
+        chTerms.movementMethod = LinkMovementMethod.getInstance()
         val backButtonCallback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -28,15 +26,9 @@ class OTPFragment : BaseFragment(R.layout.fragment_o_t_p) {
         btnToolbarBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        otpResend.setOnClickListener {
-            mContext.makeToast("Otp resend request successfully.")
-        }
-        otp.setOtpCompletionListener {
-            showSuccessDialog(layOtp, ivDialogBg)
-        }
-        onDialogButtonClick = {
-            hideSuccessDialog(ivDialogBg)
-            findNavController().navigate(R.id.action_nav_otp_to_nav_sign_in)
+
+        btnSignUp.setOnClickListener {
+            it.findNavController().navigate(R.id.action_nav_sign_up_to_nav_otp)
         }
     }
 }

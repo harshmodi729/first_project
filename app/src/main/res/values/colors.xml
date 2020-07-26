@@ -13,4 +13,6 @@
     <color name="colorPrice">#A12727</color>
     <color name="colorLogoutAndDelete">#FF2A2A</color>
     <color name="colorDivider">#C0C0C0</color>
+    <color name="colorDisable">#E3E3E3</color>
+    <color name="colorLabel">#66000000</color>
 </resources>

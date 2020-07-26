@@ -1,4 +1,4 @@
-package com.hmatter.first_project.ui.fragment
+package com.hmatter.first_project.ui.fragment.main
 
 import android.os.Bundle
 import android.view.View
@@ -16,6 +16,9 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         tvToolbarTitle.text = getString(R.string.settings)
         tvAccountSetting.setOnClickListener {
             it.findNavController().navigate(R.id.action_nav_settings_to_nav_account_settings)
+        }
+        tvAppSettings.setOnClickListener {
+            it.findNavController().navigate(R.id.action_nav_settings_to_nav_app_settings)
         }
     }
 }

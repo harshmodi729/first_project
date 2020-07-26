@@ -46,7 +46,7 @@
     <string name="account_created_successfully">Your account created successfully!</string>
     <string name="no_data_available">No data available.</string>
     <string name="logout">Logout</string>
-    <string name="you_want_to_delete">You want to delete</string>
+    <string name="you_want_to_delete">You want to delete <![CDATA[<b><font color=#2C3051>%1$s ?</font></b>]]></string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="edit_profile">Edit Profile</string>
@@ -56,4 +56,16 @@
     <string name="okay">Okay</string>
     <string name="change_password_text">Change your password</string>
     <string name="you_sure_want_to_log_out">You sure want to log out?</string>
+    <string name="cellular_data">Cellular Data</string>
+    <string name="cellular_data_for_downloads">Cellular Data for Downloads</string>
+    <string name="video_quality_for_downloads">Video Quality for Downloads</string>
+    <string name="standard_recommended">Standard (Recommended)</string>
+    <string name="high_definition">High Definition</string>
+    <string name="offline_downloads">Offline Downloads</string>
+    <string name="standard_quality_detail">Downloads faster and uses less storage</string>
+    <string name="high_definition_detail">Use more storage</string>
+    <string name="offline_downloads_detail">Lessons can automatically delete 24 hours after they are watched in full</string>
+    <string name="delete_all_downloads">Delete All Downloads</string>
+    <string name="delete_all_detail">This will remove all downloaded Lesson videos from your phone.</string>
+    <string name="delete_completed_lessons">Delete Completed Lessons</string>
 </resources>

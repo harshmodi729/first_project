@@ -1,4 +1,4 @@
-package com.hmatter.first_project.ui.fragment
+package com.hmatter.first_project.ui.fragment.startup
 
 import android.content.Intent
 import android.os.Bundle
