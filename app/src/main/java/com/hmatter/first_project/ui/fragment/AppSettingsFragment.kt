@@ -8,8 +8,9 @@ import androidx.navigation.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.common.PreferenceConstant
 import com.hmatter.first_project.extension.makeToast
-import com.hmatter.first_project.model.AppSettingsItem
+import com.hmatter.first_project.extension.onDialogButtonClick
 import com.hmatter.first_project.viewmodel.AppSettingsViewModel
 import kotlinx.android.synthetic.main.fragment_app_settings.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
@@ -17,6 +18,8 @@ import kotlinx.android.synthetic.main.lay_toolbar.*
 class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
     View.OnClickListener {
 
+    private var isCellularDataOn = false
+    private var isStandardVideoQuality = true
     private var isDeleteCompleted = true
     private lateinit var appSettingsViewModel: AppSettingsViewModel
 
@@ -29,7 +32,10 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
         appSettingsViewModel.preferenceData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
-                    setPreferenceData(it.item)
+                    isCellularDataOn = it.item.isCellularDataOn
+                    isStandardVideoQuality = it.item.isStandardVideoQuality
+                    isDeleteCompleted = it.item.isDeleteCompleted
+                    setInitData()
                 }
                 is BaseResult.Error -> {
                     mContext.makeToast(it.errorMessage)
@@ -40,39 +46,56 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
             it.findNavController().popBackStack()
         }
         swCellular.setOnCheckedChangeListener { _, isChecked ->
-            appSettingsViewModel.setCellularData(
-                mContext, isChecked
+            isCellularDataOn = isChecked
+            appSettingsViewModel.setBoolean(
+                mContext, PreferenceConstant.IS_CELLULAR_DATA_ON, isCellularDataOn
             )
         }
         btnStandardQuality.setOnClickListener(this)
         btnHighDefinition.setOnClickListener(this)
         btnDeleteCompleted.setOnClickListener(this)
+        btnDeleteAll.setOnClickListener(this)
+
+        onDialogButtonClick = { _ ->
+            hideEmptyDownloadDialog(ivDialogBg)
+        }
     }
 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btnStandardQuality -> {
-                appSettingsViewModel.setStandardVideoQuality(
-                    mContext, true
+                isStandardVideoQuality = true
+                appSettingsViewModel.setBoolean(
+                    mContext, PreferenceConstant.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
                 )
+                setInitData()
             }
             R.id.btnHighDefinition -> {
-                appSettingsViewModel.setStandardVideoQuality(
-                    mContext, false
+                isStandardVideoQuality = false
+                appSettingsViewModel.setBoolean(
+                    mContext, PreferenceConstant.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
                 )
+                setInitData()
             }
             R.id.btnDeleteCompleted -> {
                 isDeleteCompleted = !isDeleteCompleted
-                appSettingsViewModel.setDeleteCompleted(
-                    mContext, isDeleteCompleted
+                appSettingsViewModel.setBoolean(
+                    mContext, PreferenceConstant.IS_DELETE_COMPLETED, isDeleteCompleted
                 )
+                setInitData()
+            }
+            R.id.btnDeleteAll -> {
+                showEmptyDownloadDialog(layAppSettings, ivDialogBg)
             }
         }
     }
 
-    private fun setPreferenceData(item: AppSettingsItem) {
-        swCellular.isChecked = item.isCellularDataOn
-        if (item.isStandardQuality) {
+    /**
+     * Method will set initial values of selection views.
+     */
+    private fun setInitData() {
+        swCellular.isChecked = isCellularDataOn
+        if (isStandardVideoQuality) {
             btnStandardQuality.setImageResource(R.drawable.ic_check_checked)
             btnHighDefinition.setImageResource(R.drawable.ic_check_unchecked)
         } else {
@@ -80,7 +103,6 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
             btnHighDefinition.setImageResource(R.drawable.ic_check_checked)
         }
 
-        isDeleteCompleted = item.isDeleteCompleted
         if (isDeleteCompleted)
             btnDeleteCompleted.setImageResource(R.drawable.ic_check_checked)
         else

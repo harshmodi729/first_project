@@ -20,6 +20,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     private var successDialog: AlertDialog? = null
     private var changePasswordDialog: AlertDialog? = null
     private var logoutDialog: AlertDialog? = null
+    private var emptyDownloadDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +37,10 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         logoutDialog = mContext.getProgressDialog(
             R.layout.lay_dialog_logout,
             dialogType = Constants.LOGOUT_DIALOG
+        )
+        emptyDownloadDialog = mContext.getProgressDialog(
+            R.layout.lay_dialog_empty_download,
+            dialogType = Constants.EMPTY_DOWNLOAD_DIALOG
         )
 
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -54,7 +59,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
         if (progressDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
-            progressDialog?.hide()
+            progressDialog?.dismiss()
         }
     }
 
@@ -71,7 +76,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     fun hideSuccessDialog(ivDialogBg: AppCompatImageView) {
         if (successDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
-            successDialog?.hide()
+            successDialog?.dismiss()
         }
     }
 
@@ -126,5 +131,20 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         }
     }
 
+    fun showEmptyDownloadDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!emptyDownloadDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            emptyDownloadDialog?.show()
+        }
+    }
 
+    fun hideEmptyDownloadDialog(ivDialogBg: AppCompatImageView) {
+        if (emptyDownloadDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            emptyDownloadDialog?.dismiss()
+        }
+    }
 }

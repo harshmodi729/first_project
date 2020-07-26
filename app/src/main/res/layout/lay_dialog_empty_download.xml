@@ -5,40 +5,55 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dialog">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivDialogHeader"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptyDownloadTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/ic_success_dialog"
-        app:layout_constraintBottom_toTopOf="@id/tvSuccessDialogMessage"
+        android:layout_marginTop="@dimen/large_margin"
+        android:text="Nothing to delete"
+        android:textColor="@color/colorLogoutAndDelete"
+        android:textSize="@dimen/small_text"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDialogHeader"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/large_margin"
+        android:background="@drawable/ic_empty_download"
+        app:layout_constraintBottom_toTopOf="@id/tvEmptyDownloadMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmptyDownloadTitle" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvSuccessDialogMessage"
+        android:id="@+id/tvEmptyDownloadMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/account_created_successfully"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:gravity="center"
+        android:maxWidth="250dp"
+        android:text="There are no downloaded lessons on your devices."
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/small_text"
-        app:layout_constraintBottom_toTopOf="@id/btnSuccessDialog"
+        app:layout_constraintBottom_toTopOf="@id/btnEmptyDownload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivDialogHeader" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSuccessDialog"
+        android:id="@+id/btnEmptyDownload"
         style="@style/ButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginEnd="@dimen/large_margin"
         android:layout_marginBottom="@dimen/large_margin"
-        android:text="@string/sign_in"
+        android:text="@string/okay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -19,6 +19,7 @@ import com.hmatter.first_project.common.Constants
 import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
+import kotlinx.android.synthetic.main.lay_dialog_empty_download.view.*
 import kotlinx.android.synthetic.main.lay_dialog_logout.view.*
 import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
@@ -110,6 +111,11 @@ fun Context.getProgressDialog(
             }
             view.btnCancel.setOnClickListener {
                 onDialogButtonClick?.invoke(false)
+            }
+        }
+        Constants.EMPTY_DOWNLOAD_DIALOG -> {
+            view.btnEmptyDownload.setOnClickListener {
+                onDialogButtonClick?.invoke(true)
             }
         }
     }

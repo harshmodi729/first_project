@@ -3,16 +3,14 @@ package com.hmatter.first_project.base
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hmatter.first_project.extension.getPreferenceBoolean
+import com.hmatter.first_project.extension.setPreferenceBoolean
 import com.hmatter.first_project.remote.ApiManager
 import com.hmatter.first_project.remote.ApiServices
+import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-
-    companion object PreferenceConstant {
-        const val IS_CELLULAR_DATA_ON = "is_cellular_data_on"
-        const val IS_STANDARD_VIDEO_QUALITY = "is_standard_video_quality"
-        const val IS_DELETE_COMPLETED = "is_delete_completed"
-    }
 
     fun getApiServiceManager(): ApiServices {
         return ApiManager.getApiServices()
@@ -20,5 +18,25 @@ abstract class BaseViewModel : ViewModel() {
 
     fun getPreferenceManager(context: Context): SharedPreferences {
         return BaseSharedPreference.getPreferenceManager(context)
+    }
+
+    fun setBoolean(
+        context: Context,
+        key: String,
+        value: Boolean
+    ) {
+        viewModelScope.launch {
+            val preference = getPreferenceManager(context)
+            preference.setPreferenceBoolean(key, value)
+        }
+    }
+
+    fun getBoolean(
+        context: Context,
+        key: String,
+        defaultValue: Boolean = false
+    ): Boolean {
+        val preference = getPreferenceManager(context)
+        return preference.getPreferenceBoolean(key, defaultValue)
     }
 }

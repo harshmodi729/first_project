@@ -41,7 +41,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun hideProgressDialog(ivDialogBg: AppCompatImageView) {
         if (progressDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
-            progressDialog?.hide()
+            progressDialog?.dismiss()
         }
     }
 
@@ -58,7 +58,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun hideSuccessDialog(ivDialogBg: AppCompatImageView) {
         if (successDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
-            successDialog?.hide()
+            successDialog?.dismiss()
         }
     }
 }
