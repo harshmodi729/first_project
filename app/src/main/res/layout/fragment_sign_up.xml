@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/laySignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -110,16 +111,24 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/chTerms"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:padding="@dimen/small_margin"
+            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintTop_toBottomOf="@id/edConfirmPasswordLay" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTermCondition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/terms_conditions"
             android:textColor="@color/colorAccent"
             android:textColorLink="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/chTerms"
             app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
-            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
-            app:layout_constraintTop_toBottomOf="@id/edConfirmPasswordLay" />
+            app:layout_constraintStart_toEndOf="@id/chTerms"
+            app:layout_constraintTop_toTopOf="@id/chTerms" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
@@ -133,4 +142,13 @@
             app:layout_constraintTop_toBottomOf="@id/chTerms" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDialogBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,10 @@ package com.hmatter.first_project.remote
 
 import com.google.gson.GsonBuilder
 import com.hmatter.first_project.BuildConfig
+import okhttp3.Interceptor
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -19,7 +21,8 @@ class ApiManager {
             if (apiServices == null) {
                 val retrofit = Retrofit.Builder()
                     //TODO: Change this base url when services are ready
-                    .baseUrl("https://run.mocky.io/v3/")
+//                    .baseUrl("https://run.mocky.io/v3/")
+                    .baseUrl("http://educationalhub.net.in/edupi/api/")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(
                         GsonConverterFactory.create(
@@ -38,6 +41,18 @@ class ApiManager {
             httpClient.readTimeout(2, TimeUnit.MINUTES)
             httpClient.connectTimeout(60, TimeUnit.SECONDS)
             httpClient.cookieJar(JavaNetCookieJar(CookieManager()))
+            httpClient.addInterceptor(object : Interceptor {
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    val original = chain.request()
+
+                    val request = original.newBuilder()
+                        .header("email", "admin@admin.com")
+                        .header("password", "admin@123#")
+                        .method(original.method, original.body)
+                        .build()
+                    return chain.proceed(request)
+                }
+            })
 
             if (BuildConfig.DEBUG) {
                 val logging = HttpLoggingInterceptor()

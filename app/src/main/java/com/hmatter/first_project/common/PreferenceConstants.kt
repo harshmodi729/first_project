@@ -1,6 +1,6 @@
 package com.hmatter.first_project.common
 
-class PreferenceConstant {
+class PreferenceConstants {
     companion object {
         const val IS_CELLULAR_DATA_ON = "is_cellular_data_on"
         const val IS_STANDARD_VIDEO_QUALITY = "is_standard_video_quality"

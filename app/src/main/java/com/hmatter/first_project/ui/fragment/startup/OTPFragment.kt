@@ -21,12 +21,12 @@ class OTPFragment : BaseFragment(R.layout.fragment_o_t_p) {
         val backButtonCallback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.action_nav_otp_to_nav_sign_up)
                 }
             }
         activity?.onBackPressedDispatcher!!.addCallback(viewLifecycleOwner, backButtonCallback)
         btnToolbarBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_nav_otp_to_nav_sign_up)
         }
         otpResend.setOnClickListener {
             mContext.makeToast("Otp resend request successfully.")

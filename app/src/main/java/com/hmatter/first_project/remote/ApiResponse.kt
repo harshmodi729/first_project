@@ -5,18 +5,18 @@ import com.google.gson.annotations.SerializedName
 
 class ApiResponse<T> {
     @Expose
-    @SerializedName("result")
-    val result: Int = 0
+    @SerializedName("success", alternate = ["RESULT"])
+    val success: String = ""
 
     @Expose
-    @SerializedName("data")
+    @SerializedName("data", alternate = ["DATA"])
     val data: T? = null
 
     @Expose
-    @SerializedName("message")
+    @SerializedName("message", alternate = ["MESSAGE"])
     val message: String = ""
 
     fun isSuccess(): Boolean {
-        return result > 0
+        return success > "0" || success.equals("success", true)
     }
 }

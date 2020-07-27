@@ -54,6 +54,11 @@
             app:destination="@id/nav_otp"
             app:enterAnim="@anim/slide_left_to_right"
             app:popEnterAnim="@anim/slide_right_to_left" />
+        <action
+            android:id="@+id/action_nav_sign_up_to_nav_sign_in"
+            app:destination="@id/nav_sign_in"
+            app:enterAnim="@anim/slide_left_to_right"
+            app:popEnterAnim="@anim/slide_right_to_left" />
     </fragment>
 
     <fragment
@@ -77,6 +82,12 @@
         <action
             android:id="@+id/action_nav_otp_to_nav_sign_in"
             app:destination="@id/nav_sign_in"
+            app:enterAnim="@anim/slide_right_to_left"
+            app:popUpTo="@id/nav_sign_in"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_otp_to_nav_sign_up"
+            app:destination="@id/nav_sign_up"
             app:enterAnim="@anim/slide_right_to_left"
             app:popUpTo="@id/nav_sign_in"
             app:popUpToInclusive="true" />

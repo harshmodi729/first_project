@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
-import com.hmatter.first_project.common.PreferenceConstant
+import com.hmatter.first_project.common.PreferenceConstants
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.extension.onDialogButtonClick
 import com.hmatter.first_project.viewmodel.AppSettingsViewModel
@@ -48,7 +48,7 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
         swCellular.setOnCheckedChangeListener { _, isChecked ->
             isCellularDataOn = isChecked
             appSettingsViewModel.setBoolean(
-                mContext, PreferenceConstant.IS_CELLULAR_DATA_ON, isCellularDataOn
+                mContext, PreferenceConstants.IS_CELLULAR_DATA_ON, isCellularDataOn
             )
         }
         btnStandardQuality.setOnClickListener(this)
@@ -66,21 +66,21 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
             R.id.btnStandardQuality -> {
                 isStandardVideoQuality = true
                 appSettingsViewModel.setBoolean(
-                    mContext, PreferenceConstant.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
+                    mContext, PreferenceConstants.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
                 )
                 setInitData()
             }
             R.id.btnHighDefinition -> {
                 isStandardVideoQuality = false
                 appSettingsViewModel.setBoolean(
-                    mContext, PreferenceConstant.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
+                    mContext, PreferenceConstants.IS_STANDARD_VIDEO_QUALITY, isStandardVideoQuality
                 )
                 setInitData()
             }
             R.id.btnDeleteCompleted -> {
                 isDeleteCompleted = !isDeleteCompleted
                 appSettingsViewModel.setBoolean(
-                    mContext, PreferenceConstant.IS_DELETE_COMPLETED, isDeleteCompleted
+                    mContext, PreferenceConstants.IS_DELETE_COMPLETED, isDeleteCompleted
                 )
                 setInitData()
             }
