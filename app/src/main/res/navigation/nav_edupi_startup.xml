@@ -91,5 +91,8 @@
             app:enterAnim="@anim/slide_right_to_left"
             app:popUpTo="@id/nav_sign_in"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="phone_number"
+            app:argType="string" />
     </fragment>
 </navigation>

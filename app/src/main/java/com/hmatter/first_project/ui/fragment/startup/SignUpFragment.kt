@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
+    private lateinit var signUpItem: SignUpItem
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -29,7 +31,9 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             when (it) {
                 is BaseResult.Success -> {
                     mContext.makeToast(it.item)
-                    findNavController().navigate(R.id.action_nav_sign_up_to_nav_otp)
+                    val action =
+                        SignUpFragmentDirections.actionNavSignUpToNavOtp(signUpItem.phoneNumber)
+                    findNavController().navigate(action)
                 }
                 is BaseResult.Error -> {
                     mContext.makeToast(it.errorMessage)
@@ -49,7 +53,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         }
 
         btnSignUp.setOnClickListener {
-            val signUpItem = SignUpItem()
+            signUpItem = SignUpItem()
             signUpItem.userName = edUserName.text.toString().trim()
             signUpItem.email = edEmail.text.toString().trim()
             signUpItem.phoneNumber = edPhone.text.toString().trim()

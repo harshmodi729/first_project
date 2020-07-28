@@ -2,22 +2,27 @@ package com.hmatter.first_project.ui.fragment.startup
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
+import com.hmatter.first_project.extension.bold
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.extension.onDialogButtonClick
 import kotlinx.android.synthetic.main.fragment_o_t_p.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
 class OTPFragment : BaseFragment(R.layout.fragment_o_t_p) {
-    private lateinit var successDialog: AlertDialog
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         tvToolbarTitle.text = getString(R.string.otp_header_text)
+        arguments?.let {
+            val phoneNumber = OTPFragmentArgs.fromBundle(it).phoneNumber
+            val description =
+                String.format(mContext.getString(R.string.otp_heading_text), phoneNumber)
+            tvOtpDescription.text = description.bold(phoneNumber)
+        }
         val backButtonCallback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
