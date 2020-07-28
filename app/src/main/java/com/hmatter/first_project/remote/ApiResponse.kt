@@ -17,6 +17,6 @@ class ApiResponse<T> {
     val message: String = ""
 
     fun isSuccess(): Boolean {
-        return success > "0" || success.equals("success", true)
+        return success != "0" || success.equals("success", true)
     }
 }

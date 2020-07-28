@@ -14,7 +14,7 @@ class HomeViewModel : BaseViewModel() {
     fun getPopularClasses() {
         viewModelScope.launch {
             try {
-                val response = getApiServiceManager().getPopularClasses()
+                val response = getDummyApiServiceManager().getPopularClasses()
                 if (response.isSuccess()) {
                     response.data?.let {
                         if (response.isSuccess())

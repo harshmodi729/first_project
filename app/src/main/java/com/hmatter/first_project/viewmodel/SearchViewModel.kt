@@ -14,7 +14,7 @@ class SearchViewModel : BaseViewModel() {
     fun getVideoCategories() {
         viewModelScope.launch {
             try {
-                val response = getApiServiceManager().getVideoCategory()
+                val response = getDummyApiServiceManager().getVideoCategory()
                 if (response.isSuccess()) {
                     response.data?.let {
                         alVideoCategoryItem.value = BaseResult.Success(it)

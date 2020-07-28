@@ -58,6 +58,10 @@ class SignUpViewModel : BaseViewModel() {
             isValid = false
             message = "Email is not valid."
         }
+        if (!signUpItem.phoneNumber.isBlankOrEmpty() && signUpItem.phoneNumber.length != 10) {
+            isValid = false
+            message = "Please enter valid phone number."
+        }
         if ((!signUpItem.password.isBlankOrEmpty() && !signUpItem.confirmPassword.isBlankOrEmpty())
             && signUpItem.password != signUpItem.confirmPassword
         ) {

@@ -8,12 +8,17 @@ import com.hmatter.first_project.extension.getPreferenceBoolean
 import com.hmatter.first_project.extension.setPreferenceBoolean
 import com.hmatter.first_project.remote.ApiManager
 import com.hmatter.first_project.remote.ApiServices
+import com.hmatter.first_project.remote.DummyApiManager
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
     fun getApiServiceManager(): ApiServices {
         return ApiManager.getApiServices()
+    }
+
+    fun getDummyApiServiceManager(): ApiServices {
+        return DummyApiManager.getApiServices()
     }
 
     fun getPreferenceManager(context: Context): SharedPreferences {
