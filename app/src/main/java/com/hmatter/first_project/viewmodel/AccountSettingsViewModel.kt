@@ -1,42 +1,49 @@
 package com.hmatter.first_project.viewmodel
 
-import android.view.View
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
-import com.hmatter.first_project.extension.isBlankOrEmpty
-import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
+import com.hmatter.first_project.common.PreferenceConstants
+import com.hmatter.first_project.extension.getPreferenceInt
+import com.hmatter.first_project.extension.getPreferenceString
+import com.hmatter.first_project.model.SignInItem
 import kotlinx.coroutines.launch
 
 class AccountSettingsViewModel : BaseViewModel() {
 
-    val changePasswordDialogButtonClick = MutableLiveData<BaseResult<Any>>()
+    val userProfile = MutableLiveData<BaseResult<SignInItem>>()
+    val userSignOut = MutableLiveData<BaseResult<Boolean>>()
 
-    fun validationControl(dialogView: View) {
+    fun getUserProfileData(context: Context) {
         viewModelScope.launch {
-            if (dialogView.edOldPassword.isBlankOrEmpty() ||
-                dialogView.edOldPassword.isBlankOrEmpty() ||
-                dialogView.edCnfPassword.isBlankOrEmpty()
-            ) {
-                changePasswordDialogButtonClick.value =
-                    BaseResult.Error(
-                        IllegalStateException(),
-                        "Empty or blank is not allowed. Please enter valid password."
-                    )
-            } else {
-                if (dialogView.edNewPassword.text.toString() == dialogView.edCnfPassword.text.toString()) {
-                    changePasswordDialogButtonClick.value =
-                        BaseResult.Success(
-                            "Password change successfully."
-                        )
-                } else {
-                    changePasswordDialogButtonClick.value =
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            "Confirm password doesn't match."
-                        )
-                }
+            try {
+                val preference = getPreferenceManager(context)
+                val item = SignInItem()
+                item.id = preference.getPreferenceInt(PreferenceConstants.USER_ID)
+                item.name = preference.getPreferenceString(PreferenceConstants.USER_NAME)
+                item.email = preference.getPreferenceString(PreferenceConstants.USER_EMAIL)
+                item.mobile = preference.getPreferenceString(PreferenceConstants.USER_MOBILE)
+                item.password = preference.getPreferenceString(PreferenceConstants.USER_NAME)
+                userProfile.value = BaseResult.Success(item)
+            } catch (exception: Exception) {
+                userProfile.value =
+                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+            }
+        }
+    }
+
+    fun userSignOut(context: Context) {
+        viewModelScope.launch {
+            try {
+                val preference = getPreferenceManager(context)
+                preference.edit().clear()
+                preference.edit().apply()
+                userSignOut.value = BaseResult.Success(true)
+            } catch (exception: Exception) {
+                userProfile.value =
+                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }
     }

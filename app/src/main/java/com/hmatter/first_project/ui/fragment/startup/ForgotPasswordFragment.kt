@@ -8,11 +8,16 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
+import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.extension.isBlankOrEmpty
 import com.hmatter.first_project.extension.makeToast
+import com.hmatter.first_project.model.ForgotPasswordItem
+import com.hmatter.first_project.viewmodel.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import kotlinx.android.synthetic.main.lay_reset_forgot_password.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
@@ -30,29 +35,64 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
                 }
             }
         activity?.onBackPressedDispatcher!!.addCallback(viewLifecycleOwner, backButtonCallback)
+
+        val forgotPasswordViewModel =
+            ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
+        forgotPasswordViewModel.verifyMobile.observe(viewLifecycleOwner, Observer {
+            hideProgressDialog(ivDialogBg)
+            when (it) {
+                is BaseResult.Success -> {
+                    mContext.makeToast(it.item)
+                    layPhoneNumber.visibility = View.GONE
+                    layReset.visibility = View.VISIBLE
+                }
+                is BaseResult.Error -> {
+                    mContext.makeToast(it.errorMessage)
+                }
+            }
+        })
+        forgotPasswordViewModel.userResetPassword.observe(viewLifecycleOwner, Observer {
+            hideProgressDialog(ivDialogBg)
+            when (it) {
+                is BaseResult.Success -> {
+                    mContext.makeToast(it.item)
+                    findNavController().navigate(R.id.action_nav_forgot_password_to_nav_sign_in)
+                }
+                is BaseResult.Error -> {
+                    mContext.makeToast(it.errorMessage)
+                }
+            }
+        })
+
         btnToolbarBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        edUserName.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+        edPhone.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(
                 textview: TextView?,
                 actioId: Int,
                 keyEvent: KeyEvent?
             ): Boolean {
-                if (edUserName.text!!.isNotEmpty() && edUserName.text!!.isNotBlank()) {
+                if (!edPhone.text.toString().isBlankOrEmpty()) {
                     if (actioId == EditorInfo.IME_ACTION_DONE) {
-                        layUserName.visibility = View.GONE
-                        layReset.visibility = View.VISIBLE
+                        forgotPasswordViewModel.verifyMobileNumber(edPhone.text.toString()).apply {
+                            showProgressDialog(layForgotPassword, ivDialogBg)
+                        }
                         return true
                     }
-                } else mContext.makeToast("Please enter username")
+                } else mContext.makeToast("Please enter valid phone number.")
                 return false
             }
         })
-        edPassword.addTextChangedListener(this)
-        edConfirmPassword.addTextChangedListener(this)
+        edOldPassword.addTextChangedListener(this)
+        edNewPassword.addTextChangedListener(this)
         btnResetPassword.setOnClickListener {
-            it.findNavController().navigate(R.id.action_nav_forgot_password_to_nav_sign_in)
+            val forgotPasswordItem = ForgotPasswordItem()
+            forgotPasswordItem.oldPassword = edOldPassword.text.toString().trim()
+            forgotPasswordItem.newPassword = edNewPassword.text.toString().trim()
+            forgotPasswordViewModel.resetPassword(mContext, forgotPasswordItem, true).apply {
+                showProgressDialog(layForgotPassword, ivDialogBg)
+            }
         }
     }
 

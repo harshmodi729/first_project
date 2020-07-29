@@ -27,7 +27,7 @@ fun String.isEmailValid(): Boolean {
 fun String.bold(word: String): SpannableStringBuilder {
     val spannableString = SpannableStringBuilder(this)
     spannableString.setSpan(
-        StyleSpan(Typeface.BOLD), this.indexOf(this),
+        StyleSpan(Typeface.BOLD), this.indexOf(word),
         (this.indexOf(word) + word.length), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
     )
     return spannableString

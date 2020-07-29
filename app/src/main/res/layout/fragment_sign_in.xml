@@ -27,18 +27,19 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edUserNameLay"
+            android:id="@+id/edMobileLay"
             style="@style/EditTextStyle"
-            android:hint="@string/hint_username"
+            android:hint="@string/hint_phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edUserName"
+                android:id="@+id/edMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="number"
+                android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +50,7 @@
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edUserNameLay">
+            app:layout_constraintTop_toBottomOf="@id/edMobileLay">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edPassword"
@@ -63,8 +64,8 @@
             style="@style/ButtonStyle"
             android:layout_marginTop="@dimen/xxlarge_margin"
             android:text="@string/sign_in"
-            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
-            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintEnd_toEndOf="@id/edMobileLay"
+            app:layout_constraintStart_toStartOf="@id/edMobileLay"
             app:layout_constraintTop_toBottomOf="@id/edPasswordLay" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -87,8 +88,8 @@
             android:text="@string/forgot_your_password"
             android:textColor="@color/colorIntroTitle"
             android:textSize="@dimen/medium_text"
-            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
-            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintEnd_toEndOf="@id/edMobileLay"
+            app:layout_constraintStart_toStartOf="@id/edMobileLay"
             app:layout_constraintTop_toBottomOf="@id/tvSignUp" />
 
         <com.google.android.material.button.MaterialButton
@@ -103,8 +104,8 @@
             app:backgroundTint="#4460a0"
             app:icon="@drawable/ic_facebook_f"
             app:iconGravity="textStart"
-            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
-            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintEnd_toEndOf="@id/edMobileLay"
+            app:layout_constraintStart_toStartOf="@id/edMobileLay"
             app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
         <com.google.android.material.button.MaterialButton
@@ -122,8 +123,8 @@
             app:iconGravity="textStart"
             app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/edUserNameLay"
-            app:layout_constraintStart_toStartOf="@id/edUserNameLay"
+            app:layout_constraintEnd_toEndOf="@id/edMobileLay"
+            app:layout_constraintStart_toStartOf="@id/edMobileLay"
             app:layout_constraintTop_toBottomOf="@id/btnFb" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

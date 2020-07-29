@@ -59,7 +59,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             signUpItem.phoneNumber = edPhone.text.toString().trim()
             signUpItem.password = edPassword.text.toString().trim()
             signUpItem.confirmPassword = edConfirmPassword.text.toString().trim()
-            signUpItem.isTermsCOnditionChecked = chTerms.isChecked
+            signUpItem.isTermsConditionChecked = chTerms.isChecked
             showProgressDialog(laySignUp, ivDialogBg)
             signUpViewModel.userRegistration(signUpItem)
         }

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.common.Constants
+import com.hmatter.first_project.model.ForgotPasswordItem
 import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
@@ -68,7 +69,7 @@ fun Context.setBlurImage(rootView: View, ivBackground: AppCompatImageView) {
 var onDialogButtonClick: ((isPositive: Boolean) -> Unit)? = null
 var onChangePasswordDialogButtonClick: ((
     isPositive: Boolean,
-    dialogView: View
+    item: ForgotPasswordItem
 ) -> Unit)? = null
 
 fun Context.getProgressDialog(
@@ -99,10 +100,14 @@ fun Context.getProgressDialog(
         }
         Constants.CHANGE_PASSWORD_DIALOG -> {
             view.btnOkay.setOnClickListener {
-                onChangePasswordDialogButtonClick?.invoke(true, view)
+                val forgotPasswordItem = ForgotPasswordItem()
+                forgotPasswordItem.oldPassword = view.edOldPassword.text.toString().trim()
+                forgotPasswordItem.newPassword = view.edNewPassword.text.toString().trim()
+                forgotPasswordItem.confirmPassword = view.edCnfPassword.text.toString().trim()
+                onChangePasswordDialogButtonClick?.invoke(true, forgotPasswordItem)
             }
             view.btnCancel.setOnClickListener {
-                onChangePasswordDialogButtonClick?.invoke(false, view)
+                onChangePasswordDialogButtonClick?.invoke(false, ForgotPasswordItem())
             }
         }
         Constants.LOGOUT_DIALOG -> {

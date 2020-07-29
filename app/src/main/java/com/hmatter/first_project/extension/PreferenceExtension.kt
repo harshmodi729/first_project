@@ -20,6 +20,23 @@ fun SharedPreferences.getPreferenceString(key: String, defaultValue: String = ""
 }
 
 /**
+ * setPreferenceInt will set string value into given key
+ * @param key is set as an unique id in sharedPreference class
+ * @param value int will set on given key
+ */
+fun SharedPreferences.setPreferenceInt(key: String, value: Int) {
+    this.edit().putInt(key, value).apply()
+}
+
+/**
+ * getPreferenceInt will get string value into given key
+ * @param key to get an value, which is set on given key
+ */
+fun SharedPreferences.getPreferenceInt(key: String, defaultValue: Int = 0): Int {
+    return this.getInt(key, defaultValue)
+}
+
+/**
  * setPreferenceBoolean will set boolean value into given key
  * @param key is set as an unique id in sharedPreference class
  * @param value boolean will set on given key

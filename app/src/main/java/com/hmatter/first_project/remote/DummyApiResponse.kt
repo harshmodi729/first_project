@@ -3,13 +3,13 @@ package com.hmatter.first_project.remote
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class ApiResponse<T> {
+class DummyApiResponse<T> {
     @Expose
-    @SerializedName("success", alternate = ["RESULT"])
-    val success: Boolean = true
+    @SerializedName("result", alternate = ["RESULT"])
+    val success: Int = 0
 
     @Expose
-    @SerializedName("user_data", alternate = ["USER_DATA"])
+    @SerializedName("data", alternate = ["DATA"])
     val data: T? = null
 
     @Expose
@@ -17,6 +17,6 @@ class ApiResponse<T> {
     val message: String = ""
 
     fun isSuccess(): Boolean {
-        return success
+        return success > 0
     }
 }

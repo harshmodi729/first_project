@@ -6,5 +6,5 @@ class SignUpItem {
     var phoneNumber = ""
     var password = ""
     var confirmPassword = ""
-    var isTermsCOnditionChecked = false
+    var isTermsConditionChecked = false
 }
