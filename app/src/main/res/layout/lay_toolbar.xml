@@ -37,16 +37,6 @@
         app:layout_constraintBottom_toBottomOf="@id/toolbarBg"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivUserProfile"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="@dimen/large_margin"
-        android:src="@drawable/person"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tvToolbarTitle"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/edSearch"
         android:layout_width="0dp"
@@ -62,7 +52,7 @@
         android:padding="10dp"
         android:textSize="@dimen/small_text"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/ivUserProfile"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

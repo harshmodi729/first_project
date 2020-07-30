@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
@@ -41,7 +42,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         super.onActivityCreated(savedInstanceState)
 
         btnToolbarBack.visibility = View.GONE
-        ivUserProfile.visibility = View.VISIBLE
         tvToolbarTitle.text = getString(R.string.home)
 
         homeSliderAdapter = HomeSliderAdapter(mContext, getSliderItem())
@@ -84,7 +84,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
         })
 
-//        https://run.mocky.io/v3/9756db14-2aa0-44dd-8bc9-30629ea66ddd
+        ivUserProfile.setOnClickListener {
+            it.findNavController()
+                .navigate(R.id.action_nav_home_to_nav_user_profile)
+        }
     }
 
     override fun onResume() {
@@ -105,6 +108,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun getSliderItem(): ArrayList<SliderItem> {
+        alSliderItem.clear()
         for (i in 0..2) {
             val sliderItem = SliderItem()
             sliderItem.title = titles[i]

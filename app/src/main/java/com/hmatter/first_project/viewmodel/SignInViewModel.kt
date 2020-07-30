@@ -7,6 +7,7 @@ import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
 import com.hmatter.first_project.common.PreferenceConstants
 import com.hmatter.first_project.extension.isBlankOrEmpty
+import com.hmatter.first_project.extension.setPreferenceBoolean
 import com.hmatter.first_project.extension.setPreferenceInt
 import com.hmatter.first_project.extension.setPreferenceString
 import com.hmatter.first_project.model.SignInItem
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 class SignInViewModel : BaseViewModel() {
 
     val userSignInData = MutableLiveData<BaseResult<SignInItem>>()
+    val visitIntro = MutableLiveData<BaseResult<Boolean>>()
 
     fun userSignIn(
         context: Context,
@@ -57,6 +59,7 @@ class SignInViewModel : BaseViewModel() {
         item: SignInItem
     ) {
         val preferenceManager = getPreferenceManager(context)
+        preferenceManager.setPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN, true)
         preferenceManager.setPreferenceInt(PreferenceConstants.USER_ID, item.id)
         preferenceManager.setPreferenceString(
             PreferenceConstants.USER_NAME,
@@ -81,5 +84,21 @@ class SignInViewModel : BaseViewModel() {
             return Pair(isValid, message)
         }
         return Pair(isValid, message)
+    }
+
+    fun setVisitIntro(context: Context) {
+        viewModelScope.launch {
+            try {
+                val preference = getPreferenceManager(context)
+                preference.setPreferenceBoolean(
+                    PreferenceConstants.IS_ALREADY_VISIT_INTRO,
+                    true
+                )
+                visitIntro.value = BaseResult.Success(true)
+            } catch (exception: Exception) {
+                visitIntro.value =
+                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+            }
+        }
     }
 }

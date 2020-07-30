@@ -1,14 +1,20 @@
 package com.hmatter.first_project.ui.fragment.startup
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.IntroAdapter
 import com.hmatter.first_project.base.BaseFragment
+import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.SliderItem
+import com.hmatter.first_project.viewmodel.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_intro.*
 
 class IntroFragment : BaseFragment(R.layout.fragment_intro) {
@@ -23,8 +29,22 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
         "Perfect homemade paste, or write a novel... All wit acess to 100+ class."
     )
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val signInViewModel =
+            ViewModelProviders.of(this)[SignInViewModel::class.java]
+        signInViewModel.visitIntro.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is BaseResult.Success -> {
+                    findNavController().navigate(R.id.action_nav_intro_to_nav_sign_in)
+                }
+                is BaseResult.Error -> {
+                    mContext.makeToast(it.errorMessage)
+                }
+            }
+        })
+
         introAdapter = IntroAdapter(mContext, getIntroItem())
         introPager.adapter = introAdapter
         introPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -37,7 +57,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
         indicatorDots(0)
 
         btnSkip.setOnClickListener {
-            it.findNavController().navigate(R.id.action_nav_intro_to_nav_sign_in)
+            signInViewModel.setVisitIntro(mContext)
         }
     }
 

@@ -8,6 +8,7 @@ import com.hmatter.first_project.base.BaseViewModel
 import com.hmatter.first_project.common.PreferenceConstants
 import com.hmatter.first_project.extension.getPreferenceInt
 import com.hmatter.first_project.extension.getPreferenceString
+import com.hmatter.first_project.extension.setPreferenceBoolean
 import com.hmatter.first_project.model.SignInItem
 import kotlinx.coroutines.launch
 
@@ -38,8 +39,9 @@ class AccountSettingsViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 val preference = getPreferenceManager(context)
-                preference.edit().clear()
-                preference.edit().apply()
+                preference.edit().clear().commit()
+                preference.setPreferenceBoolean(PreferenceConstants.IS_ALREADY_VISIT_INTRO, true)
+                preference.setPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN, false)
                 userSignOut.value = BaseResult.Success(true)
             } catch (exception: Exception) {
                 userProfile.value =

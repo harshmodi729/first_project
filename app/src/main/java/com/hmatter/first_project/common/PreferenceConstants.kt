@@ -2,6 +2,7 @@ package com.hmatter.first_project.common
 
 class PreferenceConstants {
     companion object {
+        const val IS_ALREADY_VISIT_INTRO = "is_already_visit_intro"
         const val IS_USER_LOGIN = "is_user_login"
         const val USER_ID = "user_id"
         const val USER_NAME = "user_name"

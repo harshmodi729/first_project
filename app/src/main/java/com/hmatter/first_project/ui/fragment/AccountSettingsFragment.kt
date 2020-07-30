@@ -1,5 +1,6 @@
 package com.hmatter.first_project.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.extension.onChangePasswordDialogButtonClick
 import com.hmatter.first_project.extension.onDialogButtonClick
+import com.hmatter.first_project.ui.activity.StartupActivity
 import com.hmatter.first_project.viewmodel.AccountSettingsViewModel
 import com.hmatter.first_project.viewmodel.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.fragment_account_settings.*
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.lay_account_setting_edit_detail.view.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
 class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvToolbarTitle.text = getString(R.string.account_settings)
@@ -43,6 +46,11 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
         accountSettingsViewModel.userSignOut.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
+                    startActivity(
+                        Intent(mContext, StartupActivity::class.java).putExtra(
+                            "isAlreadyVisitIntro", true
+                        )
+                    )
                     mContext.finish()
                 }
                 is BaseResult.Error -> {
