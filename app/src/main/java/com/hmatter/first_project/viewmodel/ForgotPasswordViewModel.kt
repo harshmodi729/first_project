@@ -14,20 +14,21 @@ import kotlinx.coroutines.launch
 class ForgotPasswordViewModel : BaseViewModel() {
 
     private var isFromForgotPassword = true
-    val verifyMobile = MutableLiveData<BaseResult<String>>()
-    val userResetPassword = MutableLiveData<BaseResult<String>>()
+    val verifyMobileLiveData = MutableLiveData<BaseResult<String>>()
+    val resetPasswordLiveData = MutableLiveData<BaseResult<String>>()
 
     fun verifyMobileNumber(mobile: String) {
         viewModelScope.launch {
             try {
                 val response = getApiServiceManager().forgotPassword(mobile)
                 if (response.success) {
-                    verifyMobile.value = BaseResult.Success(response.message)
+                    verifyMobileLiveData.value = BaseResult.Success(response.message)
                 } else {
-                    verifyMobile.value = BaseResult.Error(IllegalStateException(), response.message)
+                    verifyMobileLiveData.value =
+                        BaseResult.Error(IllegalStateException(), response.message)
                 }
             } catch (exception: Exception) {
-                verifyMobile.value =
+                verifyMobileLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }
@@ -51,17 +52,17 @@ class ForgotPasswordViewModel : BaseViewModel() {
                         forgotPasswordItem.newPassword
                     )
                     if (response.success) {
-                        userResetPassword.value = BaseResult.Success(response.message)
+                        resetPasswordLiveData.value = BaseResult.Success(response.message)
                     } else {
-                        userResetPassword.value =
+                        resetPasswordLiveData.value =
                             BaseResult.Error(IllegalStateException(), response.message)
                     }
                 } else {
-                    userResetPassword.value =
+                    resetPasswordLiveData.value =
                         BaseResult.Error(IllegalStateException(), validation.second)
                 }
             } catch (exception: Exception) {
-                userResetPassword.value =
+                resetPasswordLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

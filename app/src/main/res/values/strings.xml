@@ -69,4 +69,6 @@
     <string name="delete_all_downloads">Delete All Downloads</string>
     <string name="delete_all_detail">This will remove all downloaded Lesson videos from your phone.</string>
     <string name="delete_completed_lessons">Delete Completed Lessons</string>
+    <string name="favorites">Favorites</string>
+    <string name="your_classes">Your Classes</string>
 </resources>

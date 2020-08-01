@@ -34,7 +34,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
 
         val signInViewModel =
             ViewModelProviders.of(this)[SignInViewModel::class.java]
-        signInViewModel.visitIntro.observe(viewLifecycleOwner, Observer {
+        signInViewModel.visitIntroLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
                     findNavController().navigate(R.id.action_nav_intro_to_nav_sign_in)

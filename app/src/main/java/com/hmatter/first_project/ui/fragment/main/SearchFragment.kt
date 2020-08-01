@@ -38,7 +38,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                 showProgressDialog(laySearch, ivDialogBg)
             }
         }
-        searchViewModel.alVideoCategoryItem.observe(
+        searchViewModel.videoCategoryLiveData.observe(
             viewLifecycleOwner,
             Observer {
                 hideProgressDialog(ivDialogBg)

@@ -10,7 +10,7 @@ import com.hmatter.first_project.R
 import com.zerobranch.layout.SwipeLayout
 import kotlinx.android.synthetic.main.lay_downloads_item.view.*
 
-class DownloadAdapter(private val context: Context) :
+class DownloadAdapter(private val context: Context, private val isEnabledSwipe: Boolean = true) :
     RecyclerView.Adapter<DownloadAdapter.ViewHolder>() {
 
     private var alDownloadItem = ArrayList<String>()
@@ -24,6 +24,7 @@ class DownloadAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.swipeLayout.close()
+        holder.swipeLayout.isEnabledSwipe = isEnabledSwipe
         holder.tvClassName.text = alDownloadItem[position]
         holder.deleteView.setOnClickListener {
             onDeleteClickListener?.invoke(alDownloadItem[position], position)

@@ -88,6 +88,11 @@ dependencies {
     //region iOS like Switch
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     //endregion
+
+    //region Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //endregion
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

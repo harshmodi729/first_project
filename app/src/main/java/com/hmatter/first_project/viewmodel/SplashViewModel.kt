@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class SplashViewModel : BaseViewModel() {
 
-    val userLoginCheck = MutableLiveData<BaseResult<Pair<Boolean, Boolean>>>()
+    val isLoginLiveData = MutableLiveData<BaseResult<Pair<Boolean, Boolean>>>()
 
     fun isUserLogin(context: Context) {
         viewModelScope.launch {
@@ -20,9 +20,9 @@ class SplashViewModel : BaseViewModel() {
                 val isLogin = preference.getPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN)
                 val isAlreadyVisitIntro =
                     preference.getPreferenceBoolean(PreferenceConstants.IS_ALREADY_VISIT_INTRO)
-                userLoginCheck.value = BaseResult.Success(Pair(isLogin, isAlreadyVisitIntro))
+                isLoginLiveData.value = BaseResult.Success(Pair(isLogin, isAlreadyVisitIntro))
             } catch (exception: Exception) {
-                userLoginCheck.value =
+                isLoginLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

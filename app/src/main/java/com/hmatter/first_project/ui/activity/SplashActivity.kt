@@ -19,7 +19,7 @@ class SplashActivity : BaseActivity() {
         val splashViewModel =
             ViewModelProviders.of(this)[SplashViewModel::class.java]
         splashViewModel.isUserLogin(this)
-        splashViewModel.userLoginCheck.observe(this, Observer {
+        splashViewModel.isLoginLiveData.observe(this, Observer {
             Handler().postDelayed({
                 when (it) {
                     is BaseResult.Success -> {

@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 
 class AccountSettingsViewModel : BaseViewModel() {
 
-    val userProfile = MutableLiveData<BaseResult<SignInItem>>()
-    val userSignOut = MutableLiveData<BaseResult<Boolean>>()
+    val profileLiveData = MutableLiveData<BaseResult<SignInItem>>()
+    val signOutLiveData = MutableLiveData<BaseResult<Boolean>>()
 
     fun getUserProfileData(context: Context) {
         viewModelScope.launch {
@@ -27,9 +27,9 @@ class AccountSettingsViewModel : BaseViewModel() {
                 item.email = preference.getPreferenceString(PreferenceConstants.USER_EMAIL)
                 item.mobile = preference.getPreferenceString(PreferenceConstants.USER_MOBILE)
                 item.password = preference.getPreferenceString(PreferenceConstants.USER_NAME)
-                userProfile.value = BaseResult.Success(item)
+                profileLiveData.value = BaseResult.Success(item)
             } catch (exception: Exception) {
-                userProfile.value =
+                profileLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }
@@ -42,9 +42,9 @@ class AccountSettingsViewModel : BaseViewModel() {
                 preference.edit().clear().commit()
                 preference.setPreferenceBoolean(PreferenceConstants.IS_ALREADY_VISIT_INTRO, true)
                 preference.setPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN, false)
-                userSignOut.value = BaseResult.Success(true)
+                signOutLiveData.value = BaseResult.Success(true)
             } catch (exception: Exception) {
-                userProfile.value =
+                profileLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

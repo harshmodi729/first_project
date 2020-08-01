@@ -2,6 +2,7 @@ package com.hmatter.first_project.remote
 
 import com.google.gson.JsonObject
 import com.hmatter.first_project.common.RequestConstants
+import com.hmatter.first_project.model.FavoriteCLassesItem
 import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.SignInItem
 import com.hmatter.first_project.model.VideoCategoryItem
@@ -46,10 +47,13 @@ interface ApiServices {
         @Field("new_password") newPassword: String
     ): ApiResponse<JsonObject>
 
-    @GET("9756db14-2aa0-44dd-8bc9-30629ea66ddd")
+    @GET("e12782f8-224c-48f5-b63e-0ed640272462")
     suspend fun getPopularClasses()
-            : DummyApiResponse<ArrayList<PopularClassItem>>
+            : ApiResponse<ArrayList<PopularClassItem>>
 
-    @GET("8aa3d6ee-bb06-46ea-8614-1f49846ce2de")
-    suspend fun getVideoCategory(): DummyApiResponse<ArrayList<VideoCategoryItem>>
+    @GET("076880d6-a58b-4cdd-8325-fdad56844ba9")
+    suspend fun getVideoCategory(): ApiResponse<ArrayList<VideoCategoryItem>>
+
+    @GET("56931fb1-cdd1-48fc-a7c8-b53ab7413f30")
+    suspend fun getFavoriteClasses(): ApiResponse<ArrayList<FavoriteCLassesItem>>
 }

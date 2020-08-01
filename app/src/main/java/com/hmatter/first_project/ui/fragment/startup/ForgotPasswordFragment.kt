@@ -38,7 +38,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
 
         val forgotPasswordViewModel =
             ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
-        forgotPasswordViewModel.verifyMobile.observe(viewLifecycleOwner, Observer {
+        forgotPasswordViewModel.verifyMobileLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
@@ -51,7 +51,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
                 }
             }
         })
-        forgotPasswordViewModel.userResetPassword.observe(viewLifecycleOwner, Observer {
+        forgotPasswordViewModel.resetPasswordLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AppSettingsViewModel : BaseViewModel() {
 
-    val preferenceData = MutableLiveData<BaseResult<AppSettingsItem>>()
+    val preferenceLiveData = MutableLiveData<BaseResult<AppSettingsItem>>()
 
     fun getAppSettingsPreference(context: Context) {
         viewModelScope.launch {
@@ -30,9 +30,9 @@ class AppSettingsViewModel : BaseViewModel() {
                     context,
                     PreferenceConstants.IS_DELETE_COMPLETED, true
                 )
-                preferenceData.value = BaseResult.Success(appSettingsItem)
+                preferenceLiveData.value = BaseResult.Success(appSettingsItem)
             } catch (exception: Exception) {
-                preferenceData.value =
+                preferenceLiveData.value =
                     BaseResult.Error(IllegalStateException(), exception.localizedMessage!!)
             }
         }

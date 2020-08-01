@@ -26,7 +26,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         tvTermCondition.movementMethod = LinkMovementMethod.getInstance()
 
         val signUpViewModel = ViewModelProviders.of(this)[SignUpViewModel::class.java]
-        signUpViewModel.userRegistration.observe(viewLifecycleOwner, Observer {
+        signUpViewModel.registrationLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {

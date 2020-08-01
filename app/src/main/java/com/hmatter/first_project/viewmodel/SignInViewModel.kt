@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 
 class SignInViewModel : BaseViewModel() {
 
-    val userSignInData = MutableLiveData<BaseResult<SignInItem>>()
-    val visitIntro = MutableLiveData<BaseResult<Boolean>>()
+    val signInLiveData = MutableLiveData<BaseResult<SignInItem>>()
+    val visitIntroLiveData = MutableLiveData<BaseResult<Boolean>>()
 
     fun userSignIn(
         context: Context,
@@ -27,28 +27,28 @@ class SignInViewModel : BaseViewModel() {
             try {
                 val validationControl = validationControl(phoneNumber)
                 if (!validationControl.first) {
-                    userSignInData.value =
+                    signInLiveData.value =
                         BaseResult.Error(IllegalStateException(), validationControl.second)
                 } else {
                     val response = getApiServiceManager().userLogin(phoneNumber, password)
-                    if (response.isSuccess()) {
+                    if (response.success) {
                         response.data?.let {
                             setUserProfileData(context, it)
-                            userSignInData.value = BaseResult.Success(it)
+                            signInLiveData.value = BaseResult.Success(it)
                         } ?: kotlin.run {
-                            userSignInData.value =
+                            signInLiveData.value =
                                 BaseResult.Error(
                                     IllegalStateException(),
                                     "Oops something went wrong."
                                 )
                         }
                     } else {
-                        userSignInData.value =
+                        signInLiveData.value =
                             BaseResult.Error(IllegalStateException(), response.message)
                     }
                 }
             } catch (exception: Exception) {
-                userSignInData.value =
+                signInLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }
@@ -94,9 +94,9 @@ class SignInViewModel : BaseViewModel() {
                     PreferenceConstants.IS_ALREADY_VISIT_INTRO,
                     true
                 )
-                visitIntro.value = BaseResult.Success(true)
+                visitIntroLiveData.value = BaseResult.Success(true)
             } catch (exception: Exception) {
-                visitIntro.value =
+                visitIntroLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

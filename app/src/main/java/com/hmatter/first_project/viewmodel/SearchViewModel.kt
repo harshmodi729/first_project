@@ -9,29 +9,29 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel : BaseViewModel() {
 
-    val alVideoCategoryItem = MutableLiveData<BaseResult<ArrayList<VideoCategoryItem>>>()
+    val videoCategoryLiveData = MutableLiveData<BaseResult<ArrayList<VideoCategoryItem>>>()
 
     fun getVideoCategories() {
         viewModelScope.launch {
             try {
                 val response = getDummyApiServiceManager().getVideoCategory()
-                if (response.isSuccess()) {
+                if (response.success) {
                     response.data?.let {
-                        alVideoCategoryItem.value = BaseResult.Success(it)
+                        videoCategoryLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        alVideoCategoryItem.value = BaseResult.Error(
+                        videoCategoryLiveData.value = BaseResult.Error(
                             IllegalStateException(),
-                            "Something wrong, please try again later"
+                            response.message
                         )
                     }
                 } else
-                    alVideoCategoryItem.value = BaseResult.Error(
+                    videoCategoryLiveData.value = BaseResult.Error(
                         IllegalStateException(),
-                        "Something wrong, please try again later"
+                        "Oops something went wrong."
                     )
             } catch (e: Exception) {
                 e.printStackTrace()
-                alVideoCategoryItem.value = BaseResult.Error(e, e.localizedMessage!!)
+                videoCategoryLiveData.value = BaseResult.Error(e, e.localizedMessage!!)
             }
         }
     }

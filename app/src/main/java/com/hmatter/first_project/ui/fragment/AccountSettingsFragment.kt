@@ -31,7 +31,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
             ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
 
         accountSettingsViewModel.getUserProfileData(mContext)
-        accountSettingsViewModel.userProfile.observe(viewLifecycleOwner, Observer {
+        accountSettingsViewModel.profileLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
                     panelPhoneNumber.edChangeProfile.setText(it.item.mobile)
@@ -43,7 +43,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                 }
             }
         })
-        accountSettingsViewModel.userSignOut.observe(viewLifecycleOwner, Observer {
+        accountSettingsViewModel.signOutLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
                     startActivity(
@@ -58,7 +58,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                 }
             }
         })
-        changePasswordViewModel.userResetPassword.observe(viewLifecycleOwner, Observer {
+        changePasswordViewModel.resetPasswordLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {

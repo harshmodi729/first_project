@@ -11,14 +11,14 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel : BaseViewModel() {
 
-    val userRegistration = MutableLiveData<BaseResult<String>>()
+    val registrationLiveData = MutableLiveData<BaseResult<String>>()
 
     fun userRegistration(signUpItem: SignUpItem) {
         viewModelScope.launch {
             try {
                 val validationControl = validationControl(signUpItem)
                 if (!validationControl.first) {
-                    userRegistration.value =
+                    registrationLiveData.value =
                         BaseResult.Error(IllegalStateException(), validationControl.second)
                 } else {
                     val response = getApiServiceManager().userRegistration(
@@ -28,15 +28,15 @@ class SignUpViewModel : BaseViewModel() {
                         signUpItem.password
                     )
                     if (response.success) {
-                        userRegistration.value =
+                        registrationLiveData.value =
                             BaseResult.Success(response.message)
                     } else {
-                        userRegistration.value =
+                        registrationLiveData.value =
                             BaseResult.Error(IllegalStateException(), response.message)
                     }
                 }
             } catch (exception: Exception) {
-                userRegistration.value =
+                registrationLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

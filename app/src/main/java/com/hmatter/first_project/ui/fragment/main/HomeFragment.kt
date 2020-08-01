@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 showProgressDialog(layHome, ivDialogBg)
             }
         }
-        homeViewModel.alPopularClasses.observe(viewLifecycleOwner, Observer {
+        homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {

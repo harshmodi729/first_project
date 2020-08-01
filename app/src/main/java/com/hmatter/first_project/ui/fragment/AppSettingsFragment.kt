@@ -29,7 +29,7 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
 
         appSettingsViewModel = ViewModelProviders.of(this)[AppSettingsViewModel::class.java]
         appSettingsViewModel.getAppSettingsPreference(mContext)
-        appSettingsViewModel.preferenceData.observe(viewLifecycleOwner, Observer {
+        appSettingsViewModel.preferenceLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
                     isCellularDataOn = it.item.isCellularDataOn

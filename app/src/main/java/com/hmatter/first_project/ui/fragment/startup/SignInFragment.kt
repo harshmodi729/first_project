@@ -26,7 +26,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         tvToolbarTitle.text = getString(R.string.sign_in)
 
         signInViewModel = ViewModelProviders.of(this)[SignInViewModel::class.java]
-        signInViewModel.userSignInData.observe(viewLifecycleOwner, Observer {
+        signInViewModel.signInLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
