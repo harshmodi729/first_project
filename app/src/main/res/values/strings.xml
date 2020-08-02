@@ -31,6 +31,7 @@
     <string name="newest_classes">Newest Classes</string>
     <string name="popular_classes">Popular Classes</string>
     <string name="search_tag_text">Popular Tags</string>
+    <string name="search_result_text">There are 10 classes found</string>
     <string-array name="cooking_array">
         <item>Cooking lessons</item>
         <item>Cooking Art</item>

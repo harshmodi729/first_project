@@ -8,26 +8,36 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.extension.makeToast
+import com.hmatter.first_project.model.PopularTagCategoryItem
+import com.hmatter.first_project.model.VideoCategoryItem
 import kotlinx.android.synthetic.main.list_item_tags.view.*
 
 class PopularTagsAdapter(
-    private val context: Context,
-    private val tagList: ArrayList<String>
+    private val context: Context
 ) :
     RecyclerView.Adapter<PopularTagsAdapter.ViewHolder>() {
+
+    private var alPopularTagCategoryItem = ArrayList<PopularTagCategoryItem>()
+    var onTagItemClickListener: ((item: String, position: Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.list_item_tags, parent, false)
         )
     }
 
-    override fun getItemCount() = tagList.size
+    override fun getItemCount() = alPopularTagCategoryItem.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tagName.text = tagList[position]
+        holder.tagName.text = alPopularTagCategoryItem[position].categoryName
         holder.itemView.setOnClickListener {
-            context.makeToast(tagList[position])
+            onTagItemClickListener?.invoke(alPopularTagCategoryItem[position].categoryName, position)
         }
+    }
+
+    fun addData(alPopularTagCategoryItem: ArrayList<PopularTagCategoryItem>) {
+        this.alPopularTagCategoryItem = alPopularTagCategoryItem
+        notifyDataSetChanged()
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
