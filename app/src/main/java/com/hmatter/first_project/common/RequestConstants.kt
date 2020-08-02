@@ -6,5 +6,7 @@ class RequestConstants {
         const val LOGIN_USER = "login_user"
         const val FORGET_PASSWORD = "forget_password"
         const val CHANGE_PASSWORD = "changePassword"
+        const val GET_POPULAR_TAG = "popularTags"
+        const val GET_POPULAR_CLASS_DATA = "popularPosts"
     }
 }

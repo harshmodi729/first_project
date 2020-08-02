@@ -5,16 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
 import com.hmatter.first_project.model.PopularClassItem
+import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
 
-    val alPopularClasses = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
+    val alPopularClasses = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
 
     fun getPopularClasses() {
         viewModelScope.launch {
             try {
-                val response = getDummyApiServiceManager().getPopularClasses()
+                val response = getApiServiceManager().getPopularClasses()
                 if (response.isSuccess()) {
                     response.data?.let {
                         if (response.isSuccess())

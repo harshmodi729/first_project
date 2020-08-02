@@ -52,6 +52,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 homeSliderHandler.removeCallbacks(homeSliderRunnable)
                 homeSliderHandler.postDelayed(homeSliderRunnable, 3000)
                 indicatorDots(position)
+
             }
         })
         dots = ArrayList()

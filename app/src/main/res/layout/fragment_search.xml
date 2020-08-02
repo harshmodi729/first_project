@@ -28,6 +28,21 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/btn_text"
         android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTotalResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        android:text="@string/search_result_text"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/btn_text"
+        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -47,11 +62,24 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResult"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalResult" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTag"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/small_margin"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,4 +94,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <include
+        layout="@layout/lay_no_data"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSearchResult" />
 </androidx.constraintlayout.widget.ConstraintLayout>

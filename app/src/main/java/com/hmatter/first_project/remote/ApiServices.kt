@@ -2,7 +2,8 @@ package com.hmatter.first_project.remote
 
 import com.google.gson.JsonObject
 import com.hmatter.first_project.common.RequestConstants
-import com.hmatter.first_project.model.PopularClassItem
+import com.hmatter.first_project.model.PopularClassesItem
+import com.hmatter.first_project.model.PopularTagCategoryItem
 import com.hmatter.first_project.model.SignInItem
 import com.hmatter.first_project.model.VideoCategoryItem
 import retrofit2.http.Field
@@ -46,10 +47,13 @@ interface ApiServices {
         @Field("new_password") newPassword: String
     ): ApiResponse<JsonObject>
 
-    @GET("9756db14-2aa0-44dd-8bc9-30629ea66ddd")
-    suspend fun getPopularClasses()
-            : DummyApiResponse<ArrayList<PopularClassItem>>
+    @GET(RequestConstants.GET_POPULAR_CLASS_DATA)
+    suspend fun getPopularClasses(): ApiResponse<ArrayList<PopularClassesItem>>
 
     @GET("8aa3d6ee-bb06-46ea-8614-1f49846ce2de")
     suspend fun getVideoCategory(): DummyApiResponse<ArrayList<VideoCategoryItem>>
+
+    @GET(RequestConstants.GET_POPULAR_TAG)
+    suspend fun getPopularTagList(): ApiResponse<ArrayList<PopularTagCategoryItem>>
+
 }

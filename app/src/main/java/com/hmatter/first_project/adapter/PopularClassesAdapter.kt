@@ -8,7 +8,7 @@ import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
-import com.hmatter.first_project.model.PopularClassItem
+import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.android.synthetic.main.lay_popular_classes_item.view.*
 
 class PopularClassesAdapter(
@@ -16,7 +16,7 @@ class PopularClassesAdapter(
 ) :
     RecyclerView.Adapter<PopularClassesAdapter.ViewHolder>() {
 
-    private var alPopularClassItem = ArrayList<PopularClassItem>()
+    private var alPopularClassItem = ArrayList<PopularClassesItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(context).inflate(
             R.layout.lay_popular_classes_item, parent, false
@@ -27,20 +27,20 @@ class PopularClassesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alPopularClassItem[position]
-        holder.tvClassName.text = item.tutorName
-        holder.tvPrice.text = item.classPrice
-        holder.tvClassDetail.text = item.classDetail
-        var categories = ""
-        for (categoryItem in item.classCategory) {
-            categories =
-                categories.plus("${context.getString(R.string.bullet)} ${categoryItem.categoryName} ")
-        }
-        holder.tvClassTags.text = categories
-        holder.ratingClass.rating = item.classRating
-        holder.tvTotalVideos.text = "${item.totalVideos}".plus(" Videos")
+        holder.tvClassName.text = item.author
+        holder.tvPrice.text = "$49.99"
+        holder.tvClassDetail.text = item.shortIntro
+//        var categories = ""
+//        for (categoryItem in item.classCategory) {
+//            categories =
+//                categories.plus("${context.getString(R.string.bullet)} ${categoryItem.categoryName} ")
+//        }
+        holder.tvClassTags.text = item.catName
+        holder.ratingClass.rating = item.ratings.toFloat()
+        holder.tvTotalVideos.text = "${item.videosCount}".plus(" Videos")
     }
 
-    fun addData(alPopularClassItem: ArrayList<PopularClassItem>) {
+    fun addData(alPopularClassItem: ArrayList<PopularClassesItem>) {
         this.alPopularClassItem = alPopularClassItem
         notifyDataSetChanged()
     }
