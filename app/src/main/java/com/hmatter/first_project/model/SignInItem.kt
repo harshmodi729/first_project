@@ -6,7 +6,7 @@ data class SignInItem(
     @SerializedName("social_id")
     val socialId: String = "",
     @SerializedName("profile")
-    val profile: String = "",
+    var profile: String = "",
     @SerializedName("social_flag")
     val socialFlag: Int = 0,
     @SerializedName("name")

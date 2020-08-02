@@ -28,6 +28,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnEditImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edit_image"
+        android:padding="@dimen/xsmall_margin"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+        app:layout_constraintEnd_toEndOf="@id/ivProfile" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
@@ -49,8 +59,8 @@
         android:layout_marginTop="@dimen/large_margin"
         android:text="@string/edit_profile"
         android:textColor="@color/colorLabel"
-        android:textStyle="bold"
         android:textSize="@dimen/xsmall_text"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUserName" />
 
@@ -76,6 +86,7 @@
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/large_margin"
         app:hint="@string/edit_email"
+        app:isEditable="false"
         app:label="@string/hint_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

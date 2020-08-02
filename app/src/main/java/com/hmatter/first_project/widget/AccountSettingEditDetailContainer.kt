@@ -3,7 +3,9 @@ package com.hmatter.first_project.widget
 import android.content.Context
 import android.text.InputType
 import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.hmatter.first_project.R
@@ -21,6 +23,7 @@ class AccountSettingEditDetailContainer(
 
     private var tvLabel: AppCompatTextView
     private var edChangeProfile: AppCompatEditText
+    private var btnEdit: AppCompatImageButton
 
     init {
         inflate(context, R.layout.lay_account_setting_edit_detail, this)
@@ -29,11 +32,18 @@ class AccountSettingEditDetailContainer(
             context.obtainStyledAttributes(attrs, R.styleable.AccountSettingEditDetailContainer)
         tvLabel = findViewById(R.id.tvLabel)
         edChangeProfile = findViewById(R.id.edChangeProfile)
+        btnEdit = findViewById(R.id.btnEdit)
 
         tvLabel.text = attributes.getString(R.styleable.AccountSettingEditDetailContainer_label)
         edChangeProfile.setText(attributes.getString(R.styleable.AccountSettingEditDetailContainer_value))
         edChangeProfile.isEnabled =
             attributes.getBoolean(R.styleable.AccountSettingEditDetailContainer_enabled, false)
+        btnEdit.visibility =
+            if (attributes.getBoolean(
+                    R.styleable.AccountSettingEditDetailContainer_isEditable,
+                    true
+                )
+            ) View.VISIBLE else View.GONE
         edChangeProfile.hint =
             attributes.getString(R.styleable.AccountSettingEditDetailContainer_hint)
         val type =

@@ -6,10 +6,8 @@ import com.hmatter.first_project.model.FavoriteCLassesItem
 import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.SignInItem
 import com.hmatter.first_project.model.VideoCategoryItem
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface ApiServices {
 
@@ -45,6 +43,21 @@ interface ApiServices {
         @Field("user_id") userId: Int,
         @Field("old_password") oldPassword: String,
         @Field("new_password") newPassword: String
+    ): ApiResponse<JsonObject>
+
+    @Multipart
+    @POST(RequestConstants.CHANGE_PICTURE)
+    suspend fun changePic(
+        @Part("user_id") userId: Int,
+        @Part file: MultipartBody.Part
+    ): ApiResponse<JsonObject>
+
+    @FormUrlEncoded
+    @POST(RequestConstants.CHANGE_MOBILE)
+    suspend fun changePhoneNumber(
+        @Field("id") userId: Int,
+        @Field("mobile") mobile: Int,
+        @Field("password") password: String
     ): ApiResponse<JsonObject>
 
     @GET("e12782f8-224c-48f5-b63e-0ed640272462")

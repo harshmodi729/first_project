@@ -10,5 +10,6 @@
             <enum name="password" value="2" />
         </attr>
         <attr name="enabled" format="boolean" />
+        <attr name="isEditable" format="boolean" />
     </declare-styleable>
 </resources>

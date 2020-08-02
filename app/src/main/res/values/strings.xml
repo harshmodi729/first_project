@@ -71,4 +71,6 @@
     <string name="delete_completed_lessons">Delete Completed Lessons</string>
     <string name="favorites">Favorites</string>
     <string name="your_classes">Your Classes</string>
+    <string name="change_phone_number">Change Phone Number</string>
+    <string name="verify">Verify</string>
 </resources>

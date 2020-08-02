@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.model.ForgotPasswordItem
+import com.hmatter.first_project.model.SignInItem
 import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
@@ -70,6 +71,10 @@ var onDialogButtonClick: ((isPositive: Boolean) -> Unit)? = null
 var onChangePasswordDialogButtonClick: ((
     isPositive: Boolean,
     item: ForgotPasswordItem
+) -> Unit)? = null
+var onChangePhoneNumberButtonClick: ((
+    isPositive: Boolean,
+    item: SignInItem
 ) -> Unit)? = null
 
 fun Context.getProgressDialog(
@@ -136,4 +141,19 @@ fun Context.getProgressDialog(
 fun Context.hideKeyboard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+var onDeniedDialogClick: ((isPositive: Boolean) -> Unit)? = null
+fun Context.permissionDeniedDialog(): AlertDialog {
+    val dialog = AlertDialog.Builder(this).create()
+    dialog.setCancelable(false)
+    dialog.setTitle("Permission Denied")
+    dialog.setMessage("To use all the feature you've allow the permission. Press \"Retry\" and allow the permission.")
+    dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Retry") { _, _ ->
+        onDeniedDialogClick?.invoke(true)
+    }
+    dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel") { _, _ ->
+        onDeniedDialogClick?.invoke(false)
+    }
+    return dialog
 }
