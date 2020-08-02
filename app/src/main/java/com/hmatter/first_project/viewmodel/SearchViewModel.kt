@@ -17,7 +17,7 @@ class SearchViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 val response = getDummyApiServiceManager().getVideoCategory()
-                if (response.success) {
+                if (response.isSuccess()) {
                     response.data?.let {
                         videoCategoryLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
@@ -42,7 +42,7 @@ class SearchViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 val response = getApiServiceManager().getPopularTagList()
-                if(response.success){
+                if (response.success) {
                     response.data?.let {
                         alPopularCategoryItem.value = BaseResult.Success(it)
                     } ?: kotlin.run {
@@ -52,7 +52,7 @@ class SearchViewModel : BaseViewModel() {
                         )
                     }
                 }
-            } catch (e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
                 alPopularCategoryItem.value = BaseResult.Error(e, e.localizedMessage!!)
             }

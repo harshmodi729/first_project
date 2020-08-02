@@ -79,7 +79,7 @@ class AccountSettingsViewModel : BaseViewModel() {
                     response.data?.let {
                         preference.setPreferenceString(
                             PreferenceConstants.USER_IMAGE,
-                            it.get("profile").asString
+                            it.asString
                         )
                         uploadImageLiveData.value = BaseResult.Success("Image upload successfully.")
                     } ?: kotlin.run {

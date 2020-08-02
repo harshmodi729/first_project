@@ -61,9 +61,8 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     panelPhoneNumber.edChangeProfile.setText(it.item.mobile)
                     panelEmail.edChangeProfile.setText(it.item.email)
                     panelPassword.edChangeProfile.setText(it.item.password)
-                    if (it.item.profile.isBlankOrEmpty()) {
-                        ivProfile.setImageResource(R.drawable.person)
-                    } else {
+                    ivProfile.setImageResource(R.drawable.person)
+                    if (!it.item.profile.isBlankOrEmpty()) {
                         Glide.with(mContext)
                             .load(it.item.profile)
                             .centerCrop()

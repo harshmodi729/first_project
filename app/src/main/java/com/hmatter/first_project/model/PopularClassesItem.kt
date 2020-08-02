@@ -27,4 +27,7 @@ data class PopularClassesItem(@SerializedName("thumbnail")
                               @SerializedName("pdfCount")
                               val pdfCount: Int = 0,
                               @SerializedName("about_course")
-                              val aboutCourse: String = "")
+                              val aboutCourse: String = "",
+                              @SerializedName("price")
+                              val price: String = ""
+)

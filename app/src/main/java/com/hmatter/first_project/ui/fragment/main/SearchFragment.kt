@@ -112,7 +112,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     showProgressDialog(laySearch, ivDialogBg)
                 }
             }
-            homeViewModel.alPopularClasses.observe(viewLifecycleOwner, Observer {
+            homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {
@@ -121,6 +121,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                         tvTotalResult.visibility = View.VISIBLE
                         rvTag.visibility = View.GONE
                         tvTagView.visibility = View.GONE
+                        tvTotalResult.text = String.format(
+                            mContext.getString(R.string.search_result_text),
+                            it.item.size.toString()
+                        )
                         popularClassesAdapter.addData(it.item)
                     }
                     is BaseResult.Error -> {

@@ -8,6 +8,7 @@ import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
+import com.hmatter.first_project.extension.isBlankOrEmpty
 import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.android.synthetic.main.lay_popular_classes_item.view.*
 
@@ -28,13 +29,12 @@ class PopularClassesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alPopularClassItem[position]
         holder.tvClassName.text = item.author
-        holder.tvPrice.text = "$49.99"
+        if (item.price.isBlankOrEmpty()) {
+            holder.tvPrice.text = context.getString(R.string.rupee_symbol).plus("0.00")
+        } else {
+            holder.tvPrice.text = context.getString(R.string.rupee_symbol).plus(item.price)
+        }
         holder.tvClassDetail.text = item.shortIntro
-//        var categories = ""
-//        for (categoryItem in item.classCategory) {
-//            categories =
-//                categories.plus("${context.getString(R.string.bullet)} ${categoryItem.categoryName} ")
-//        }
         holder.tvClassTags.text = item.catName
         holder.ratingClass.rating = item.ratings.toFloat()
         holder.tvTotalVideos.text = "${item.videosCount}".plus(" Videos")

@@ -11,9 +11,9 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
 
-    val popularClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
+    val popularClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
     val favoriteClassesLiveData = MutableLiveData<BaseResult<ArrayList<FavoriteCLassesItem>>>()
-    val yourClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
+    val yourClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
 
     fun getPopularClasses() {
         viewModelScope.launch {
@@ -21,7 +21,7 @@ class HomeViewModel : BaseViewModel() {
                 val response = getApiServiceManager().getPopularClasses()
                 if (response.success) {
                     response.data?.let {
-                        if (response.isSuccess())
+                        if (response.success)
                             popularClassesLiveData.value = BaseResult.Success(it)
                         else
                             popularClassesLiveData.value =
@@ -37,6 +37,54 @@ class HomeViewModel : BaseViewModel() {
                     }
                 } else
                     popularClassesLiveData.value =
+                        BaseResult.Error(
+                            IllegalStateException(),
+                            response.message
+                        )
+            } catch (exception: Exception) {
+                popularClassesLiveData.value =
+                    BaseResult.Error(exception, "Oops something went wrong.")
+            }
+        }
+    }
+
+    fun getFavoriteClasses() {
+        viewModelScope.launch {
+            try {
+                val response = getDummyApiServiceManager().getFavoriteClasses()
+                if (response.success) {
+                    response.data?.let {
+                        favoriteClassesLiveData.value = BaseResult.Success(it)
+                    } ?: kotlin.run {
+                        favoriteClassesLiveData.value =
+                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                    }
+                } else {
+                    favoriteClassesLiveData.value =
+                        BaseResult.Error(IllegalStateException(), response.message)
+                }
+            } catch (exception: Exception) {
+                favoriteClassesLiveData.value =
+                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+            }
+        }
+    }
+
+    fun getYourClasses() {
+        viewModelScope.launch {
+            try {
+                val response = getDummyApiServiceManager().getYourClasses()
+                if (response.success) {
+                    response.data?.let {
+                        yourClassesLiveData.value = BaseResult.Success(it)
+                    } ?: kotlin.run {
+                        BaseResult.Error(
+                            IllegalStateException(),
+                            "Oops something went wrong."
+                        )
+                    }
+                } else
+                    yourClassesLiveData.value =
                         BaseResult.Error(
                             IllegalStateException(),
                             response.message
