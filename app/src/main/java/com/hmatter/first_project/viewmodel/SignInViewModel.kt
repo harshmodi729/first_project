@@ -25,7 +25,7 @@ class SignInViewModel : BaseViewModel() {
     ) {
         viewModelScope.launch {
             try {
-                val validationControl = validationControl(phoneNumber)
+                val validationControl = validationControl(phoneNumber, password)
                 if (!validationControl.first) {
                     signInLiveData.value =
                         BaseResult.Error(IllegalStateException(), validationControl.second)
@@ -73,11 +73,20 @@ class SignInViewModel : BaseViewModel() {
             PreferenceConstants.USER_MOBILE,
             item.mobile
         )
+        preferenceManager.setPreferenceString(
+            PreferenceConstants.USER_IMAGE,
+            item.profile
+        )
     }
 
-    private fun validationControl(phoneNumber: String): Pair<Boolean, String> {
+    private fun validationControl(phoneNumber: String, password: String): Pair<Boolean, String> {
         var isValid = true
         var message = ""
+        if (phoneNumber.isBlankOrEmpty() || password.isBlankOrEmpty()) {
+            isValid = false
+            message = "Please enter valid username and password."
+            return Pair(isValid, message)
+        }
         if (!phoneNumber.isBlankOrEmpty() && phoneNumber.length != 10) {
             isValid = false
             message = "Please enter valid phone number."
@@ -89,8 +98,8 @@ class SignInViewModel : BaseViewModel() {
     fun setVisitIntro(context: Context) {
         viewModelScope.launch {
             try {
-                val preference = getPreferenceManager(context)
-                preference.setPreferenceBoolean(
+                val preferenceManager = getPreferenceManager(context)
+                preferenceManager.setPreferenceBoolean(
                     PreferenceConstants.IS_ALREADY_VISIT_INTRO,
                     true
                 )

@@ -18,25 +18,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/large_margin"
         android:src="@drawable/person"
+        app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/person"
+            android:transitionName="@string/transition_image" />
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnEditImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="2dp"
         android:background="@drawable/bg_edit_image"
         android:padding="@dimen/xsmall_margin"
         android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf="@id/ivProfile"
-        app:layout_constraintEnd_toEndOf="@id/ivProfile" />
+        app:layout_constraintBottom_toBottomOf="@id/cvUserProfile"
+        app:layout_constraintEnd_toEndOf="@id/cvUserProfile" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvUserName"
@@ -47,9 +57,9 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/large_text"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/ivProfile"
-        app:layout_constraintStart_toStartOf="@id/ivProfile"
-        app:layout_constraintTop_toBottomOf="@id/ivProfile" />
+        app:layout_constraintEnd_toEndOf="@id/cvUserProfile"
+        app:layout_constraintStart_toStartOf="@id/cvUserProfile"
+        app:layout_constraintTop_toBottomOf="@id/cvUserProfile" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvEditProfileLabel"

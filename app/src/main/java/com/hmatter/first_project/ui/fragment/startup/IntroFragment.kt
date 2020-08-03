@@ -26,7 +26,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
     private val details = arrayOf(
         "Online classes taught by the world's best. Gordon Ramsey, Stephen Curry, and more.",
         "Download up to 10 digestible lessons that you can watch offline at any time",
-        "Perfect homemade paste, or write a novel... All wit acess to 100+ class."
+        "Perfect homemade paste, or write a novel... All wit access to 100+ class."
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

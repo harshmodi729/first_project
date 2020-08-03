@@ -14,29 +14,9 @@ import okhttp3.MultipartBody
 
 class AccountSettingsViewModel : BaseViewModel() {
 
-    val profileLiveData = MutableLiveData<BaseResult<SignInItem>>()
     val signOutLiveData = MutableLiveData<BaseResult<Boolean>>()
     val uploadImageLiveData = MutableLiveData<BaseResult<String>>()
     val changePhoneNumberLiveData = MutableLiveData<BaseResult<String>>()
-
-    fun getUserProfileData(context: Context) {
-        viewModelScope.launch {
-            try {
-                val preference = getPreferenceManager(context)
-                val item = SignInItem()
-                item.id = preference.getPreferenceInt(PreferenceConstants.USER_ID)
-                item.name = preference.getPreferenceString(PreferenceConstants.USER_NAME)
-                item.email = preference.getPreferenceString(PreferenceConstants.USER_EMAIL)
-                item.mobile = preference.getPreferenceString(PreferenceConstants.USER_MOBILE)
-                item.password = preference.getPreferenceString(PreferenceConstants.USER_NAME)
-                item.profile = preference.getPreferenceString(PreferenceConstants.USER_IMAGE)
-                profileLiveData.value = BaseResult.Success(item)
-            } catch (exception: Exception) {
-                profileLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
-            }
-        }
-    }
 
     fun changePhoneNumber(context: Context, signInItem: SignInItem) {
         viewModelScope.launch {
@@ -81,7 +61,7 @@ class AccountSettingsViewModel : BaseViewModel() {
                             PreferenceConstants.USER_IMAGE,
                             it.asString
                         )
-                        uploadImageLiveData.value = BaseResult.Success("Image upload successfully.")
+                        uploadImageLiveData.value = BaseResult.Success(it.asString)
                     } ?: kotlin.run {
                         uploadImageLiveData.value =
                             BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
@@ -101,12 +81,12 @@ class AccountSettingsViewModel : BaseViewModel() {
         viewModelScope.launch {
             try {
                 val preference = getPreferenceManager(context)
-                preference.edit().clear().commit()
+                preference.erase()
                 preference.setPreferenceBoolean(PreferenceConstants.IS_ALREADY_VISIT_INTRO, true)
                 preference.setPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN, false)
                 signOutLiveData.value = BaseResult.Success(true)
             } catch (exception: Exception) {
-                profileLiveData.value =
+                signOutLiveData.value =
                     BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
             }
         }

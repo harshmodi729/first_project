@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.*
 import com.hmatter.first_project.model.SignInItem
 import com.hmatter.first_project.ui.activity.StartupActivity
@@ -53,27 +54,17 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
         val changePasswordViewModel =
             ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
 
-        accountSettingsViewModel.getUserProfileData(mContext)
-        accountSettingsViewModel.profileLiveData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is BaseResult.Success -> {
-                    tvUserName.text = it.item.name
-                    panelPhoneNumber.edChangeProfile.setText(it.item.mobile)
-                    panelEmail.edChangeProfile.setText(it.item.email)
-                    panelPassword.edChangeProfile.setText(it.item.password)
-                    ivProfile.setImageResource(R.drawable.person)
-                    if (!it.item.profile.isBlankOrEmpty()) {
-                        Glide.with(mContext)
-                            .load(it.item.profile)
-                            .centerCrop()
-                            .into(ivProfile)
-                    }
-                }
-                is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
-                }
-            }
-        })
+        item = Constants.userProfileData
+        tvUserName.text = item.name
+        panelPhoneNumber.edChangeProfile.setText(item.mobile)
+        panelEmail.edChangeProfile.setText(item.email)
+        panelPassword.edChangeProfile.setText(item.password)
+        if (!item.profile.isBlankOrEmpty()) {
+            Glide.with(mContext)
+                .load(item.profile)
+                .centerCrop()
+                .into(ivProfile)
+        }
         accountSettingsViewModel.signOutLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {
@@ -93,7 +84,8 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
-                    mContext.makeToast(it.item)
+                    item.profile = it.item
+                    mContext.makeToast("Image upload successfully.")
                 }
                 is BaseResult.Error -> {
                     mContext.makeToast(it.errorMessage)
@@ -163,7 +155,6 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
             dialogView.edPhone.setText("")
             changePhoneNumberDialog.setView(dialogView)
             dialogView.btnVerify.setOnClickListener {
-                item = SignInItem()
                 item.password = dialogView.edPassword.text.toString()
                 item.mobile = dialogView.edPhone.text.toString()
                 showProgressDialog(layAccountSettings, ivDialogBg)
@@ -191,9 +182,13 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
 
         onDeniedDialogClick = { isPositive ->
             if (isPositive)
-                checkPermissions()
+                openImageChooser()
             else
                 mContext.makeToast("You've denied the permission.")
+        }
+
+        onPermanentlyDeniedDialogClick = {
+            mContext.openAppSettings()
         }
     }
 
@@ -242,7 +237,21 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                 return
             }
             if (!storageAccepted) {
-                mContext.permissionDeniedDialog()
+                if (!shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    mContext.permissionDeniedDialog(
+                        "Permission Denied",
+                        "From application settings in permissions block set Storage permission ON. Press \"Settings\" and allow the permission.",
+                        "Settings",
+                        "Cancel"
+                    )
+                } else {
+                    mContext.permissionDeniedDialog(
+                        "Permission Denied",
+                        "To change the profile image please allow the permission. Press \"Retry\" and allow the permission.",
+                        "Retry",
+                        "Cancel"
+                    )
+                }
             }
         }
     }
@@ -271,9 +280,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     "profile",
                     file.name, fileBody
                 )
-                accountSettingsViewModel.uploadImage(mContext, filePart).apply {
-//                    showProgressDialog(layAccountSettings, ivDialogBg)
-                }
+                accountSettingsViewModel.uploadImage(mContext, filePart)
 
                 Glide.with(mContext)
                     .load(uri)

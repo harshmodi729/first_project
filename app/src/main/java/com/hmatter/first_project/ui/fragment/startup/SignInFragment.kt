@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.hideKeyboard
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.ui.activity.MainActivity
@@ -31,8 +32,11 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             when (it) {
                 is BaseResult.Success -> {
                     edMobile.setText("")
+                    edMobile.requestFocus()
                     edPassword.setText("")
+                    Constants.userProfileData = it.item
                     startActivity(Intent(mContext, MainActivity::class.java))
+                    mContext.finish()
                 }
                 is BaseResult.Error -> {
                     mContext.makeToast(it.errorMessage)
@@ -48,16 +52,12 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         }
         btnSignIn.setOnClickListener {
             mContext.hideKeyboard(edMobile)
-            if (edMobile.text!!.isNotEmpty() && edPassword.text!!.isNotEmpty()) {
-                showProgressDialog(laySigIn, ivDialogBg)
-                signInViewModel.userSignIn(
-                    mContext,
-                    edMobile.text.toString().trim(),
-                    edPassword.text.toString().trim()
-                )
-            } else {
-                mContext.makeToast("Please enter valid username and password.")
-            }
+            showProgressDialog(laySigIn, ivDialogBg)
+            signInViewModel.userSignIn(
+                mContext,
+                edMobile.text.toString().trim(),
+                edPassword.text.toString().trim()
+            )
         }
     }
 }

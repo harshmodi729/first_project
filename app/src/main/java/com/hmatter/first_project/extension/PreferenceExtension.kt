@@ -2,6 +2,10 @@ package com.hmatter.first_project.extension
 
 import android.content.SharedPreferences
 
+fun SharedPreferences.erase() {
+    this.edit().clear().commit()
+}
+
 /**
  * setPreferenceString will set string value into given key
  * @param key is set as an unique id in sharedPreference class

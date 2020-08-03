@@ -1,9 +1,12 @@
 package com.hmatter.first_project.extension
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.lay_dialog_empty_download.view.*
 import kotlinx.android.synthetic.main.lay_dialog_logout.view.*
 import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
+
 
 /**
  * Invoke toast message on screen whatever text provided when calling it
@@ -144,16 +148,37 @@ fun Context.hideKeyboard(view: View) {
 }
 
 var onDeniedDialogClick: ((isPositive: Boolean) -> Unit)? = null
-fun Context.permissionDeniedDialog(): AlertDialog {
+var onPermanentlyDeniedDialogClick: (() -> Unit)? = null
+fun Context.permissionDeniedDialog(
+    title: String,
+    message: String,
+    positiveButtonText: String,
+    negativeButtonText: String
+) {
     val dialog = AlertDialog.Builder(this).create()
     dialog.setCancelable(false)
-    dialog.setTitle("Permission Denied")
-    dialog.setMessage("To use all the feature you've allow the permission. Press \"Retry\" and allow the permission.")
-    dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Retry") { _, _ ->
-        onDeniedDialogClick?.invoke(true)
+    dialog.setTitle(title)
+    dialog.setMessage(message)
+    dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveButtonText) { _, _ ->
+        if (positiveButtonText == "Settings")
+            onPermanentlyDeniedDialogClick?.invoke()
+        else
+            onDeniedDialogClick?.invoke(true)
+        dialog.dismiss()
     }
-    dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel") { _, _ ->
+    dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeButtonText) { _, _ ->
         onDeniedDialogClick?.invoke(false)
+        dialog.dismiss()
     }
-    return dialog
+    dialog.show()
+    dialog.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
+    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
+}
+
+fun Context.openAppSettings() {
+    val intent = Intent()
+    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+    val uri = Uri.fromParts("package", this.packageName, null)
+    intent.data = uri
+    this.startActivity(intent)
 }
