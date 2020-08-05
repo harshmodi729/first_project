@@ -49,6 +49,15 @@
         <item name="android:textSize">@dimen/btn_text</item>
     </style>
 
+    <style name="PurchaseButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorLightBlue</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorIntroTitle</item>
+        <item name="android:textSize">@dimen/btn_text</item>
+    </style>
+
     <style name="DialogStyle" parent="ThemeOverlay.AppCompat.Dialog.Alert">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMinor">90%</item>

@@ -71,6 +71,14 @@
     <string name="delete_all_detail">This will remove all downloaded Lesson videos from your phone.</string>
     <string name="delete_completed_lessons">Delete Completed Lessons</string>
     <string name="favorites">Favorites</string>
+    <string name="all_access_pass">All-Access Pass</string>
+    <string name="all_access_subtitle">You will get unlimit access to every class you want for a year. All lessons for you auto renews anuualy</string>
+    <string name="all_access_price">$499.99/year</string>
+    <string name="all_access_button">Get All-Access</string>
+    <string name="single_class_label">This Class Only</string>
+    <string name="single_class_subtitle">A Good choice for who want to learn a single class for a long time.</string>
+    <string name="single_class_button">Purchase This Class</string>
+    <string name="single_class_price">$89.99/year</string>
     <string name="your_classes">Your Classes</string>
     <string name="change_phone_number">Change Phone Number</string>
     <string name="verify">Verify</string>
