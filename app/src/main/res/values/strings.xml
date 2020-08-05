@@ -75,4 +75,11 @@
     <string name="change_phone_number">Change Phone Number</string>
     <string name="verify">Verify</string>
     <string name="rupee_symbol">\u20B9</string>
+    <string name="purchased">Purchased</string>
+    <string name="lessons">Lessons</string>
+    <string name="overview">Overview</string>
+    <string name="start_learning">Start Learning</string>
+    <string name="take_the_class">Take The Class</string>
+    <string name="watch_trailer">Watch Trailer</string>
+    <string name="what_you_will_get">What you will get</string>
 </resources>

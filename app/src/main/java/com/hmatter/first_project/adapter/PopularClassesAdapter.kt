@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.extension.isBlankOrEmpty
@@ -18,6 +19,7 @@ class PopularClassesAdapter(
     RecyclerView.Adapter<PopularClassesAdapter.ViewHolder>() {
 
     private var alPopularClassItem = ArrayList<PopularClassesItem>()
+    var onCardClickListener: ((item: PopularClassesItem, position: Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(context).inflate(
             R.layout.lay_popular_classes_item, parent, false
@@ -38,6 +40,9 @@ class PopularClassesAdapter(
         holder.tvClassTags.text = item.catName
         holder.ratingClass.rating = item.ratings.toFloat()
         holder.tvTotalVideos.text = "${item.videosCount}".plus(" Videos")
+        holder.layClass.setOnClickListener {
+            onCardClickListener?.invoke(item, position)
+        }
     }
 
     fun addData(alPopularClassItem: ArrayList<PopularClassesItem>) {
@@ -52,5 +57,6 @@ class PopularClassesAdapter(
         val tvClassTags: AppCompatTextView = view.tvClassTags
         val ratingClass: RatingBar = view.ratingClass
         val tvTotalVideos: AppCompatTextView = view.tvTotalVideos
+        val layClass: CardView = itemView.layClass
     }
 }

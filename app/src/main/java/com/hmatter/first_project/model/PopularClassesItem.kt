@@ -1,6 +1,7 @@
 package com.hmatter.first_project.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PopularClassesItem(@SerializedName("thumbnail")
                               val thumbnail: String = "",
@@ -30,4 +31,4 @@ data class PopularClassesItem(@SerializedName("thumbnail")
                               val aboutCourse: String = "",
                               @SerializedName("price")
                               val price: String = ""
-)
+) : Serializable

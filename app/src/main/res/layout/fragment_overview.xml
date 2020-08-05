@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.LessonFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvClassOverview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/overview" />
+
+    <View
+        android:id="@+id/viewOverviewDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="@id/tvClassOverview"
+        app:layout_constraintStart_toStartOf="@id/tvClassOverview"
+        app:layout_constraintTop_toBottomOf="@id/tvClassOverview" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvWhatGetLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:text="@string/what_you_will_get"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/tvClassOverview"
+        app:layout_constraintStart_toStartOf="@id/tvClassOverview"
+        app:layout_constraintTop_toBottomOf="@id/viewOverviewDivider" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTotalVideos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:drawableStart="@drawable/ic_total_videos"
+        android:drawablePadding="@dimen/medium_margin"
+        android:text="10 video lessons"
+        android:textColor="@color/colorPrice"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvWhatGetLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvWhatGetLabel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLearningMaterials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawableStart="@drawable/ic_star"
+        android:drawablePadding="@dimen/medium_margin"
+        android:text="Exculsive learning materials"
+        android:textColor="@color/colorPrice"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvWhatGetLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalVideos" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGuaranteed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawableStart="@drawable/ic_check_guaranteed"
+        android:drawablePadding="@dimen/medium_margin"
+        android:text="100% guaranteed"
+        android:textColor="@color/colorPrice"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvWhatGetLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvLearningMaterials" />
+
+    <View
+        android:id="@+id/viewWhatGetDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="@id/tvClassOverview"
+        app:layout_constraintStart_toStartOf="@id/tvClassOverview"
+        app:layout_constraintTop_toBottomOf="@id/tvGuaranteed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

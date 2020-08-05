@@ -1,6 +1,7 @@
 package com.hmatter.first_project.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PdfItem(@SerializedName("classes_id")
                    val classesId: Int = 0,
@@ -19,4 +20,5 @@ data class PdfItem(@SerializedName("classes_id")
                    @SerializedName("pef_description")
                    val pefDescription: String = "",
                    @SerializedName("status")
-                   val status: Int = 0)
+                   val status: Int = 0
+) : Serializable

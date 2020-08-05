@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.activity.ClassActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.hmatter.first_project.widget.RoundedImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="0dp"
+                    android:layout_height="350dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_gradient"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTutorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:maxWidth="250dp"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/medium_text"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/ratingClass"
+                    app:layout_constraintEnd_toStartOf="@id/tvPurchased"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@id/tvClassDescription"
+                    tools:text="@tools:sample/lorem" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPurchased"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    android:background="@drawable/bg_rounded_purchased"
+                    android:padding="@dimen/xsmall_margin"
+                    android:text="@string/purchased"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/xxsmall_text"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvTutorName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvTutorName" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratingClass"
+                    style="?attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:numStars="5"
+                    android:progressDrawable="@drawable/bg_rating_bar"
+                    android:rating="3.5"
+                    android:stepSize="0.5"
+                    app:layout_constraintBottom_toTopOf="@id/tvClassDescription"
+                    app:layout_constraintStart_toStartOf="@id/tvClassDescription" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalVideos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:textColor="#8399E8"
+                    android:textSize="@dimen/xsmall_text"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/ratingClass"
+                    app:layout_constraintStart_toEndOf="@id/ratingClass"
+                    app:layout_constraintTop_toTopOf="@id/ratingClass"
+                    tools:text="12/20 Videos" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvClassDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/xsmall_text"
+                    app:layout_constraintBottom_toTopOf="@id/layToolbarButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.6"
+                    app:layout_goneMarginBottom="@dimen/large_margin"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layToolbarButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTakeClass"
+                        style="@style/ButtonStyle"
+                        android:layout_marginStart="@dimen/large_margin"
+                        android:layout_marginEnd="@dimen/small_margin"
+                        android:layout_marginBottom="@dimen/large_margin"
+                        android:text="@string/take_the_class"
+                        android:textSize="@dimen/small_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnWatchTrailer"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnWatchTrailer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_marginBottom="@dimen/large_margin"
+                        android:backgroundTint="@color/colorGray"
+                        android:text="@string/watch_trailer"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/small_text"
+                        app:layout_constraintBaseline_toBaselineOf="@id/btnTakeClass"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/btnTakeClass" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStartLearning"
+                        style="@style/ButtonStyle"
+                        android:layout_marginStart="@dimen/large_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_marginBottom="@dimen/large_margin"
+                        android:text="@string/start_learning"
+                        android:textSize="@dimen/small_text"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/groupLesson"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:constraint_referenced_ids="btnTakeClass, btnWatchTrailer" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnToolbarBack"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back_primary" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabClass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:background="@color/colorBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnStartLearning"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            app:tabTextColor="@color/colorDivider" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/classPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

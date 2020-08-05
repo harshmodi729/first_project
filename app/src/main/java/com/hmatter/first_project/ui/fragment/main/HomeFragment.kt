@@ -1,5 +1,6 @@
 package com.hmatter.first_project.ui.fragment.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -20,6 +21,7 @@ import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.isBlankOrEmpty
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.SliderItem
+import com.hmatter.first_project.ui.activity.ClassActivity
 import com.hmatter.first_project.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_intro.layDots
@@ -97,6 +99,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         ivUserProfile.setOnClickListener {
             it.findNavController()
                 .navigate(R.id.action_nav_home_to_nav_user_profile)
+        }
+        popularClassesAdapter.onCardClickListener = { item, _ ->
+            mContext.startActivity(
+                Intent(mContext, ClassActivity::class.java).putExtra(Constants.CLASS_ITEM, item)
+            )
         }
     }
 

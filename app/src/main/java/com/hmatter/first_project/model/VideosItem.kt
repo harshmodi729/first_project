@@ -1,6 +1,7 @@
 package com.hmatter.first_project.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class VideosItem(@SerializedName("classes_id")
                       val classesId: Int = 0,
@@ -19,4 +20,5 @@ data class VideosItem(@SerializedName("classes_id")
                       @SerializedName("video_intro")
                       val videoIntro: String = "",
                       @SerializedName("status")
-                      val status: Int = 0)
+                      val status: Int = 0
+) : Serializable
