@@ -4,23 +4,43 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
+import com.hmatter.first_project.model.VideosItem
+import kotlinx.android.synthetic.main.lay_class_lessons_item.view.*
 
 class LessonsAdapter(private val context: Context) :
     RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
 
-    class ViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView)
+    private var alVideo = ArrayList<VideosItem>()
+    var onVideoClick: ((item: VideosItem) -> Unit)? = null
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvLessonsName: AppCompatTextView = itemView.tvLessonsName
+        val tvClassDetail: AppCompatTextView = itemView.tvClassDetail
+        val layLessonVideo: ViewGroup = itemView.layLessonVideo
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.lay_popular_classes_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.lay_class_lessons_item, parent, false)
         )
     }
 
-    override fun getItemCount() = 10
+    override fun getItemCount() = alVideo.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = alVideo[position]
+        holder.tvLessonsName.text = String.format("%02d", position + 1).plus(". ${item.videoTitle}")
+        holder.tvClassDetail.text = item.videoIntro
+        holder.layLessonVideo.setOnClickListener {
+            onVideoClick?.invoke(item)
+        }
+    }
 
+    fun addData(alVideo: ArrayList<VideosItem>) {
+        this.alVideo = alVideo
+        notifyDataSetChanged()
     }
 }

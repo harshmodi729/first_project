@@ -21,5 +21,6 @@ class OverviewFragment(private val classesItem: PopularClassesItem) :
         } else {
             tvClassOverview.text = Html.fromHtml(classesItem.description)
         }
+        tvTotalVideos.text = String.format("%02d", classesItem.videosCount).plus(" video lessons")
     }
 }

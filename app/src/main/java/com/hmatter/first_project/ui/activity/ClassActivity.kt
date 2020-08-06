@@ -39,7 +39,7 @@ class ClassActivity : BaseActivity() {
         }
         val adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
         adapter.addFragment(OverviewFragment(item))
-        adapter.addFragment(LessonFragment())
+        adapter.addFragment(LessonFragment(item))
         classPager.adapter = adapter
         TabLayoutMediator(tabClass, classPager) { tab: TabLayout.Tab, position: Int ->
             when (position) {

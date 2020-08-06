@@ -12,6 +12,7 @@ class Constants {
         const val LOGOUT_DIALOG = "logout_dialog"
         const val EMPTY_DOWNLOAD_DIALOG = "empty_download_dialog"
         const val CLASS_ITEM = "class_item"
+        const val VIDEO_ITEM = "video_item"
         var userProfileData = SignInItem()
     }
 }

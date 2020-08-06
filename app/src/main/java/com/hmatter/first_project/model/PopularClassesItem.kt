@@ -16,11 +16,11 @@ data class PopularClassesItem(@SerializedName("thumbnail")
                               @SerializedName("description")
                               val description: String = "",
                               @SerializedName("videos")
-                              val videos: List<VideosItem>?,
+                              val videos: ArrayList<VideosItem>,
                               @SerializedName("title")
                               val title: String = "",
                               @SerializedName("pdf")
-                              val pdf: List<PdfItem>?,
+                              val pdf: ArrayList<PdfItem>,
                               @SerializedName("ratings")
                               val ratings: Int = 0,
                               @SerializedName("cat_id")
