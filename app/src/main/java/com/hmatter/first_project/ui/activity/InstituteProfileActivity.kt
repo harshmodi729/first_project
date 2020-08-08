@@ -3,11 +3,12 @@ package com.hmatter.first_project.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hmatter.first_project.R
-import com.hmatter.first_project.base.BaseActivity
+import kotlinx.android.synthetic.main.lay_toolbar.*
 
-class PurchaseClassActivity : BaseActivity() {
+class InstituteProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_purchase_class)
+        setContentView(R.layout.activity_institute_profile)
+        tvToolbarTitle.text = getString(R.string.information)
     }
 }
