@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.hmatter.first_project.R
 import com.hmatter.first_project.extension.isBlankOrEmpty
+import com.hmatter.first_project.extension.loadImage
 import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.android.synthetic.main.lay_popular_classes_item.view.*
 
@@ -30,6 +32,7 @@ class PopularClassesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alPopularClassItem[position]
+        context.loadImage(item.thumbnail, holder.ivClass)
         holder.tvClassName.text = item.author
         if (item.price.isBlankOrEmpty()) {
             holder.tvPrice.text = context.getString(R.string.rupee_symbol).plus("0.00")
@@ -51,6 +54,7 @@ class PopularClassesAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ivClass: AppCompatImageView = view.ivClass
         val tvClassName: AppCompatTextView = view.tvClassName
         val tvPrice: AppCompatTextView = view.tvPrice
         val tvClassDetail: AppCompatTextView = view.tvClassDetail

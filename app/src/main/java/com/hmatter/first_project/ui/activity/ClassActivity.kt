@@ -4,10 +4,12 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -16,19 +18,47 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hmatter.first_project.R
 import com.hmatter.first_project.base.BaseActivity
+import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.common.Constants
+import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.PopularClassesItem
 import com.hmatter.first_project.ui.fragment.LessonFragment
 import com.hmatter.first_project.ui.fragment.OverviewFragment
+import com.hmatter.first_project.viewmodel.VideoViewModel
 import kotlinx.android.synthetic.main.activity_class.*
 
 
-class ClassActivity : BaseActivity() {
+class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
     private lateinit var item: PopularClassesItem
+    private lateinit var videoViewModel: VideoViewModel
+
+    companion object {
+        private const val ADD_TO_WISH_LIST = 1
+        private const val REMOVE_FROM_WISH_LIST = 2
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class)
+
+        videoViewModel = ViewModelProviders.of(this)[VideoViewModel::class.java]
+        videoViewModel.addWishListLiveData.observe(this, Observer {
+            hideProgressDialog(ivDialogBg)
+            btnFavorite.setOnCheckedChangeListener(null)
+            when (it) {
+                is BaseResult.Success -> {
+                    if (btnFavorite.isChecked)
+                        makeToast("Added in wish list.")
+                    else
+                        makeToast("Remove from wish list.")
+                }
+                is BaseResult.Error -> {
+                    btnFavorite.isChecked = !btnFavorite.isChecked
+                    makeToast(it.errorMessage)
+                }
+            }
+            btnFavorite.setOnCheckedChangeListener(this)
+        })
 
         if (intent.extras != null) {
             item = intent.getSerializableExtra(Constants.CLASS_ITEM) as PopularClassesItem
@@ -37,6 +67,7 @@ class ClassActivity : BaseActivity() {
             tvTotalVideos.text = item.videosCount.toString().plus(" Videos")
             tvClassDescription.text = item.shortIntro
         }
+        btnFavorite.setOnCheckedChangeListener(this)
         val adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
         adapter.addFragment(OverviewFragment(item))
         adapter.addFragment(LessonFragment(item))
@@ -69,34 +100,16 @@ class ClassActivity : BaseActivity() {
 
         Glide.with(this)
             .asBitmap()
-            .load("https://d1zdxptf8tk3f9.cloudfront.net/ckeditor_assets/pictures/2509/content_geordanna-cordero-fields-762612-unsplash.jpg")
+            .load(item.thumbnail)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    imageView1.setImageBitmap(resource)
+                    ivCLass.setImageBitmap(resource)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
         btnToolbarBack.setOnClickListener {
             onBackPressed()
-        }
-    }
-
-    class ClassPagerAdapter(fragmentManager: FragmentManager) :
-        FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-        private val alFragment = ArrayList<Fragment>()
-        private val alFragmentTitle = ArrayList<String>()
-
-        override fun getItem(position: Int) = alFragment[position]
-
-        override fun getCount() = alFragment.size
-
-        override fun getPageTitle(position: Int) = alFragmentTitle[position]
-
-        fun addFragment(fragment: Fragment, title: String) {
-            alFragment.add(fragment)
-            alFragmentTitle.add(title)
         }
     }
 
@@ -113,5 +126,10 @@ class ClassActivity : BaseActivity() {
         }
 
         override fun createFragment(position: Int) = arrayList[position]
+    }
+
+    override fun onCheckedChanged(btn: CompoundButton, isChecked: Boolean) {
+        val isAdd = if (isChecked) ADD_TO_WISH_LIST else REMOVE_FROM_WISH_LIST
+        videoViewModel.addToWishList(item.classId, isAdd)
     }
 }

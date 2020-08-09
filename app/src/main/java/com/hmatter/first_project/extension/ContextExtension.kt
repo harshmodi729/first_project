@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
+import com.bumptech.glide.Glide
 import com.hmatter.first_project.R
 import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.model.ForgotPasswordItem
@@ -147,6 +148,10 @@ fun Context.hideKeyboard(view: View) {
     imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+/**
+ * If user denied permission or select don't ask again box and denied, at that time,
+ * invoke this permission denial information dialog
+ */
 var onDeniedDialogClick: ((isPositive: Boolean) -> Unit)? = null
 var onPermanentlyDeniedDialogClick: (() -> Unit)? = null
 fun Context.permissionDeniedDialog(
@@ -175,10 +180,21 @@ fun Context.permissionDeniedDialog(
     dialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
 }
 
+/**
+ * This method will open device settings screen of [edupi] application
+ */
 fun Context.openAppSettings() {
     val intent = Intent()
     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
     val uri = Uri.fromParts("package", this.packageName, null)
     intent.data = uri
     this.startActivity(intent)
+}
+
+fun Context.loadImage(imagePath: String, imageView: AppCompatImageView) {
+    Glide.with(this)
+        .load(imagePath)
+        .centerCrop()
+        .placeholder(R.drawable.ic_no_image)
+        .into(imageView)
 }

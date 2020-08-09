@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.model.FavoriteCLassesItem
 import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.PopularClassesItem
@@ -18,7 +19,8 @@ class HomeViewModel : BaseViewModel() {
     fun getPopularClasses() {
         viewModelScope.launch {
             try {
-                val response = getApiServiceManager().getPopularClasses()
+                val response =
+                    getApiServiceManager().getPopularClasses(Constants.userProfileData.id)
                 if (response.success) {
                     response.data?.let {
                         if (response.success)

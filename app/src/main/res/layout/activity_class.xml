@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layClass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -25,7 +26,7 @@
                 android:layout_height="match_parent">
 
                 <com.hmatter.first_project.widget.RoundedImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/ivCLass"
                     android:layout_width="0dp"
                     android:layout_height="350dp"
                     android:scaleType="fitXY"
@@ -38,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/bg_gradient"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView1"
+                    app:layout_constraintBottom_toBottomOf="@id/ivCLass"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -124,7 +125,7 @@
                     android:id="@+id/layToolbarButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView1"
+                    app:layout_constraintBottom_toBottomOf="@id/ivCLass"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -188,6 +189,24 @@
                 android:layout_marginTop="@dimen/medium_margin"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_back_primary" />
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:background="@drawable/bg_rounded_favorite">
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/btnFavorite"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_favorite_selector"
+                    android:textOff=""
+                    android:textOn="" />
+            </FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout
@@ -222,4 +241,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDialogBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

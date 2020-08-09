@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layClass"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,11 +24,11 @@
             android:id="@+id/ivClass"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivGuideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_no_image" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/ivGuideline"
@@ -46,24 +46,24 @@
             android:layout_marginEnd="@dimen/small_margin"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Gordon Ramsay"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/tvPrice"
             app:layout_constraintStart_toEndOf="@id/ivGuideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Gordon Ramsay" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/small_margin"
-            android:text="$49.99"
             android:textColor="@color/colorPrice"
             android:textSize="@dimen/medium_text"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/tvClassName"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="$49.99" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvClassDetail"
@@ -72,12 +72,12 @@
             android:layout_marginTop="@dimen/small_margin"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="This is sample text. Class Detail"
             android:textColor="@color/colorIntroDetail"
             android:textSize="@dimen/small_text"
             app:layout_constraintEnd_toEndOf="@id/tvPrice"
             app:layout_constraintStart_toStartOf="@id/tvClassName"
-            app:layout_constraintTop_toBottomOf="@id/tvClassName" />
+            app:layout_constraintTop_toBottomOf="@id/tvClassName"
+            tools:text="This is sample text. Class Detail" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvClassTags"
@@ -86,12 +86,12 @@
             android:layout_marginTop="12dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="This is sample text. Class Tags"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/xsmall_text"
             app:layout_constraintEnd_toEndOf="@id/tvPrice"
             app:layout_constraintStart_toStartOf="@id/tvClassName"
-            app:layout_constraintTop_toBottomOf="@id/tvClassDetail" />
+            app:layout_constraintTop_toBottomOf="@id/tvClassDetail"
+            tools:text="This is sample text. Class Tags" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingClass"
@@ -113,12 +113,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/medium_margin"
-            android:text="12 Videos"
             android:textColor="#5A5A5A"
             android:textSize="@dimen/xsmall_text"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ratingClass"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ratingClass" />
+            app:layout_constraintTop_toTopOf="@id/ratingClass"
+            tools:text="12 Videos" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

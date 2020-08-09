@@ -58,8 +58,17 @@ interface ApiServices {
         @Field("password") password: String
     ): ApiResponse<JsonObject>
 
-    @GET(RequestConstants.GET_POPULAR_CLASS_DATA)
-    suspend fun getPopularClasses(): ApiResponse<ArrayList<PopularClassesItem>>
+    @FormUrlEncoded
+    @POST(RequestConstants.GET_POPULAR_CLASS_DATA)
+    suspend fun getPopularClasses(@Field("user_id") userId: Int): ApiResponse<ArrayList<PopularClassesItem>>
+
+    @FormUrlEncoded
+    @POST(RequestConstants.ADD_WISH_LIST)
+    suspend fun addToWishList(
+        @Field("user_id") userId: Int,
+        @Field("class_id") classId: Int,
+        @Field("status") isAdd: Int
+    ): ApiResponse<JsonElement>
 
     @GET("e12782f8-224c-48f5-b63e-0ed640272462")
     suspend fun getYourClasses()

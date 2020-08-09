@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.HomeSliderAdapter
 import com.hmatter.first_project.adapter.PopularClassesAdapter
@@ -19,6 +18,7 @@ import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.isBlankOrEmpty
+import com.hmatter.first_project.extension.loadImage
 import com.hmatter.first_project.extension.makeToast
 import com.hmatter.first_project.model.SliderItem
 import com.hmatter.first_project.ui.activity.ClassActivity
@@ -69,10 +69,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         rvPopularClasses.isNestedScrollingEnabled = false
 
         if (!Constants.userProfileData.profile.isBlankOrEmpty()) {
-            Glide.with(mContext)
-                .load(Constants.userProfileData.profile)
-                .centerCrop()
-                .into(ivUserProfile)
+            mContext.loadImage(Constants.userProfileData.profile, ivUserProfile)
         }
         val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
         homeViewModel.getPopularClasses().apply {

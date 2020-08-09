@@ -20,5 +20,7 @@ data class VideosItem(@SerializedName("classes_id")
                       @SerializedName("video_intro")
                       val videoIntro: String = "",
                       @SerializedName("status")
-                      val status: Int = 0
+                      val status: Int = 0,
+                      @SerializedName("thumbnail")
+                      val thumbnail: String = ""
 ) : Serializable
