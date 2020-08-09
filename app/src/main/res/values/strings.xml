@@ -16,6 +16,7 @@
     <string name="hint_new_confirm_password">Confirm new password</string>
     <string name="hint_email">Email</string>
     <string name="hint_phone">Phone number</string>
+    <string name="hint_comment">Type your comment</string>
     <string name="terms_conditions">I have read and agree to <a href="https://www.google.com">the Terms and Conditions.</a></string>
     <string name="hint_confirm_password">Confirm password</string>
     <string name="forgot_your_password">Forgot your password?</string>
@@ -87,6 +88,12 @@
     <string name="institute_website_name">Website</string>
     <string name="institute_website_value">www.educationalhub.net.in</string>
     <string name="institute_name">Educational Hub</string>
+    <string name="user_name">Cartoon Crazey</string>
+    <string name="timestamp">2 weeks ago</string>
+    <string name="read_tutorial">Read Tutorial</string>
+    <string name="comments">Comments</string>
+    <string name="lesson_name">03.Food Safety Lesson Plan</string>
+    <string name="lesson_description">Use this lesson plan to teach your students the basic terms used when cooking.</string>
     <string name="placeholder">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="your_classes">Your Classes</string>
     <string name="change_phone_number">Change Phone Number</string>
