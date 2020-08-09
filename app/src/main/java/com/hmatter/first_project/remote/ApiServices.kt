@@ -63,6 +63,10 @@ interface ApiServices {
     suspend fun getPopularClasses(@Field("user_id") userId: Int): ApiResponse<ArrayList<PopularClassesItem>>
 
     @FormUrlEncoded
+    @POST(RequestConstants.GET_CATEGORY_WISE_FILTER_DATA)
+    suspend fun getCategoryWiseFilterData(@Field("cat_id") catId: Int): ApiResponse<ArrayList<PopularClassesItem>>
+
+    @FormUrlEncoded
     @POST(RequestConstants.ADD_WISH_LIST)
     suspend fun addToWishList(
         @Field("user_id") userId: Int,

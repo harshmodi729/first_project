@@ -31,7 +31,7 @@ class PopularTagsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tagName.text = alPopularTagCategoryItem[position].categoryName
         holder.itemView.setOnClickListener {
-            onTagItemClickListener?.invoke(alPopularTagCategoryItem[position].categoryName, position)
+            onTagItemClickListener?.invoke(alPopularTagCategoryItem[position].categoryName, alPopularTagCategoryItem[position].categoryId)
         }
     }
 
