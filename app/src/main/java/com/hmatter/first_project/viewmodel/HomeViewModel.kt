@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.base.BaseViewModel
 import com.hmatter.first_project.common.Constants
-import com.hmatter.first_project.model.FavoriteCLassesItem
 import com.hmatter.first_project.model.PopularClassItem
 import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.coroutines.launch
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel : BaseViewModel() {
 
     val popularClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
-    val favoriteClassesLiveData = MutableLiveData<BaseResult<ArrayList<FavoriteCLassesItem>>>()
+    val favoriteClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
     val yourClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
 
     fun getPopularClasses() {
@@ -23,14 +22,7 @@ class HomeViewModel : BaseViewModel() {
                     getApiServiceManager().getPopularClasses(Constants.userProfileData.id)
                 if (response.success) {
                     response.data?.let {
-                        if (response.success)
-                            popularClassesLiveData.value = BaseResult.Success(it)
-                        else
-                            popularClassesLiveData.value =
-                                BaseResult.Error(
-                                    IllegalStateException(),
-                                    "Something wrong, please try again later"
-                                )
+                        popularClassesLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
                         BaseResult.Error(
                             IllegalStateException(),
@@ -53,7 +45,8 @@ class HomeViewModel : BaseViewModel() {
     fun getFavoriteClasses() {
         viewModelScope.launch {
             try {
-                val response = getDummyApiServiceManager().getFavoriteClasses()
+                val response =
+                    getApiServiceManager().getFavoriteClasses(Constants.userProfileData.id)
                 if (response.success) {
                     response.data?.let {
                         favoriteClassesLiveData.value = BaseResult.Success(it)

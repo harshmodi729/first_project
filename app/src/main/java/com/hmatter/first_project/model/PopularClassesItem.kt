@@ -35,5 +35,7 @@ data class PopularClassesItem(
     @SerializedName("class_id")
     val classId: Int = 0,
     @SerializedName("wishlist")
-    val wishList: Int = 0
+    var wishList: Int = 0,
+    @SerializedName("comments")
+    var comments: ArrayList<CommentItem>
 ) : Serializable

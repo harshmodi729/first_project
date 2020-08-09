@@ -1,10 +1,10 @@
 package com.hmatter.first_project.ui.fragment.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import com.hmatter.first_project.R
 import com.hmatter.first_project.adapter.DownloadAdapter
 import com.hmatter.first_project.adapter.FavoriteClassesAdapter
@@ -13,7 +13,9 @@ import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
 import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.isBlankOrEmpty
+import com.hmatter.first_project.extension.loadImage
 import com.hmatter.first_project.extension.makeToast
+import com.hmatter.first_project.ui.activity.ClassActivity
 import com.hmatter.first_project.viewmodel.HomeViewModel
 import com.hmatter.first_project.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_user_profile.*
@@ -35,10 +37,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
         rvYourClasses.adapter = yourClassesAdapter
 
         if (!Constants.userProfileData.profile.isBlankOrEmpty()) {
-            Glide.with(mContext)
-                .load(Constants.userProfileData.profile)
-                .centerCrop()
-                .into(ivBigUserProfile)
+            mContext.loadImage(Constants.userProfileData.profile, ivBigUserProfile)
         }
         tvToolbarTitle.text = Constants.userProfileData.name
 
@@ -51,11 +50,19 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
             }
         }
         homeViewModel.favoriteClassesLiveData.observe(viewLifecycleOwner, Observer {
+            tvFavoritesLabel.visibility = View.VISIBLE
+            rvFavorites.visibility = View.VISIBLE
             when (it) {
                 is BaseResult.Success -> {
-                    favoriteCLassesAdapter.addData(it.item)
+                    if (it.item.isEmpty()) {
+                        tvFavoritesLabel.visibility = View.GONE
+                        rvFavorites.visibility = View.GONE
+                    } else
+                        favoriteCLassesAdapter.addData(it.item)
                 }
                 is BaseResult.Error -> {
+                    tvFavoritesLabel.visibility = View.GONE
+                    rvFavorites.visibility = View.GONE
                     mContext.makeToast(it.errorMessage)
                 }
             }
@@ -76,5 +83,12 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
                     }
                 }
             })
+
+        favoriteCLassesAdapter.onFavoriteClassClick = { item ->
+            item.wishList = 1
+            mContext.startActivity(
+                Intent(mContext, ClassActivity::class.java).putExtra(Constants.CLASS_ITEM, item)
+            )
+        }
     }
 }

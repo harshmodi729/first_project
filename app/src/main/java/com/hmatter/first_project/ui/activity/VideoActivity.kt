@@ -27,6 +27,8 @@ class VideoActivity : BaseActivity() {
 
         if (intent.extras != null) {
             val item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
+            tvLessonName.text = item.videoTitle
+            tvLessonDescription.text = item.videoIntro
             initializePlayer(item.video)
         }
 

@@ -11,5 +11,6 @@ class RequestConstants {
         const val GET_POPULAR_TAG = "popularTags"
         const val GET_POPULAR_CLASS_DATA = "popularPosts"
         const val ADD_WISH_LIST = "addWishList"
+        const val GET_WISH_LIST = "getWishList"
     }
 }

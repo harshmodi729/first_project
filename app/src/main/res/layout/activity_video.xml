@@ -52,10 +52,10 @@
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_marginEnd="@dimen/medium_margin"
                     android:layout_marginBottom="@dimen/small_margin"
-                    android:text="@string/lesson_name"
                     android:textColor="@color/colorIntroTitle"
                     android:textSize="@dimen/large_text"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="@tools:sample/lorem" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLessonDescription"
@@ -65,11 +65,10 @@
                     android:layout_marginTop="@dimen/small_margin"
                     android:layout_marginEnd="@dimen/medium_margin"
                     android:layout_marginBottom="@dimen/medium_margin"
-                    android:justificationMode="inter_word"
-                    android:text="@string/lesson_description"
                     android:textColor="@color/colorIntroTitle"
                     android:textSize="@dimen/small_text"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    tools:text="@tools:sample/lorem" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnReadTutorial"
@@ -96,68 +95,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layVideoDetail" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvComments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:text="@string/comments"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/medium_text"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewDetailDivider" />
-
-            <LinearLayout
-                android:id="@+id/layComment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvComments">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="@dimen/medium_margin"
-                    android:background="@drawable/person" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edCommentLay"
-                    style="@style/EditTextWhiteStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/medium_margin"
-                    android:hint="@string/hint_comment">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/edCommentInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvComments"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginEnd="@dimen/medium_margin"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/small_margin"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layComment" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

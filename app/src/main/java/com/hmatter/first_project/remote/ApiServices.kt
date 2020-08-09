@@ -70,12 +70,13 @@ interface ApiServices {
         @Field("status") isAdd: Int
     ): ApiResponse<JsonElement>
 
+    @FormUrlEncoded
+    @POST(RequestConstants.GET_WISH_LIST)
+    suspend fun getFavoriteClasses(@Field("user_id") userId: Int): ApiResponse<ArrayList<PopularClassesItem>>
+
     @GET("e12782f8-224c-48f5-b63e-0ed640272462")
     suspend fun getYourClasses()
             : ApiResponse<ArrayList<PopularClassItem>>
-
-    @GET("56931fb1-cdd1-48fc-a7c8-b53ab7413f30")
-    suspend fun getFavoriteClasses(): ApiResponse<ArrayList<FavoriteCLassesItem>>
 
     @GET("8aa3d6ee-bb06-46ea-8614-1f49846ce2de")
     suspend fun getVideoCategory(): DummyApiResponse<ArrayList<VideoCategoryItem>>

@@ -48,7 +48,6 @@
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.ClassActivity" />
         <activity android:name=".ui.activity.VideoActivity" />
-        <activity android:name=".ui.activity.ClassDetailActivity" />
         <activity android:name=".ui.activity.InstituteProfileActivity" />
         <activity android:name=".ui.activity.PurchaseClassActivity" />
     </application>

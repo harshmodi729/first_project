@@ -113,7 +113,8 @@
                 android:textSize="@dimen/medium_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvFavorites" />
+                app:layout_constraintTop_toBottomOf="@id/rvFavorites"
+                app:layout_goneMarginTop="@dimen/xlarge_margin" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVideoCategory"

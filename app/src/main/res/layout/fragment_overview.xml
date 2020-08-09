@@ -89,4 +89,83 @@
         app:layout_constraintStart_toStartOf="@id/tvClassOverview"
         app:layout_constraintTop_toBottomOf="@id/tvGuaranteed" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCommentLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:text="@string/comments"
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/tvClassOverview"
+        app:layout_constraintTop_toBottomOf="@id/viewWhatGetDivider" />
+
+    <LinearLayout
+        android:id="@+id/layComment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/tvClassOverview"
+        app:layout_constraintStart_toStartOf="@id/tvCommentLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvCommentLabel">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/person"
+            app:cardCornerRadius="28dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivUserProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                tools:background="@drawable/person" />
+        </androidx.cardview.widget.CardView>
+
+        <!--<com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edCommentLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:hint="@string/hint_comment"
+            app:boxBackgroundColor="@color/colorBackground"
+            app:hintTextColor="@color/colorIntroDetail">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edCommentInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edCommentInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:hint="@string/hint_comment"
+            android:inputType="text"
+            android:textSize="@dimen/small_text" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/xlarge_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layComment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

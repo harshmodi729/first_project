@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hmatter.first_project.R
-import com.hmatter.first_project.model.FavoriteCLassesItem
+import com.hmatter.first_project.extension.loadImage
+import com.hmatter.first_project.model.PopularClassesItem
 import kotlinx.android.synthetic.main.lay_favorite_classes_item.view.*
 
 class FavoriteClassesAdapter(private val context: Context) :
     RecyclerView.Adapter<FavoriteClassesAdapter.ViewHolder>() {
-    private var alFavoriteClassesItem = ArrayList<FavoriteCLassesItem>()
+    private var alFavoriteClassesItem = ArrayList<PopularClassesItem>()
+    var onFavoriteClassClick: ((item: PopularClassesItem) -> Unit)? = null
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val cvFavoriteClass = itemView.cvFavoriteClass as CardView
         val ivClass = itemView.ivClass as AppCompatImageView
         val tvTutorName = itemView.tvTutorName as AppCompatTextView
         val tvDescription = itemView.tvDescription as AppCompatTextView
@@ -32,17 +35,15 @@ class FavoriteClassesAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alFavoriteClassesItem[position]
-        Glide
-            .with(context)
-            .load(item.image_path)
-            .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.ivClass)
-        holder.tvTutorName.text = item.tutor_name
-        holder.tvDescription.text = item.description
+        context.loadImage(item.thumbnail, holder.ivClass)
+        holder.tvTutorName.text = item.author
+        holder.tvDescription.text = item.shortIntro
+        holder.cvFavoriteClass.setOnClickListener {
+            onFavoriteClassClick?.invoke(item)
+        }
     }
 
-    fun addData(alFavoriteCLassesItem: ArrayList<FavoriteCLassesItem>) {
+    fun addData(alFavoriteCLassesItem: ArrayList<PopularClassesItem>) {
         this.alFavoriteClassesItem = alFavoriteCLassesItem
         notifyDataSetChanged()
     }
