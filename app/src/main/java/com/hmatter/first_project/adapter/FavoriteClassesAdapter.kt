@@ -36,7 +36,7 @@ class FavoriteClassesAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alFavoriteClassesItem[position]
         context.loadImage(item.thumbnail, holder.ivClass)
-        holder.tvTutorName.text = item.author
+        holder.tvTutorName.text = item.title
         holder.tvDescription.text = item.shortIntro
         holder.cvFavoriteClass.setOnClickListener {
             onFavoriteClassClick?.invoke(item)

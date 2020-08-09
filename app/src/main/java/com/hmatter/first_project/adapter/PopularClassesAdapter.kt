@@ -33,7 +33,7 @@ class PopularClassesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alPopularClassItem[position]
         context.loadImage(item.thumbnail, holder.ivClass)
-        holder.tvClassName.text = item.author
+        holder.tvClassName.text = item.title
         if (item.price.isBlankOrEmpty()) {
             holder.tvPrice.text = context.getString(R.string.rupee_symbol).plus("0.00")
         } else {
