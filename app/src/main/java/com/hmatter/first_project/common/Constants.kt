@@ -1,5 +1,6 @@
 package com.hmatter.first_project.common
 
+import com.hmatter.first_project.model.PopularTagCategoryItem
 import com.hmatter.first_project.model.SignInItem
 
 class Constants {
@@ -14,5 +15,6 @@ class Constants {
         const val CLASS_ITEM = "class_item"
         const val VIDEO_ITEM = "video_item"
         var userProfileData = SignInItem()
+        var categoryId = PopularTagCategoryItem()
     }
 }

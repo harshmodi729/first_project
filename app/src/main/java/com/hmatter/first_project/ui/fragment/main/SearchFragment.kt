@@ -106,13 +106,13 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             rvVideoCategory.visibility = View.GONE
             tvTagView.visibility = View.GONE
             rvTag.visibility = View.GONE
-            val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
-            homeViewModel.getPopularClasses().apply {
+
+            searchViewModel.getCatFilterData(position).apply {
                 laySearch.post {
                     showProgressDialog(laySearch, ivDialogBg)
                 }
             }
-            homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
+            searchViewModel.alCategoryWiseFilterItem.observe(viewLifecycleOwner, Observer {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {
