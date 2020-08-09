@@ -1,5 +1,6 @@
 package com.hmatter.first_project.ui.fragment.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,8 +14,9 @@ import com.hmatter.first_project.adapter.PopularTagsAdapter
 import com.hmatter.first_project.adapter.VideoCategoryAdapter
 import com.hmatter.first_project.base.BaseFragment
 import com.hmatter.first_project.base.BaseResult
+import com.hmatter.first_project.common.Constants
 import com.hmatter.first_project.extension.makeToast
-import com.hmatter.first_project.viewmodel.HomeViewModel
+import com.hmatter.first_project.ui.activity.ClassActivity
 import com.hmatter.first_project.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.lay_no_data.*
@@ -134,6 +136,12 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     }
                 }
             })
+        }
+
+        popularClassesAdapter.onCardClickListener = { item, _ ->
+            mContext.startActivity(
+                Intent(mContext, ClassActivity::class.java).putExtra(Constants.CLASS_ITEM, item)
+            )
         }
 
         videoCategoryAdapter.onCategorySelectedListener = { item, isChecked ->
