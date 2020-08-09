@@ -30,9 +30,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity.ClassDeatilActivity"></activity>
-        <activity android:name=".ui.activity.InstituteProfileActivity"></activity>
-        <activity android:name=".ui.activity.PurchaseClassActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -51,6 +48,9 @@
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.ClassActivity" />
         <activity android:name=".ui.activity.VideoActivity" />
+        <activity android:name=".ui.activity.ClassDetailActivity" />
+        <activity android:name=".ui.activity.InstituteProfileActivity" />
+        <activity android:name=".ui.activity.PurchaseClassActivity" />
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@
                 android:layout_height="match_parent">
 
                 <com.hmatter.first_project.widget.RoundedImageView
-                    android:id="@+id/ivCLass"
+                    android:id="@+id/ivClass"
                     android:layout_width="0dp"
                     android:layout_height="350dp"
                     android:scaleType="fitXY"
@@ -39,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/bg_gradient"
-                    app:layout_constraintBottom_toBottomOf="@id/ivCLass"
+                    app:layout_constraintBottom_toBottomOf="@id/ivClass"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +53,7 @@
                     android:maxWidth="250dp"
                     android:maxLines="1"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/medium_text"
+                    android:textSize="@dimen/large_text"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/ratingClass"
                     app:layout_constraintEnd_toStartOf="@id/tvPurchased"
@@ -125,7 +125,7 @@
                     android:id="@+id/layToolbarButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@id/ivCLass"
+                    app:layout_constraintBottom_toBottomOf="@id/ivClass"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 

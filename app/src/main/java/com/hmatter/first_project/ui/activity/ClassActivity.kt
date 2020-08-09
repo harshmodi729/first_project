@@ -1,5 +1,6 @@
 package com.hmatter.first_project.ui.activity
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -101,15 +102,25 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
         Glide.with(this)
             .asBitmap()
             .load(item.thumbnail)
+            .placeholder(R.drawable.ic_no_image)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    ivCLass.setImageBitmap(resource)
+                    ivClass.setImageBitmap(resource)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
         btnToolbarBack.setOnClickListener {
             onBackPressed()
+        }
+        tvTutorName.setOnClickListener {
+            startActivity(Intent(this, InstituteProfileActivity::class.java))
+        }
+        btnTakeClass.setOnClickListener {
+            startActivity(
+                Intent(this, PurchaseClassActivity::class.java)
+                    .putExtra(Constants.CLASS_ITEM, item)
+            )
         }
     }
 

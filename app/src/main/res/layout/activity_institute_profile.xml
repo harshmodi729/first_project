@@ -9,11 +9,35 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.AccountSettingsFragment">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/lay_toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnToolbarBack"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvInstituteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/information"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/large_text"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btnToolbarBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnToolbarBack" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvUserProfile"
@@ -38,15 +62,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
         android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
         android:layout_marginBottom="@dimen/medium_margin"
         android:text="@string/institute_name"
         android:textColor="@color/colorIntroTitle"
         android:textSize="@dimen/large_text"
         android:textStyle="bold" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -120,9 +144,9 @@
                     android:id="@+id/tvRatingValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_marginEnd="@dimen/medium_margin"
-                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginBottom="@dimen/small_margin"
                     android:layout_weight="1.5"
                     android:text="@string/institute_rating_value"
@@ -161,9 +185,9 @@
                     android:id="@+id/tvWebsiteValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_marginEnd="@dimen/medium_margin"
-                    android:layout_marginStart="@dimen/small_margin"
                     android:layout_marginBottom="@dimen/small_margin"
                     android:layout_weight="1.5"
                     android:text="@string/institute_website_value"
@@ -189,12 +213,9 @@
                 android:layout_marginEnd="@dimen/medium_margin"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:text="@string/placeholder"
-                android:justificationMode="inter_word"
                 android:textColor="@color/colorIntroTitle"
                 android:textSize="@dimen/small_text"
                 android:textStyle="normal" />
         </LinearLayout>
-    </ScrollView>
-
-
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
