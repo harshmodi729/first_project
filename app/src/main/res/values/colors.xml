@@ -15,4 +15,5 @@
     <color name="colorDivider">#C0C0C0</color>
     <color name="colorDisable">#E3E3E3</color>
     <color name="colorLabel">#66000000</color>
+    <color name="colorLightBlue">#cbeaed</color>
 </resources>
