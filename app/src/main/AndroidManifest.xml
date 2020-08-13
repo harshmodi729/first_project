@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sseduhub.edupi">
+    package="com.ss_eduhub.edupi">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -35,9 +35,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.sseduhub.edupi.ui.activity.StartupActivity" />
+        <activity android:name="com.ss_eduhub.edupi.ui.activity.StartupActivity" />
         <activity
-            android:name="com.sseduhub.edupi.ui.activity.SplashActivity"
+            android:name="com.ss_eduhub.edupi.ui.activity.SplashActivity"
             android:theme="@style/SplashFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,13 +45,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sseduhub.edupi.ui.activity.MainActivity" />
-        <activity android:name="com.sseduhub.edupi.ui.activity.ClassActivity" />
+        <activity android:name="com.ss_eduhub.edupi.ui.activity.MainActivity" />
+        <activity android:name="com.ss_eduhub.edupi.ui.activity.ClassActivity" />
         <activity
-            android:name="com.sseduhub.edupi.ui.activity.VideoActivity"
+            android:name="com.ss_eduhub.edupi.ui.activity.VideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="com.sseduhub.edupi.ui.activity.InstituteProfileActivity" />
-        <activity android:name="com.sseduhub.edupi.ui.activity.PurchaseClassActivity" />
+        <activity android:name="com.ss_eduhub.edupi.ui.activity.InstituteProfileActivity" />
+        <activity android:name="com.ss_eduhub.edupi.ui.activity.PurchaseClassActivity" />
     </application>
 
 </manifest>

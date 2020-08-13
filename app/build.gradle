@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.sseduhub.edupi"
+        applicationId "com.ss_eduhub.edupi"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

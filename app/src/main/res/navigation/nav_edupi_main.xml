@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.sseduhub.edupi.ui.fragment.main.HomeFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.main.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
         <action
@@ -19,13 +19,13 @@
 
     <fragment
         android:id="@+id/nav_user_profile"
-        android:name="com.sseduhub.edupi.ui.fragment.main.UserProfileFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.main.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.sseduhub.edupi.ui.fragment.main.SearchFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.main.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@id/nav_download"
-        android:name="com.sseduhub.edupi.ui.fragment.main.DownloadFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.main.DownloadFragment"
         android:label="@string/download"
         tools:layout="@layout/fragment_download">
         <action
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.sseduhub.edupi.ui.fragment.main.SettingsFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.main.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings">
         <action
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/nav_account_settings"
-        android:name="com.sseduhub.edupi.ui.fragment.AccountSettingsFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.AccountSettingsFragment"
         android:label="@string/account_settings"
         tools:layout="@layout/fragment_account_settings">
         <action
@@ -70,7 +70,7 @@
 
     <fragment
         android:id="@+id/nav_app_settings"
-        android:name="com.sseduhub.edupi.ui.fragment.AppSettingsFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.AppSettingsFragment"
         android:label="fragment_app_settings"
         tools:layout="@layout/fragment_app_settings">
         <action

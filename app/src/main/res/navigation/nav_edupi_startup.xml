@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_welcome"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.WelcomeTextFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.WelcomeTextFragment"
         android:label="@string/welcome_text"
         tools:layout="@layout/fragment_welcome_text">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/nav_intro"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.IntroFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.IntroFragment"
         android:label="Intro"
         tools:layout="@layout/fragment_intro">
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/nav_sign_in"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.SignInFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.SignInFragment"
         android:label="@string/sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/nav_sign_up"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.SignUpFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.SignUpFragment"
         android:label="@string/sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -63,7 +63,7 @@
 
     <fragment
         android:id="@+id/nav_forgot_password"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.ForgotPasswordFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.ForgotPasswordFragment"
         android:label="Forgot Password"
         tools:layout="@layout/fragment_forgot_password">
         <action
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/nav_otp"
-        android:name="com.sseduhub.edupi.ui.fragment.startup.OTPFragment"
+        android:name="com.ss_eduhub.edupi.ui.fragment.startup.OTPFragment"
         android:label="OTP"
         tools:layout="@layout/fragment_o_t_p">
         <action

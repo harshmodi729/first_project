@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.sseduhub.edupi.widget.RoundedImageView
+                <com.ss_eduhub.edupi.widget.RoundedImageView
                     android:id="@+id/ivClass"
                     android:layout_width="0dp"
                     android:layout_height="350dp"
