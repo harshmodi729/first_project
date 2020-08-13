@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.activity.PurchaseClassActivity">
 
-    <com.hmatter.first_project.widget.RoundedImageView
+    <com.sseduhub.edupi.widget.RoundedImageView
         android:id="@+id/ivClass"
         android:layout_width="0dp"
         android:layout_height="250dp"
