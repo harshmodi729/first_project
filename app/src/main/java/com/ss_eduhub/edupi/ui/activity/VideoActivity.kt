@@ -54,8 +54,7 @@ class VideoActivity : BaseActivity() {
             val item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
             tvLessonName.text = item.videoTitle
             tvLessonDescription.text = item.videoIntro
-//            initializePlayer(item.video)
-            initializePlayer("https://html5demos.com/assets/dizzy.mp4")
+            initializePlayer(item.video)
         }
 
         btnBack.setOnClickListener {
@@ -163,7 +162,7 @@ class VideoActivity : BaseActivity() {
         val renderersFactory = DefaultRenderersFactory(this)
 
         exoPlayer = ExoPlayerFactory.newSimpleInstance(
-            renderersFactory, trackSelector, loadControl
+            renderersFactory, DefaultTrackSelector(), loadControl
         )
         exoPlayer!!.addListener(object : Player.EventListener {
             override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
@@ -224,7 +223,7 @@ class VideoActivity : BaseActivity() {
             buildMediaSource(Uri.parse(videoUrl))
         exoPlayer!!.prepare(mediaSource, true, false)
         videoView.showController()
-        willHaveContent(trackSelector)
+//        willHaveContent(trackSelector)
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {

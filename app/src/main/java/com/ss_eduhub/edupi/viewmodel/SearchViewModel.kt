@@ -24,15 +24,13 @@ class SearchViewModel : BaseViewModel() {
                     response.data?.let {
                         videoCategoryLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        videoCategoryLiveData.value = BaseResult.Error(
-                            IllegalStateException(),
-                            response.message
-                        )
+                        videoCategoryLiveData.value =
+                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
                     }
                 } else
                     videoCategoryLiveData.value = BaseResult.Error(
                         IllegalStateException(),
-                        "Oops something went wrong."
+                        response.message
                     )
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -49,11 +47,14 @@ class SearchViewModel : BaseViewModel() {
                     response.data?.let {
                         alPopularCategoryItem.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        alPopularCategoryItem.value = BaseResult.Error(
-                            IllegalStateException(),
-                            "Something wrong, please try again later"
-                        )
+                        alPopularCategoryItem.value =
+                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
                     }
+                } else {
+                    alPopularCategoryItem.value = BaseResult.Error(
+                        IllegalStateException(),
+                        response.message
+                    )
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

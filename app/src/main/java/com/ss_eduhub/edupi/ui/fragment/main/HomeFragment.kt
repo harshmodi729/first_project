@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.ss_eduhub.edupi.R
+import com.ss_eduhub.edupi.adapter.HomeCategoryAdapter
 import com.ss_eduhub.edupi.adapter.HomeSliderAdapter
 import com.ss_eduhub.edupi.adapter.PopularClassesAdapter
 import com.ss_eduhub.edupi.base.BaseFragment
@@ -23,15 +24,16 @@ import com.ss_eduhub.edupi.extension.makeToast
 import com.ss_eduhub.edupi.model.SliderItem
 import com.ss_eduhub.edupi.ui.activity.ClassActivity
 import com.ss_eduhub.edupi.viewmodel.HomeViewModel
+import com.ss_eduhub.edupi.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_intro.layDots
-import kotlinx.android.synthetic.main.lay_no_data.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 import kotlinx.coroutines.Runnable
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private lateinit var homeSliderAdapter: HomeSliderAdapter
     private lateinit var popularClassesAdapter: PopularClassesAdapter
+    private lateinit var categoriesAdapter: HomeCategoryAdapter
     private var homeSliderHandler = Handler()
     private val alSliderItem = ArrayList<SliderItem>()
     private var dots = ArrayList<TextView>()
@@ -42,6 +44,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         "Mr. Ramsay teach how to make tastiest cakes.",
         "Bear Grylls shows how to survive in desert."
     )
+    private lateinit var onViewMoreTagClickListener: OnViewMoreClickListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -64,34 +67,68 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         indicatorDots(0)
 
         popularClassesAdapter = PopularClassesAdapter(mContext)
+        categoriesAdapter = HomeCategoryAdapter(mContext)
+
         rvPopularClasses.layoutManager = LinearLayoutManager(mContext)
         rvPopularClasses.adapter = popularClassesAdapter
         rvPopularClasses.isNestedScrollingEnabled = false
+
+        rvCategories.adapter = categoriesAdapter
+        rvCategories.isNestedScrollingEnabled = false
 
         if (!Constants.userProfileData.profile.isBlankOrEmpty()) {
             mContext.loadImage(Constants.userProfileData.profile, ivUserProfile)
         }
         val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
+        val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
         homeViewModel.getPopularClasses().apply {
             layHome.post {
                 showProgressDialog(layHome, ivDialogBg)
             }
         }
+        searchViewModel.getPopularCategoryList()
         homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
-                    rvPopularClasses.visibility = View.VISIBLE
-                    tvNoData.visibility = View.GONE
                     popularClassesAdapter.addData(it.item)
+                    if (it.item.isNotEmpty()) {
+                        rvPopularClasses.visibility = View.VISIBLE
+                        tvPopularClassesLabel.visibility = View.VISIBLE
+                    } else {
+                        rvPopularClasses.visibility = View.GONE
+                        tvPopularClassesLabel.visibility = View.GONE
+                    }
                 }
                 is BaseResult.Error -> {
                     rvPopularClasses.visibility = View.GONE
-                    tvNoData.visibility = View.VISIBLE
+                    tvPopularClassesLabel.visibility = View.GONE
                     mContext.makeToast(it.errorMessage)
                 }
             }
         })
+        searchViewModel.alPopularCategoryItem.observe(
+            viewLifecycleOwner,
+            Observer {
+                hideProgressDialog(ivDialogBg)
+                when (it) {
+                    is BaseResult.Success -> {
+                        categoriesAdapter.addData(it.item)
+                        if (it.item.isNotEmpty()) {
+                            rvCategories.visibility = View.VISIBLE
+                            tvCategoriesLabel.visibility = View.VISIBLE
+                        } else {
+                            rvCategories.visibility = View.GONE
+                            tvCategoriesLabel.visibility = View.GONE
+                        }
+                    }
+                    is BaseResult.Error -> {
+                        mContext.makeToast(it.errorMessage)
+                        tvCategoriesLabel.visibility = View.GONE
+                        rvCategories.visibility = View.GONE
+                    }
+                }
+            })
 
         ivUserProfile.setOnClickListener {
             it.findNavController()
@@ -101,6 +138,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             mContext.startActivity(
                 Intent(mContext, ClassActivity::class.java).putExtra(Constants.CLASS_ITEM, item)
             )
+        }
+        onViewMoreTagClickListener = mContext as OnViewMoreClickListener
+        btnViewMore.setOnClickListener {
+            onViewMoreTagClickListener.onViewMoreTagClick()
         }
     }
 
@@ -146,5 +187,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         if (dots.size > 0) {
             dots[position].setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary))
         }
+    }
+
+    interface OnViewMoreClickListener {
+        fun onViewMoreTagClick()
     }
 }

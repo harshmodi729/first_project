@@ -103,4 +103,6 @@
     <string name="watch_trailer">Watch Trailer</string>
     <string name="what_you_will_get">What you will get</string>
     <string name="video_quality">Video Quality</string>
+    <string name="categories">Categories</string>
+    <string name="institute">Institute</string>
 </resources>

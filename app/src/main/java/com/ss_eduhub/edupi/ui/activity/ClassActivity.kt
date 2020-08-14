@@ -115,7 +115,12 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
             onBackPressed()
         }
         tvTutorName.setOnClickListener {
-            startActivity(Intent(this, InstituteProfileActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    InstituteProfileActivity::class.java
+                ).putExtra(Constants.INSTITUTE_NAME, item.author)
+            )
         }
         btnTakeClass.setOnClickListener {
             startActivity(

@@ -6,9 +6,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.ss_eduhub.edupi.R
 import com.ss_eduhub.edupi.base.BaseActivity
+import com.ss_eduhub.edupi.ui.fragment.main.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), HomeFragment.OnViewMoreClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,5 +25,9 @@ class MainActivity : BaseActivity() {
                 else -> bottomNavigation.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onViewMoreTagClick() {
+        bottomNavigation.selectedItemId = R.id.nav_search
     }
 }

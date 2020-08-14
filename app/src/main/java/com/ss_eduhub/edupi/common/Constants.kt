@@ -14,6 +14,7 @@ class Constants {
         const val EMPTY_DOWNLOAD_DIALOG = "empty_download_dialog"
         const val CLASS_ITEM = "class_item"
         const val VIDEO_ITEM = "video_item"
+        const val INSTITUTE_NAME = "institute_name"
         var userProfileData = SignInItem()
         var categoryId = PopularTagCategoryItem()
     }

@@ -111,25 +111,56 @@
                 android:id="@+id/rvPopularClasses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingBottom="@dimen/small_margin"
                 app:layoutManager="LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPopularClassesLabel"
-                app:layout_constraintVertical_bias="0" />
-
-            <include
-                layout="@layout/lay_no_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvPopularClassesLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCategoriesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xlarge_margin"
+                android:text="@string/categories"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/medium_text"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
+                app:layout_constraintTop_toBottomOf="@id/rvPopularClasses" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingStart="@dimen/large_margin"
+                android:paddingEnd="@dimen/large_margin"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toBottomOf="@id/tvCategoriesLabel"
+                app:spanCount="2"
+                tools:itemCount="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/lay_categories_home" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewMore"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/large_margin"
+                android:text="View More"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvCategories" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
