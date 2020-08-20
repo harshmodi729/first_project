@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.PurchaseClassActivity">
+    tools:context="com.ss_eduhub.ui.activity.PurchaseClassActivity">
 
-    <com.ss_eduhub.edupi.widget.RoundedImageView
+    <com.ss_eduhub.widget.RoundedImageView
         android:id="@+id/ivClass"
         android:layout_width="0dp"
         android:layout_height="250dp"

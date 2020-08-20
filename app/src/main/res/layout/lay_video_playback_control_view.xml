@@ -22,7 +22,6 @@
         android:layout_marginEnd="@dimen/small_margin"
         android:background="@null"
         android:src="@drawable/ic_more"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,7 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:played_color="@color/colorPrimary"
-        app:scrubber_dragged_size="50dp"
         app:unplayed_color="@color/colorAccentLight" />
 
     <androidx.appcompat.widget.AppCompatTextView

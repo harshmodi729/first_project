@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".ui.fragment.main.UserProfileFragment">
+    tools:context="com.ss_eduhub.ui.fragment.main.UserProfileFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/toolbarBg"

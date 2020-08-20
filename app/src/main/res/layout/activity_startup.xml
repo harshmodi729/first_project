@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.StartupActivity">
+    tools:context="com.ss_eduhub.ui.activity.StartupActivity">
 
     <fragment
         android:id="@+id/navHostStartup"

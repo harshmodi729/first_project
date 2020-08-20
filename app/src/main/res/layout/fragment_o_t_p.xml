@@ -5,7 +5,7 @@
     android:id="@+id/layOtp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.startup.OTPFragment">
+    tools:context="com.ss_eduhub.ui.fragment.startup.OTPFragment">
 
     <include
         android:id="@+id/toolbar"

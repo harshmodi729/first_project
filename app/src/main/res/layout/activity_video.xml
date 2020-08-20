@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:keepScreenOn="true"
-    tools:context=".ui.activity.VideoActivity">
+    tools:context="com.ss_eduhub.ui.activity.VideoActivity">
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/videoView"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0"
         app:resize_mode="zoom"
         app:rewind_increment="10000"
-        app:show_buffering="true" />
+        app:show_buffering="always" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
