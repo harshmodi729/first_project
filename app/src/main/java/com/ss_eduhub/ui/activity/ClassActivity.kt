@@ -22,6 +22,7 @@ import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.PopularClassesItem
 import com.ss_eduhub.ui.fragment.LessonFragment
 import com.ss_eduhub.ui.fragment.OverviewFragment
@@ -55,7 +56,7 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
                 }
                 is BaseResult.Error -> {
                     btnFavorite.isChecked = !btnFavorite.isChecked
-                    makeToast(it.errorMessage)
+                    makeToastForServerError(it)
                 }
             }
             btnFavorite.setOnCheckedChangeListener(this)

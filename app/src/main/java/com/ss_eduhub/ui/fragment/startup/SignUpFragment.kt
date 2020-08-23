@@ -11,6 +11,7 @@ import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.SignUpItem
 import com.ss_eduhub.viewmodel.SignUpViewModel
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -36,7 +37,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                     findNavController().navigate(action)
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

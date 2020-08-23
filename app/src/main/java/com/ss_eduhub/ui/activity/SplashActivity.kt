@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.base.BaseResult
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.viewmodel.SplashViewModel
 
 class SplashActivity : BaseActivity() {
@@ -35,7 +35,7 @@ class SplashActivity : BaseActivity() {
                         }
                     }
                     is BaseResult.Error -> {
-                        makeToast(it.errorMessage)
+                        makeToastForServerError(it)
                         startActivity(
                             Intent(this@SplashActivity, StartupActivity::class.java)
                                 .putExtra("isAlreadyVisitIntro", false)

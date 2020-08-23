@@ -26,8 +26,7 @@ class VideoViewModel : BaseViewModel() {
                         BaseResult.Error(IllegalStateException(), response.message)
                 }
             } catch (exception: Exception) {
-                addWishListLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                addWishListLiveData.value = BaseResult.Error(exception)
             }
         }
     }

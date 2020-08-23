@@ -25,16 +25,15 @@ class SearchViewModel : BaseViewModel() {
                         videoCategoryLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
                         videoCategoryLiveData.value =
-                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                            BaseResult.Error(IllegalStateException())
                     }
                 } else
-                    videoCategoryLiveData.value = BaseResult.Error(
-                        IllegalStateException(),
-                        response.message
-                    )
-            } catch (e: Exception) {
-                e.printStackTrace()
-                videoCategoryLiveData.value = BaseResult.Error(e, e.localizedMessage!!)
+                    videoCategoryLiveData.value =
+                        BaseResult.Error(IllegalStateException(), response.message)
+            } catch (exception: Exception) {
+                exception.printStackTrace()
+                videoCategoryLiveData.value =
+                    BaseResult.Error(exception)
             }
         }
     }
@@ -48,17 +47,15 @@ class SearchViewModel : BaseViewModel() {
                         alPopularCategoryItem.value = BaseResult.Success(it)
                     } ?: kotlin.run {
                         alPopularCategoryItem.value =
-                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                            BaseResult.Error(IllegalStateException("Oops something went wrong."))
                     }
                 } else {
-                    alPopularCategoryItem.value = BaseResult.Error(
-                        IllegalStateException(),
-                        response.message
-                    )
+                    alPopularCategoryItem.value =
+                        BaseResult.Error(IllegalStateException(), response.message)
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                alPopularCategoryItem.value = BaseResult.Error(e, e.localizedMessage!!)
+            } catch (exception: Exception) {
+                exception.printStackTrace()
+                alPopularCategoryItem.value = BaseResult.Error(exception)
             }
         }
     }
@@ -75,20 +72,13 @@ class SearchViewModel : BaseViewModel() {
                     response.data?.let {
                         alCategoryWiseFilterItem.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            "Oops something went wrong."
-                        )
+                        alCategoryWiseFilterItem.value = BaseResult.Error(IllegalStateException())
                     }
                 } else
                     alCategoryWiseFilterItem.value =
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            response.message
-                        )
+                        BaseResult.Error(IllegalStateException(), response.message)
             } catch (exception: Exception) {
-                alCategoryWiseFilterItem.value =
-                    BaseResult.Error(exception, "Oops something went wrong.")
+                alCategoryWiseFilterItem.value = BaseResult.Error(exception)
             }
         }
     }

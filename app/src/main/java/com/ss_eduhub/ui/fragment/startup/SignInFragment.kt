@@ -11,7 +11,7 @@ import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.hideKeyboard
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.ui.activity.MainActivity
 import com.ss_eduhub.viewmodel.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -39,7 +39,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                     mContext.finish()
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

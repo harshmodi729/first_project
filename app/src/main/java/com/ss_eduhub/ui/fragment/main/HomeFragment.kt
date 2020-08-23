@@ -20,7 +20,7 @@ import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.isBlankOrEmpty
 import com.ss_eduhub.extension.loadImage
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.SliderItem
 import com.ss_eduhub.ui.activity.ClassActivity
 import com.ss_eduhub.viewmodel.HomeViewModel
@@ -81,12 +81,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
         val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
         val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
-        homeViewModel.getPopularClasses().apply {
-            layHome.post {
-                showProgressDialog(layHome, ivDialogBg)
-            }
+        layHome.post {
+            showProgressDialog(layHome, ivDialogBg)
+            homeViewModel.getPopularClasses()
+            searchViewModel.getPopularCategoryList()
         }
-        searchViewModel.getPopularCategoryList()
         homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {
@@ -103,7 +102,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 is BaseResult.Error -> {
                     rvPopularClasses.visibility = View.GONE
                     tvPopularClassesLabel.visibility = View.GONE
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -125,7 +124,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                         }
                     }
                     is BaseResult.Error -> {
-                        mContext.makeToast(it.errorMessage)
+                        mContext.makeToastForServerError(it)
                         tvCategoriesLabel.visibility = View.GONE
                         rvCategories.visibility = View.GONE
                         btnViewMore.visibility = View.GONE

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.ParseException
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -20,7 +21,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.gson.JsonParseException
 import com.ss_eduhub.R
+import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.model.ForgotPasswordItem
 import com.ss_eduhub.model.SignInItem
@@ -31,6 +34,11 @@ import kotlinx.android.synthetic.main.lay_dialog_empty_download.view.*
 import kotlinx.android.synthetic.main.lay_dialog_logout.view.*
 import kotlinx.android.synthetic.main.lay_dialog_success.view.*
 import kotlinx.coroutines.runBlocking
+import org.json.JSONException
+import retrofit2.HttpException
+import java.io.IOException
+import java.io.InterruptedIOException
+import java.net.UnknownHostException
 
 
 /**
@@ -40,6 +48,37 @@ import kotlinx.coroutines.runBlocking
  */
 fun Context.makeToast(text: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, length).show()
+}
+
+fun Context.makeToastForServerError(error: BaseResult.Error) {
+    var errorMessage = "Oops something went wrong."
+    if (error.exception is IOException) {
+        when (error.exception) {
+            is UnknownHostException, is InterruptedIOException -> {
+                this.permissionDeniedDialog(
+                    "No Internet",
+                    "Check your internet connection and try again",
+                    "Settings",
+                    "Cancel"
+                )
+                onPermanentlyDeniedDialogClick = {
+                    this.openAppSettings()
+                }
+                errorMessage = "No internet connection."
+            }
+        }
+    } else if (error.exception is HttpException) {
+        errorMessage = "No internet connection."
+    } else if (error.exception is JSONException ||
+        error.exception is JsonParseException ||
+        error.exception is ParseException
+    ) {
+        errorMessage = "Something wrong with response."
+    } else {
+        if (error.errorMessage != null && !error.errorMessage.isBlankOrEmpty())
+            errorMessage = error.errorMessage
+    }
+    this.makeToast(errorMessage)
 }
 
 /**
@@ -156,30 +195,35 @@ fun Context.hideKeyboard(view: View) {
  */
 var onDeniedDialogClick: ((isPositive: Boolean) -> Unit)? = null
 var onPermanentlyDeniedDialogClick: (() -> Unit)? = null
+private var permissionDialog: AlertDialog? = null
 fun Context.permissionDeniedDialog(
     title: String,
     message: String,
     positiveButtonText: String,
     negativeButtonText: String
 ) {
-    val dialog = AlertDialog.Builder(this).create()
-    dialog.setCancelable(false)
-    dialog.setTitle(title)
-    dialog.setMessage(message)
-    dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveButtonText) { _, _ ->
+    if (permissionDialog != null && permissionDialog!!.isShowing) {
+        permissionDialog!!.dismiss()
+        permissionDialog = null
+    }
+    permissionDialog = AlertDialog.Builder(this).create()
+    permissionDialog!!.setCancelable(false)
+    permissionDialog!!.setTitle(title)
+    permissionDialog!!.setMessage(message)
+    permissionDialog!!.setButton(AlertDialog.BUTTON_POSITIVE, positiveButtonText) { _, _ ->
         if (positiveButtonText == "Settings")
             onPermanentlyDeniedDialogClick?.invoke()
         else
             onDeniedDialogClick?.invoke(true)
-        dialog.dismiss()
+        permissionDialog!!.dismiss()
     }
-    dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeButtonText) { _, _ ->
+    permissionDialog!!.setButton(AlertDialog.BUTTON_NEGATIVE, negativeButtonText) { _, _ ->
         onDeniedDialogClick?.invoke(false)
-        dialog.dismiss()
+        permissionDialog!!.dismiss()
     }
-    dialog.show()
-    dialog.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
-    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
+    permissionDialog!!.show()
+    permissionDialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
+    permissionDialog!!.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
 }
 
 /**

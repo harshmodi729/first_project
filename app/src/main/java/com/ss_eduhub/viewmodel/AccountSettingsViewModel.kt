@@ -42,8 +42,7 @@ class AccountSettingsViewModel : BaseViewModel() {
                     }
                 }
             } catch (exception: Exception) {
-                changePhoneNumberLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                changePhoneNumberLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -63,16 +62,14 @@ class AccountSettingsViewModel : BaseViewModel() {
                         )
                         uploadImageLiveData.value = BaseResult.Success(it.asString)
                     } ?: kotlin.run {
-                        uploadImageLiveData.value =
-                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                        uploadImageLiveData.value = BaseResult.Error(IllegalStateException())
                     }
                 } else {
                     uploadImageLiveData.value =
                         BaseResult.Error(IllegalStateException(), response.message)
                 }
             } catch (exception: Exception) {
-                uploadImageLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                uploadImageLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -86,8 +83,7 @@ class AccountSettingsViewModel : BaseViewModel() {
                 preference.setPreferenceBoolean(PreferenceConstants.IS_USER_LOGIN, false)
                 signOutLiveData.value = BaseResult.Success(true)
             } catch (exception: Exception) {
-                signOutLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                signOutLiveData.value = BaseResult.Error(exception)
             }
         }
     }

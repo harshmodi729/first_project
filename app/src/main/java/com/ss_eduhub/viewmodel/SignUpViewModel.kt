@@ -36,8 +36,7 @@ class SignUpViewModel : BaseViewModel() {
                     }
                 }
             } catch (exception: Exception) {
-                registrationLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                registrationLiveData.value = BaseResult.Error(exception)
             }
         }
     }

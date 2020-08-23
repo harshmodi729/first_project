@@ -24,20 +24,13 @@ class HomeViewModel : BaseViewModel() {
                     response.data?.let {
                         popularClassesLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            "Oops something went wrong."
-                        )
+                        BaseResult.Error(IllegalStateException())
                     }
                 } else
                     popularClassesLiveData.value =
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            response.message
-                        )
+                        BaseResult.Error(IllegalStateException(), response.message)
             } catch (exception: Exception) {
-                popularClassesLiveData.value =
-                    BaseResult.Error(exception, "Oops something went wrong.")
+                popularClassesLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -52,15 +45,14 @@ class HomeViewModel : BaseViewModel() {
                         favoriteClassesLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
                         favoriteClassesLiveData.value =
-                            BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                            BaseResult.Error(IllegalStateException())
                     }
                 } else {
                     favoriteClassesLiveData.value =
                         BaseResult.Error(IllegalStateException(), response.message)
                 }
             } catch (exception: Exception) {
-                favoriteClassesLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                favoriteClassesLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -73,20 +65,13 @@ class HomeViewModel : BaseViewModel() {
                     response.data?.let {
                         yourClassesLiveData.value = BaseResult.Success(it)
                     } ?: kotlin.run {
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            "Oops something went wrong."
-                        )
+                        BaseResult.Error(IllegalStateException())
                     }
                 } else
                     yourClassesLiveData.value =
-                        BaseResult.Error(
-                            IllegalStateException(),
-                            response.message
-                        )
+                        BaseResult.Error(IllegalStateException(), response.message)
             } catch (exception: Exception) {
-                yourClassesLiveData.value =
-                    BaseResult.Error(exception, "Oops something went wrong.")
+                yourClassesLiveData.value = BaseResult.Error(exception)
             }
         }
     }

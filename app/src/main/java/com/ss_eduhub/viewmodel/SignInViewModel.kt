@@ -37,10 +37,7 @@ class SignInViewModel : BaseViewModel() {
                             signInLiveData.value = BaseResult.Success(it)
                         } ?: kotlin.run {
                             signInLiveData.value =
-                                BaseResult.Error(
-                                    IllegalStateException(),
-                                    "Oops something went wrong."
-                                )
+                                BaseResult.Error(IllegalStateException())
                         }
                     } else {
                         signInLiveData.value =
@@ -48,8 +45,7 @@ class SignInViewModel : BaseViewModel() {
                     }
                 }
             } catch (exception: Exception) {
-                signInLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                signInLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -105,8 +101,7 @@ class SignInViewModel : BaseViewModel() {
                 )
                 visitIntroLiveData.value = BaseResult.Success(true)
             } catch (exception: Exception) {
-                visitIntroLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                visitIntroLiveData.value = BaseResult.Error(exception)
             }
         }
     }

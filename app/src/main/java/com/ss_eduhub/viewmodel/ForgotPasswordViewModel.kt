@@ -28,8 +28,7 @@ class ForgotPasswordViewModel : BaseViewModel() {
                         BaseResult.Error(IllegalStateException(), response.message)
                 }
             } catch (exception: Exception) {
-                verifyMobileLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                verifyMobileLiveData.value = BaseResult.Error(exception)
             }
         }
     }
@@ -62,8 +61,7 @@ class ForgotPasswordViewModel : BaseViewModel() {
                         BaseResult.Error(IllegalStateException(), validation.second)
                 }
             } catch (exception: Exception) {
-                resetPasswordLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                resetPasswordLiveData.value = BaseResult.Error(exception)
             }
         }
     }

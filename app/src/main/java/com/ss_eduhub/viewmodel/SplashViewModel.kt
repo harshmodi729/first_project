@@ -34,8 +34,7 @@ class SplashViewModel : BaseViewModel() {
                 Constants.userProfileData = item
                 isLoginLiveData.value = BaseResult.Success(Pair(isLogin, isAlreadyVisitIntro))
             } catch (exception: Exception) {
-                isLoginLiveData.value =
-                    BaseResult.Error(IllegalStateException(), "Oops something went wrong.")
+                isLoginLiveData.value = BaseResult.Error(exception)
             }
         }
     }

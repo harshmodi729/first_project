@@ -16,6 +16,7 @@ import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.extension.isBlankOrEmpty
 import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.ForgotPasswordItem
 import com.ss_eduhub.viewmodel.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
@@ -47,7 +48,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
                     layReset.visibility = View.VISIBLE
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -59,7 +60,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
                     findNavController().navigate(R.id.action_nav_forgot_password_to_nav_sign_in)
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

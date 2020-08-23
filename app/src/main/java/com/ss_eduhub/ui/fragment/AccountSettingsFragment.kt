@@ -76,7 +76,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     mContext.finish()
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -88,7 +88,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     mContext.makeToast("Image upload successfully.")
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -111,7 +111,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     }
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -123,7 +123,7 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
                     hideChangePasswordDialog(ivDialogBg)
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

@@ -9,7 +9,7 @@ import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.PreferenceConstants
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.extension.onDialogButtonClick
 import com.ss_eduhub.viewmodel.AppSettingsViewModel
 import kotlinx.android.synthetic.main.fragment_app_settings.*
@@ -38,7 +38,7 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
                     setInitData()
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

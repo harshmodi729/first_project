@@ -32,8 +32,7 @@ class AppSettingsViewModel : BaseViewModel() {
                 )
                 preferenceLiveData.value = BaseResult.Success(appSettingsItem)
             } catch (exception: Exception) {
-                preferenceLiveData.value =
-                    BaseResult.Error(IllegalStateException(), exception.localizedMessage!!)
+                preferenceLiveData.value = BaseResult.Error(exception)
             }
         }
     }

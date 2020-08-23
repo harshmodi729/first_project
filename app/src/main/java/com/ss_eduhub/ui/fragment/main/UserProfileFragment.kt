@@ -14,7 +14,7 @@ import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.isBlankOrEmpty
 import com.ss_eduhub.extension.loadImage
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.ui.activity.ClassActivity
 import com.ss_eduhub.viewmodel.HomeViewModel
 import com.ss_eduhub.viewmodel.SearchViewModel
@@ -63,7 +63,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
                 is BaseResult.Error -> {
                     tvFavoritesLabel.visibility = View.GONE
                     rvFavorites.visibility = View.GONE
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })
@@ -79,7 +79,7 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
                         videoCategoryAdapter.addData(it.item)
                     }
                     is BaseResult.Error -> {
-                        mContext.makeToast(it.errorMessage)
+                        mContext.makeToastForServerError(it)
                     }
                 }
             })

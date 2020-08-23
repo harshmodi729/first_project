@@ -12,7 +12,7 @@ import com.ss_eduhub.R
 import com.ss_eduhub.adapter.IntroAdapter
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.SliderItem
 import com.ss_eduhub.viewmodel.SignInViewModel
 import kotlinx.android.synthetic.main.fragment_intro.*
@@ -40,7 +40,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
                     findNavController().navigate(R.id.action_nav_intro_to_nav_sign_in)
                 }
                 is BaseResult.Error -> {
-                    mContext.makeToast(it.errorMessage)
+                    mContext.makeToastForServerError(it)
                 }
             }
         })

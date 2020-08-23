@@ -18,7 +18,7 @@ import com.ss_eduhub.adapter.VideoCategoryAdapter
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
-import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.ui.activity.ClassActivity
 import com.ss_eduhub.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                         rvSearchResult.visibility = View.GONE
                     }
                     is BaseResult.Error -> {
-                        mContext.makeToast(it.errorMessage)
+                        mContext.makeToastForServerError(it)
                     }
                 }
             })
@@ -83,7 +83,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                         rvTag.visibility = View.VISIBLE
                     }
                     is BaseResult.Error -> {
-                        mContext.makeToast(it.errorMessage)
+                        mContext.makeToastForServerError(it)
                     }
                 }
             }
@@ -146,7 +146,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     is BaseResult.Error -> {
                         rvSearchResult.visibility = View.GONE
                         tvNoData.visibility = View.VISIBLE
-                        mContext.makeToast(it.errorMessage)
+                        mContext.makeToastForServerError(it)
                     }
                 }
             })
