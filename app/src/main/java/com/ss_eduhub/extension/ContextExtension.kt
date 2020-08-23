@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ss_eduhub.R
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.model.ForgotPasswordItem
@@ -196,13 +197,27 @@ fun Context.openAppSettings() {
  * This method will retrieve image url and set on given [ImageView]
  * @param imagePath url [String] of an image
  * @param imageView
+ * @param diskCacheStrategy By Default, Glide caches images with URLs as keys in the memory and disk.
+ *                          Tell Glide not to write any images to the cache with ->
+ *                          [DiskCacheStrategy.NONE]
  */
-fun Context.loadImage(imagePath: String, imageView: AppCompatImageView) {
-    Glide.with(this)
-        .load(imagePath)
-        .centerCrop()
-        .placeholder(R.drawable.ic_no_image)
-        .into(imageView)
+fun Context.loadImage(
+    imagePath: String?,
+    imageView: AppCompatImageView,
+    diskCacheStrategy: DiskCacheStrategy = DiskCacheStrategy.AUTOMATIC
+) {
+    try {
+        Glide.with(this)
+            .load(imagePath)
+            .centerCrop()
+            .fallback(R.drawable.ic_no_image)
+            .placeholder(R.drawable.ic_no_image)
+            .diskCacheStrategy(diskCacheStrategy)
+            .into(imageView)
+    } catch (exception: Exception) {
+        exception.printStackTrace()
+        imageView.setImageResource(R.drawable.ic_no_image)
+    }
 }
 
 /**

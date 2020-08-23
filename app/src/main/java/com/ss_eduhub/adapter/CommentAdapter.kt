@@ -28,7 +28,7 @@ class CommentAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US)
-        val date = sdf.parse(alComments[position].created)
+        val date = sdf.parse("2020-08-21 01:16:20")
         holder.tvCommentDateTime.text =
             SimpleDateFormat("dd-MMM-yyyy hh:mm a", Locale.US).format(date!!)
         holder.tvComment.text = alComments[position].comments

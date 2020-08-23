@@ -3,7 +3,6 @@ package com.ss_eduhub.ui.activity
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -15,37 +14,31 @@ import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector.ParametersBuilder
-import com.google.android.exoplayer2.trackselection.MappingTrackSelector.MappedTrackInfo
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector.SelectionOverride
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.ui.DefaultTrackNameProvider
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
-import com.google.android.exoplayer2.util.Assertions
 import com.google.android.exoplayer2.util.Util
-import com.google.gson.Gson
 import com.ss_eduhub.R
-import com.ss_eduhub.adapter.VideoQualityAdapter
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.makeToast
-import com.ss_eduhub.model.VideoQualityItem
 import com.ss_eduhub.model.VideosItem
+import com.ss_eduhub.widget.SSEduhubTrackSelectionView
 import kotlinx.android.synthetic.main.activity_video.*
-import kotlinx.android.synthetic.main.lay_dialog_video_quality.view.*
+import kotlinx.android.synthetic.main.lay_dialog_track_selection.view.*
 import kotlinx.android.synthetic.main.lay_video_playback_control_view.*
-import java.util.*
-import kotlin.collections.ArrayList
 
-class VideoActivity : BaseActivity() {
+class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionListener {
 
     private var playbackPosition = 0L
     private var currentWindow = 0
     private var playWhenReady = true
     private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var trackSelectorParameters: DefaultTrackSelector.Parameters
-    private var exoPlayer: ExoPlayer? = null
-    private var alVideoQualityItem = ArrayList<VideoQualityItem>()
+    private var exoPlayer: SimpleExoPlayer? = null
+    private lateinit var overrides: List<SelectionOverride>
+    private var isDisabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,84 +48,15 @@ class VideoActivity : BaseActivity() {
             val item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
             tvLessonName.text = item.videoTitle
             tvLessonDescription.text = item.videoIntro
-//            initializePlayer(item.video)
-            initializePlayer("https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8")
+            initializePlayer(item.video)
+            btnMore.setImageResource(R.drawable.ic_more_disable)
+            btnMore.isEnabled = false
         }
 
         btnBack.setOnClickListener {
             onBackPressed()
         }
         btnMore.setOnClickListener {
-            Log.d(
-                "VideoViewTag",
-                "log tracks clicked"
-            )
-            val mappedTrackInfo =
-                Assertions.checkNotNull(trackSelector.currentMappedTrackInfo)
-            val parameters: DefaultTrackSelector.Parameters = trackSelector.parameters
-
-            alVideoQualityItem = ArrayList<VideoQualityItem>()
-            for (rendererIndex in 0 until mappedTrackInfo.rendererCount) {
-                if (showTabForRenderer(mappedTrackInfo, rendererIndex)) {
-                    val trackType = mappedTrackInfo.getRendererType(rendererIndex)
-                    val trackGroupArray =
-                        mappedTrackInfo.getTrackGroups(rendererIndex)
-                    val isRendererDisabled =
-                        parameters.getRendererDisabled(rendererIndex)
-                    val selectionOverride =
-                        parameters.getSelectionOverride(rendererIndex, trackGroupArray)
-                    Log.d(
-                        "VideoViewTag",
-                        "------------------------------------------------------Track item $rendererIndex------------------------------------------------------"
-                    )
-                    Log.d(
-                        "VideoViewTag",
-                        "track type: " + trackTypeToName(trackType)
-                    )
-                    Log.d(
-                        "VideoViewTag",
-                        "track group array: " + Gson().toJson(trackGroupArray)
-                    )
-                    for (groupIndex in 0 until trackGroupArray.length) {
-                        for (trackIndex in 0 until trackGroupArray[groupIndex].length) {
-                            val trackName =
-                                DefaultTrackNameProvider(resources).getTrackName(
-                                    trackGroupArray[groupIndex].getFormat(trackIndex)
-                                )
-                            val isTrackSupported = mappedTrackInfo.getTrackSupport(
-                                rendererIndex,
-                                groupIndex,
-                                trackIndex
-                            ) == RendererCapabilities.FORMAT_HANDLED
-                            if (trackType == C.TRACK_TYPE_VIDEO) {
-                                val videoQualityItem = VideoQualityItem()
-                                videoQualityItem.trackName = trackName
-                                var list = mutableListOf<DefaultTrackSelector.SelectionOverride>()
-                                if (selectionOverride == null)
-                                    list = Collections.emptyList()
-                                else
-                                    list[0] = selectionOverride
-                                videoQualityItem.parameters = parameters
-//                                videoQualityItem.selectionOverride = list
-                                alVideoQualityItem.add(videoQualityItem)
-                            }
-                            Log.d(
-                                "VideoViewTag",
-                                "track item $groupIndex: trackName: $trackName, isTrackSupported: $isTrackSupported"
-                            )
-                        }
-                    }
-                    Log.d(
-                        "VideoViewTag",
-                        "isRendererDisabled: $isRendererDisabled"
-                    )
-                    Log.d(
-                        "VideoViewTag",
-                        "selectionOverride: " + Gson().toJson(selectionOverride)
-                    )
-                }
-            }
-
             getVideoQualityDialog()
         }
         btnFullScreen.setOnCheckedChangeListener { _, isFullScreen ->
@@ -159,7 +83,7 @@ class VideoActivity : BaseActivity() {
     private fun initializePlayer(videoUrl: String) {
         trackSelectorParameters = ParametersBuilder().build()
         trackSelector =
-            DefaultTrackSelector(AdaptiveTrackSelection.Factory(DefaultBandwidthMeter()))
+            DefaultTrackSelector(AdaptiveTrackSelection.Factory())
         trackSelector.parameters = trackSelectorParameters
         val loadControl = DefaultLoadControl()
         val renderersFactory = DefaultRenderersFactory(this)
@@ -211,13 +135,16 @@ class VideoActivity : BaseActivity() {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 when (playbackState) {
                     Player.STATE_BUFFERING -> videoView.hideController()
-                    Player.STATE_READY -> videoView.showController()
+                    Player.STATE_READY -> {
+                        videoView.showController()
+                        btnMore.setImageResource(R.drawable.ic_more)
+                        btnMore.isEnabled = true
+                    }
                     Player.STATE_ENDED -> {
                         exoPlayer!!.seekTo(0)
                         playPausePlayer(false)
                     }
                 }
-                willHaveContent(trackSelector)
             }
         })
         videoView.player = exoPlayer
@@ -226,7 +153,6 @@ class VideoActivity : BaseActivity() {
             buildMediaSource(Uri.parse(videoUrl))
         exoPlayer!!.prepare(mediaSource, true, false)
         videoView.showController()
-//        willHaveContent(trackSelector)
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {
@@ -259,75 +185,54 @@ class VideoActivity : BaseActivity() {
         exoPlayer!!.playbackState
     }
 
-    /**
-     * Returns whether a track selection dialog will have content to display if initialized with the
-     * specified [DefaultTrackSelector] in its current state.
-     */
-    private fun willHaveContent(trackSelector: DefaultTrackSelector): Boolean {
-        val mappedTrackInfo = trackSelector.currentMappedTrackInfo
-        return mappedTrackInfo != null && willHaveContent(mappedTrackInfo)
-    }
-
-    /**
-     * Returns whether a track selection dialog will have content to display if initialized with the
-     * specified [MappedTrackInfo].
-     */
-    private fun willHaveContent(mappedTrackInfo: MappedTrackInfo): Boolean {
-        for (i in 0 until mappedTrackInfo.rendererCount) {
-            if (showTabForRenderer(mappedTrackInfo, i)) {
-                return true
-            }
-        }
-        return false
-    }
-
-    private fun showTabForRenderer(
-        mappedTrackInfo: MappedTrackInfo,
-        rendererIndex: Int
-    ): Boolean {
-        val trackGroupArray = mappedTrackInfo.getTrackGroups(rendererIndex)
-        if (trackGroupArray.length == 0) {
-            return false
-        }
-        val trackType = mappedTrackInfo.getRendererType(rendererIndex)
-        return isSupportedTrackType(
-            trackType
-        )
-    }
-
-    private fun isSupportedTrackType(trackType: Int): Boolean {
-        return when (trackType) {
-            C.TRACK_TYPE_VIDEO, C.TRACK_TYPE_AUDIO, C.TRACK_TYPE_TEXT -> true
-            else -> false
-        }
-    }
-
-    private fun trackTypeToName(trackType: Int): String? {
-        return when (trackType) {
-            C.TRACK_TYPE_VIDEO -> "TRACK_TYPE_VIDEO"
-            C.TRACK_TYPE_AUDIO -> "TRACK_TYPE_AUDIO"
-            C.TRACK_TYPE_TEXT -> "TRACK_TYPE_TEXT"
-            else -> "Invalid track type"
-        }
-    }
-
     private fun getVideoQualityDialog() {
-        val dialog = AlertDialog.Builder(this, R.style.DialogStyle).create()
-        val view = View.inflate(this, R.layout.lay_dialog_video_quality, null)
-        val adapter = VideoQualityAdapter(this)
-        view.rvVideoQuality.adapter = adapter
-        adapter.addData(alVideoQualityItem)
-        adapter.onVideoQualityChecked = { selectorOverride ->
-            makeToast("Done")
+        val dialogBuilder = AlertDialog.Builder(this, R.style.DialogStyle).create()
+        val dialogView = View.inflate(this, R.layout.lay_dialog_track_selection, null)
+        dialogBuilder.setView(dialogView)
+        dialogBuilder.setCancelable(false)
+        val selectionView: SSEduhubTrackSelectionView = dialogView.trackSelectionView
+
+        val mappedTrackInfo = trackSelector.currentMappedTrackInfo
+        trackSelectorParameters = trackSelector.parameters
+        if (mappedTrackInfo != null) {
+            val trackGroupArray: TrackGroupArray = mappedTrackInfo.getTrackGroups(0)
+            val initialOverride = trackSelectorParameters.getSelectionOverride(0, trackGroupArray)
+            selectionView.init(
+                mappedTrackInfo,
+                0,
+                trackSelectorParameters.getRendererDisabled(0),
+                if (initialOverride == null) emptyList() else listOf(initialOverride),
+                this
+            )
+            dialogView.btnOkay.setOnClickListener {
+                val builder: ParametersBuilder = trackSelectorParameters.buildUpon()
+                for (rendererIndex in 0..mappedTrackInfo.rendererCount) {
+                    builder.clearSelectionOverrides(rendererIndex)
+                        .setRendererDisabled(rendererIndex, isDisabled)
+                    val overrides: List<SelectionOverride> = overrides
+                    if (overrides.isNotEmpty()) {
+                        builder.setSelectionOverride(
+                            0,
+                            mappedTrackInfo.getTrackGroups(0),
+                            overrides[0]
+                        )
+                    }
+                }
+                trackSelector.setParameters(builder)
+                dialogBuilder.dismiss()
+            }
+            dialogView.btnCancel.setOnClickListener {
+                dialogBuilder.dismiss()
+            }
+            dialogBuilder.show()
         }
-        view.btnOkay.setOnClickListener {
-            dialog.dismiss()
-        }
-        view.btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.setView(view)
-        dialog.setCancelable(false)
-        dialog.show()
+    }
+
+    override fun onTrackSelectionChanged(
+        isDisabled: Boolean,
+        overrides: MutableList<SelectionOverride>?
+    ) {
+        this.isDisabled = isDisabled
+        this.overrides = overrides!!
     }
 }

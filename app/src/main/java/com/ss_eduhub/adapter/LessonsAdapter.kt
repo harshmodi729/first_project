@@ -35,7 +35,10 @@ class LessonsAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = alVideo[position]
-        context.loadImage(item.thumbnail, holder.ivVideoThumbnail)
+        context.loadImage(
+            item.thumbnail,
+            holder.ivVideoThumbnail
+        )
         holder.tvLessonsName.text = String.format("%02d", position + 1).plus(". ${item.videoTitle}")
         holder.tvClassDetail.text = item.videoIntro
         holder.layLessonVideo.setOnClickListener {

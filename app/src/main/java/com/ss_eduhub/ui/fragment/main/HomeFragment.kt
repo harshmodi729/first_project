@@ -117,15 +117,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                         if (it.item.isNotEmpty()) {
                             rvCategories.visibility = View.VISIBLE
                             tvCategoriesLabel.visibility = View.VISIBLE
+                            btnViewMore.visibility = View.VISIBLE
                         } else {
                             rvCategories.visibility = View.GONE
                             tvCategoriesLabel.visibility = View.GONE
+                            btnViewMore.visibility = View.GONE
                         }
                     }
                     is BaseResult.Error -> {
                         mContext.makeToast(it.errorMessage)
                         tvCategoriesLabel.visibility = View.GONE
                         rvCategories.visibility = View.GONE
+                        btnViewMore.visibility = View.GONE
                     }
                 }
             })

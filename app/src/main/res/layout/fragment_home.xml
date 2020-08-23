@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/large_margin"
-                android:text="View More"
+                android:text="@string/view_more"
                 android:textAllCaps="false"
                 android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
