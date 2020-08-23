@@ -61,10 +61,8 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         }
         btnFullScreen.setOnCheckedChangeListener { _, isFullScreen ->
             exoPlayer?.let {
-                playPausePlayer(false)
                 videoView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
                 val layParams = videoView.layoutParams as ConstraintLayout.LayoutParams
-                btnBack.visibility = if (isFullScreen) View.GONE else View.VISIBLE
                 if (isFullScreen) {
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     layParams.matchConstraintPercentHeight = 1F
@@ -75,7 +73,6 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                     layParams.topMargin = resources.getDimension(R.dimen.large_margin).toInt()
                 }
                 videoView.layoutParams = layParams
-                playPausePlayer(true)
             }
         }
     }

@@ -14,6 +14,7 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.RendererCapabilities;
 import com.google.android.exoplayer2.source.TrackGroup;
 import com.google.android.exoplayer2.source.TrackGroupArray;
@@ -42,7 +43,7 @@ public class SSEduhubTrackSelectionView extends LinearLayout {
     private final SparseArray<SelectionOverride> overrides;
     private boolean allowAdaptiveSelections;
     private boolean allowMultipleOverrides;
-    private TrackNameProvider trackNameProvider;
+    private DefaultTrackNameProvider trackNameProvider;
     private CheckedTextView[][] trackViews;
     private MappedTrackInfo mappedTrackInfo;
     private int rendererIndex;
@@ -184,7 +185,7 @@ public class SSEduhubTrackSelectionView extends LinearLayout {
      *
      * @param trackNameProvider The {@link TrackNameProvider} to use.
      */
-    public void setTrackNameProvider(TrackNameProvider trackNameProvider) {
+    public void setTrackNameProvider(DefaultTrackNameProvider trackNameProvider) {
         this.trackNameProvider = Assertions.checkNotNull(trackNameProvider);
         updateViews();
     }
@@ -275,7 +276,7 @@ public class SSEduhubTrackSelectionView extends LinearLayout {
                 CheckedTextView trackView =
                         (CheckedTextView) inflater.inflate(trackViewLayoutId, this, false);
                 trackView.setBackgroundResource(selectableItemBackgroundResourceId);
-                trackView.setText(trackNameProvider.getTrackName(group.getFormat(trackIndex)));
+                trackView.setText(buildResolutionName(group.getFormat(trackIndex)));
                 trackView.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
                 if (mappedTrackInfo.getTrackSupport(rendererIndex, groupIndex, trackIndex)
                         == RendererCapabilities.FORMAT_HANDLED) {
@@ -292,6 +293,25 @@ public class SSEduhubTrackSelectionView extends LinearLayout {
         }
 
         updateViewStates();
+    }
+
+    private String buildResolutionName(Format format) {
+        int width = format.width;
+        int height = format.height;
+        if (height >= 144 && height < 240) {
+            return "144p";
+        } else if (height >= 240 && height < 360) {
+            return "240p";
+        } else if (height >= 360 && height < 480) {
+            return "360p";
+        } else if (height >= 480 && height < 720) {
+            return "720p";
+        } else if (height >= 720 && height < 1080) {
+            return "1080p";
+        } else if (height >= 1080 && height < 2160) {
+            return "4K";
+        }
+        return getContext().getString(R.string.exo_track_role_alternate);
     }
 
     private void updateViewStates() {

@@ -49,7 +49,7 @@
         <activity android:name="com.ss_eduhub.ui.activity.ClassActivity" />
         <activity
             android:name="com.ss_eduhub.ui.activity.VideoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
         <activity android:name="com.ss_eduhub.ui.activity.InstituteProfileActivity" />
         <activity android:name="com.ss_eduhub.ui.activity.PurchaseClassActivity" />
     </application>
