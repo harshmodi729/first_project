@@ -23,6 +23,7 @@ import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.makeToast
 import com.ss_eduhub.extension.makeToastForServerError
+import com.ss_eduhub.extension.ratingFormat
 import com.ss_eduhub.model.PopularClassesItem
 import com.ss_eduhub.ui.fragment.LessonFragment
 import com.ss_eduhub.ui.fragment.OverviewFragment
@@ -65,7 +66,7 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
         if (intent.extras != null) {
             item = intent.getSerializableExtra(Constants.CLASS_ITEM) as PopularClassesItem
             tvTutorName.text = item.author
-            ratingClass.rating = item.ratings.toFloat()
+            ratingClass.rating = item.ratings.ratingFormat()
             tvTotalVideos.text = item.videosCount.toString().plus(" Videos")
             tvClassDescription.text = item.shortIntro
             btnFavorite.isChecked = item.wishList == ADD_TO_WISH_LIST

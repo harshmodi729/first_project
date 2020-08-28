@@ -48,13 +48,11 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             }
         }
         searchViewModel.videoCategoryLiveData.observe(
-            viewLifecycleOwner,
-            Observer {
+            viewLifecycleOwner, {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {
                         videoCategoryAdapter.addData(it.item)
-                        rvVideoCategory.visibility = View.GONE
                         rvSearchResult.visibility = View.GONE
                     }
                     is BaseResult.Error -> {
@@ -74,16 +72,22 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             }
         }
         searchViewModel.alPopularCategoryItem.observe(
-            viewLifecycleOwner,
-            Observer {
+            viewLifecycleOwner, {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {
                         popularTagsAdapter.addData(it.item)
+                        tvNoData.visibility = View.GONE
+                        if (it.item.size == 0) {
+                            tvNoData.visibility = View.VISIBLE
+                            tvTagView.visibility = View.GONE
+                        }
                         rvTag.visibility = View.VISIBLE
                     }
                     is BaseResult.Error -> {
                         mContext.makeToastForServerError(it)
+                        tvNoData.visibility = View.VISIBLE
+                        tvTagView.visibility = View.GONE
                     }
                 }
             }
@@ -119,7 +123,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
         popularTagsAdapter.onTagItemClickListener = { item, position ->
             edSearch.setText(item)
-            rvVideoCategory.visibility = View.GONE
             tvTagView.visibility = View.GONE
             rvTag.visibility = View.GONE
 
@@ -134,6 +137,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     is BaseResult.Success -> {
                         rvSearchResult.visibility = View.VISIBLE
                         tvNoData.visibility = View.GONE
+                        if (it.item.size == 0)
+                            tvNoData.visibility = View.VISIBLE
                         tvTotalResult.visibility = View.VISIBLE
                         rvTag.visibility = View.GONE
                         tvTagView.visibility = View.GONE

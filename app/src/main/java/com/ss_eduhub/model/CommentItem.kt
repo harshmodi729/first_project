@@ -3,23 +3,40 @@ package com.ss_eduhub.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class CommentItem(
+class CommentItem : Serializable {
     @SerializedName("classes_id")
-    val classesId: Int = 0,
+    val classesId: Int = 0
+
     @SerializedName("comments")
-    val comments: String = "",
+    var comments: String = ""
+
     @SerializedName("rating_id")
-    val ratingId: Int = 0,
+    val ratingId: Int = 0
+
     @SerializedName("user_id")
-    val userId: Int = 0,
+    val userId: Int = 0
+
+    @SerializedName("user_name")
+    val userName: String = ""
+
+    @SerializedName("profile")
+    var profile: String = ""
+
     @SerializedName("created")
-    val created: String = "",
+    var created: String = ""
+
     @SerializedName("courses_id")
-    val coursesId: Int = 0,
+    val coursesId: Int = 0
+
     @SerializedName("rating")
-    val rating: Int = 0,
+    var rating: Double = 0.0
+
     @SerializedName("modified")
-    val modified: String = "",
+    val modified: String = ""
+
     @SerializedName("status")
     val status: Int = 0
-) : Serializable
+
+    var userComment = ""
+    var userRating = 0.0
+}

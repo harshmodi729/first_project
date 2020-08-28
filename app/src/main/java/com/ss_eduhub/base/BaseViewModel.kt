@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ss_eduhub.data.remote.ApiManager
+import com.ss_eduhub.data.remote.ApiServices
+import com.ss_eduhub.data.remote.DummyApiManager
 import com.ss_eduhub.extension.getPreferenceBoolean
 import com.ss_eduhub.extension.setPreferenceBoolean
-import com.ss_eduhub.remote.ApiManager
-import com.ss_eduhub.remote.ApiServices
-import com.ss_eduhub.remote.DummyApiManager
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {

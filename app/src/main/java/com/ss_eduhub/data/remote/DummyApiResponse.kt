@@ -1,4 +1,4 @@
-package com.ss_eduhub.remote
+package com.ss_eduhub.data.remote
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

@@ -88,16 +88,15 @@
             app:layout_constraintStart_toStartOf="@id/tvClassName"
             app:layout_constraintTop_toBottomOf="@id/tvClassDetail" />
 
-        <androidx.appcompat.widget.AppCompatRatingBar
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/ratingClass"
             style="?attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/xsmall_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
-            android:numStars="5"
-            android:progressDrawable="@drawable/bg_rating_bar"
-            android:rating="3.5"
+            app:mrb_progressTint="@color/colorPrimary"
+            app:mrb_secondaryProgressTint="@color/colorPrimary"
             android:stepSize="0.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvClassName"

@@ -22,12 +22,14 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.JsonParseException
+import com.google.gson.JsonSyntaxException
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
+import com.ss_eduhub.model.CommentItem
 import com.ss_eduhub.model.ForgotPasswordItem
-import com.ss_eduhub.model.SignInItem
 import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
+import kotlinx.android.synthetic.main.lay_dialog_comment_rating.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.btnCancel
 import kotlinx.android.synthetic.main.lay_dialog_empty_download.view.*
@@ -57,20 +59,21 @@ fun Context.makeToastForServerError(error: BaseResult.Error) {
             is UnknownHostException, is InterruptedIOException -> {
                 this.permissionDeniedDialog(
                     "No Internet",
-                    "Check your internet connection and try again",
+                    "Check your internet connection and try again.",
                     "Settings",
                     "Cancel"
                 )
                 onPermanentlyDeniedDialogClick = {
-                    this.openAppSettings()
+                    this.openSettings()
                 }
                 errorMessage = "No internet connection."
             }
         }
     } else if (error.exception is HttpException) {
-        errorMessage = "No internet connection."
+        errorMessage = "Oops something went wrong."
     } else if (error.exception is JSONException ||
         error.exception is JsonParseException ||
+        error.exception is JsonSyntaxException ||
         error.exception is ParseException
     ) {
         errorMessage = "Something wrong with response."
@@ -114,13 +117,10 @@ fun Context.setBlurImage(rootView: View, ivBackground: AppCompatImageView) {
  * Invoke progress dialog
  */
 var onDialogButtonClick: ((isPositive: Boolean) -> Unit)? = null
+var onDialogWithDataButtonClick: ((isPositive: Boolean, any: Any?) -> Unit)? = null
 var onChangePasswordDialogButtonClick: ((
     isPositive: Boolean,
     item: ForgotPasswordItem
-) -> Unit)? = null
-var onChangePhoneNumberButtonClick: ((
-    isPositive: Boolean,
-    item: SignInItem
 ) -> Unit)? = null
 
 fun Context.getProgressDialog(
@@ -172,6 +172,24 @@ fun Context.getProgressDialog(
         Constants.EMPTY_DOWNLOAD_DIALOG -> {
             view.btnEmptyDownload.setOnClickListener {
                 onDialogButtonClick?.invoke(true)
+            }
+        }
+        Constants.COMMENT_RATING_DIALOG -> {
+            view.tvCommentRatingLabel.text = message
+            view.ratingClass.rating = 0F
+            view.edComment.setText("")
+            val commentItem = CommentItem()
+            var rating = 0.0
+            view.ratingClass.setOnRatingChangeListener { _, value ->
+                rating = value.toDouble()
+            }
+            view.btnSubmit.setOnClickListener {
+                commentItem.userComment = view.edComment.text.toString().trim()
+                commentItem.userRating = rating
+                onDialogWithDataButtonClick?.invoke(true, commentItem)
+            }
+            view.btnCancel.setOnClickListener {
+                onDialogWithDataButtonClick?.invoke(false, null)
             }
         }
     }
@@ -235,6 +253,13 @@ fun Context.openAppSettings() {
     val uri = Uri.fromParts("package", this.packageName, null)
     intent.data = uri
     this.startActivity(intent)
+}
+
+/**
+ * This method will open device main setting screen
+ */
+fun Context.openSettings() {
+    startActivity(Intent(Settings.ACTION_SETTINGS))
 }
 
 /**

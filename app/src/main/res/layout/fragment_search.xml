@@ -66,12 +66,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:visibility="gone"
         android:paddingBottom="@dimen/small_margin"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTotalResult" />
+        app:layout_constraintTop_toBottomOf="@id/tvTotalResult"
+        tools:itemCount="3"
+        tools:listitem="@layout/lay_popular_classes_item" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTag"
@@ -83,7 +85,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTagView" />
+        app:layout_constraintTop_toBottomOf="@id/tvTagView"
+        tools:itemCount="5"
+        tools:listitem="@layout/list_item_tags" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivDialogBg"
@@ -94,13 +98,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <include
         layout="@layout/lay_no_data"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvSearchResult" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

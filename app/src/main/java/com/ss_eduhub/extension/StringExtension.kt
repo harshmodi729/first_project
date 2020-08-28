@@ -5,6 +5,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.StyleSpan
+import java.text.DecimalFormat
 
 /**
  * Method will check whether given [String] is blank or empty.
@@ -31,4 +32,8 @@ fun String.bold(word: String): SpannableStringBuilder {
         (this.indexOf(word) + word.length), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
     )
     return spannableString
+}
+
+fun Double.ratingFormat(): Float {
+    return DecimalFormat("#.#").format(this).toFloat()
 }

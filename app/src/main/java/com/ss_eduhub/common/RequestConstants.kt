@@ -13,5 +13,6 @@ class RequestConstants {
         const val GET_CATEGORY_WISE_FILTER_DATA="catData"
         const val ADD_WISH_LIST = "addWishList"
         const val GET_WISH_LIST = "getWishList"
+        const val ADD_COMMENT = "addComment"
     }
 }

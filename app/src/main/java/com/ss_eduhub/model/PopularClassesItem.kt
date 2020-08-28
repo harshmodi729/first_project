@@ -23,7 +23,7 @@ data class PopularClassesItem(
     @SerializedName("pdf")
     val pdf: ArrayList<PdfItem>,
     @SerializedName("ratings")
-    val ratings: Int = 0,
+    val ratings: Double = 0.0,
     @SerializedName("cat_id")
     val catId: Int = 0,
     @SerializedName("pdfCount")

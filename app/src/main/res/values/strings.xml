@@ -109,4 +109,6 @@
     <string name="video_quality_title">Video Quality</string>
     <string name="nothing_to_delete">Nothing to delete</string>
     <string name="there_are_no_downloaded_lessons_on_your_devices">There are no downloaded lessons on your devices.</string>
+    <string name="write_a_review">Write a review</string>
+    <string name="submit">Submit</string>
 </resources>

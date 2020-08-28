@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -21,9 +22,13 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseActivity
+import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
+import com.ss_eduhub.data.local.model.LocalVideosItem
 import com.ss_eduhub.extension.makeToast
+import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.model.VideosItem
+import com.ss_eduhub.viewmodel.VideoViewModel
 import com.ss_eduhub.widget.SSEduhubTrackSelectionView
 import kotlinx.android.synthetic.main.activity_video.*
 import kotlinx.android.synthetic.main.lay_dialog_track_selection.view.*
@@ -39,16 +44,32 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
     private var exoPlayer: SimpleExoPlayer? = null
     private lateinit var overrides: List<SelectionOverride>
     private var isDisabled: Boolean = false
+    private lateinit var videoViewModel: VideoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
+        videoViewModel = ViewModelProviders.of(this)[VideoViewModel::class.java]
+        videoViewModel.videoWatchTimeLiveData.observe(this, {
+            when (it) {
+                is BaseResult.Success -> {
+                    it.item.forEach { localVideosItem ->
+                        if (localVideosItem.videoId == 123) {
+                            exoPlayer!!.seekTo(localVideosItem.watchTime)
+                        }
+                    }
+                }
+                is BaseResult.Error -> {
+                    makeToastForServerError(it)
+                }
+            }
+        })
         if (intent.extras != null) {
             val item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
             tvLessonName.text = item.videoTitle
             tvLessonDescription.text = item.videoIntro
-            initializePlayer(item.video)
+            initializePlayer("https://anyconv.com/api/action/download/3984a382da41e2016817c837150e3242/?name=file_example_MP4_1920_18MG.m3u8")
             btnMore.setImageResource(R.drawable.ic_more_disable)
             btnMore.isEnabled = false
         }
@@ -136,10 +157,12 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                         videoView.showController()
                         btnMore.setImageResource(R.drawable.ic_more)
                         btnMore.isEnabled = true
+//                        videoViewModel.getVideoWatchTime(this@VideoActivity, 123)
                     }
                     Player.STATE_ENDED -> {
                         exoPlayer!!.seekTo(0)
-                        playPausePlayer(false)
+                        exoPlayer!!.playWhenReady = false
+                        exoPlayer!!.playbackState
                     }
                 }
             }
@@ -154,15 +177,20 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
 
     private fun buildMediaSource(uri: Uri): MediaSource {
         val userAgent = Util.getUserAgent(this, getString(R.string.app_name))
-        if (uri.lastPathSegment!!.contains("m3u8"))
-            return HlsMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
+        return if (uri.lastPathSegment!!.contains("m3u8"))
+            HlsMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
                 .createMediaSource(uri)
         else
-            return ProgressiveMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
+            ProgressiveMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
                 .createMediaSource(uri)
     }
 
     override fun onDestroy() {
+        val localVideosItem = LocalVideosItem()
+        localVideosItem.lessonId = 123
+        localVideosItem.videoId = 345
+        localVideosItem.watchTime = exoPlayer!!.currentPosition
+//        videoViewModel.saveWatchTime(this, localVideosItem)
         releasePlayer()
         super.onDestroy()
     }
@@ -175,11 +203,6 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
             exoPlayer!!.release()
             exoPlayer = null
         }
-    }
-
-    private fun playPausePlayer(isPlay: Boolean) {
-        exoPlayer!!.playWhenReady = isPlay
-        exoPlayer!!.playbackState
     }
 
     private fun getVideoQualityDialog() {

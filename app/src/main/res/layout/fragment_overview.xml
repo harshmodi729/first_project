@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layOverview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.ss_eduhub.ui.fragment.LessonFragment">
@@ -126,39 +127,32 @@
                 tools:background="@drawable/person" />
         </androidx.cardview.widget.CardView>
 
-        <!--<com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edCommentLay"
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWriteReview"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/medium_margin"
             android:layout_marginStart="@dimen/medium_margin"
-            android:hint="@string/hint_comment"
-            app:boxBackgroundColor="@color/colorBackground"
-            app:hintTextColor="@color/colorIntroDetail">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edCommentInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>-->
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edCommentInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:hint="@string/hint_comment"
-            android:inputType="text"
-            android:textSize="@dimen/small_text" />
-
+            android:text="@string/write_a_review"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/viewCommentDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="@id/tvClassOverview"
+        app:layout_constraintStart_toStartOf="@id/tvClassOverview"
+        app:layout_constraintTop_toBottomOf="@id/layComment" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
         android:layout_marginEnd="@dimen/small_margin"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/xlarge_margin"
@@ -166,6 +160,15 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layComment" />
+        app:layout_constraintTop_toBottomOf="@id/viewCommentDivider" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDialogBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ss_eduhub.R
 import com.ss_eduhub.extension.isBlankOrEmpty
 import com.ss_eduhub.extension.loadImage
+import com.ss_eduhub.extension.ratingFormat
 import com.ss_eduhub.model.PopularClassesItem
 import kotlinx.android.synthetic.main.lay_popular_classes_item.view.*
 
@@ -41,7 +42,7 @@ class PopularClassesAdapter(
         }
         holder.tvClassDetail.text = item.shortIntro
         holder.tvClassTags.text = item.catName
-        holder.ratingClass.rating = item.ratings.toFloat()
+        holder.ratingClass.rating = item.ratings.ratingFormat()
         holder.tvTotalVideos.text = "${item.videosCount}".plus(" Videos")
         holder.layClass.setOnClickListener {
             onCardClickListener?.invoke(item, position)

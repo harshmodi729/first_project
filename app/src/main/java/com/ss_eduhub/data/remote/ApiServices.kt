@@ -1,4 +1,4 @@
-package com.ss_eduhub.remote
+package com.ss_eduhub.data.remote
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
@@ -82,14 +82,22 @@ interface ApiServices {
     @POST(RequestConstants.GET_WISH_LIST)
     suspend fun getFavoriteClasses(@Field("user_id") userId: Int): ApiResponse<ArrayList<PopularClassesItem>>
 
+    @GET(RequestConstants.GET_POPULAR_TAG)
+    suspend fun getPopularTagList(): ApiResponse<ArrayList<PopularTagCategoryItem>>
+
+    @FormUrlEncoded
+    @POST(RequestConstants.ADD_COMMENT)
+    suspend fun addCommentRating(
+        @Field("user_id") userId: Int,
+        @Field("class_id") classId: Int,
+        @Field("rating") rating: Double,
+        @Field("comments") comments: String
+    ): JsonObject
+
     @GET("e12782f8-224c-48f5-b63e-0ed640272462")
     suspend fun getYourClasses()
             : ApiResponse<ArrayList<PopularClassItem>>
 
     @GET("8aa3d6ee-bb06-46ea-8614-1f49846ce2de")
     suspend fun getVideoCategory(): DummyApiResponse<ArrayList<VideoCategoryItem>>
-
-    @GET(RequestConstants.GET_POPULAR_TAG)
-    suspend fun getPopularTagList(): ApiResponse<ArrayList<PopularTagCategoryItem>>
-
 }
