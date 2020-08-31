@@ -111,4 +111,7 @@
     <string name="there_are_no_downloaded_lessons_on_your_devices">There are no downloaded lessons on your devices.</string>
     <string name="write_a_review">Write a review</string>
     <string name="submit">Submit</string>
+    <string name="download_over_cellular_network_data_charges_may_apply">Download over cellular network data charges may apply.</string>
+    <string name="done">Done</string>
+    <string name="please_turn_on_wifi_or_enable_usage_over_cellular_network_from_setting">Please turn on WiFi or enable usage over cellular network from Setting.</string>
 </resources>

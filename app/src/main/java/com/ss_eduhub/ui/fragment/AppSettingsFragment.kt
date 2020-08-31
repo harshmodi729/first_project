@@ -11,6 +11,7 @@ import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.PreferenceConstants
 import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.extension.onDialogButtonClick
+import com.ss_eduhub.extension.onDialogWithDataButtonClick
 import com.ss_eduhub.viewmodel.AppSettingsViewModel
 import kotlinx.android.synthetic.main.fragment_app_settings.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
@@ -50,6 +51,9 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
             appSettingsViewModel.setBoolean(
                 mContext, PreferenceConstants.IS_CELLULAR_DATA_ON, isCellularDataOn
             )
+            if (isChecked) {
+                showCellularDataConfirmationDialog(layAppSettings, ivDialogBg)
+            }
         }
         btnStandardQuality.setOnClickListener(this)
         btnHighDefinition.setOnClickListener(this)
@@ -58,6 +62,14 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
 
         onDialogButtonClick = { _ ->
             hideEmptyDownloadDialog(ivDialogBg)
+        }
+        onDialogWithDataButtonClick = { isPositive, _ ->
+            isCellularDataOn = isPositive
+            appSettingsViewModel.setBoolean(
+                mContext, PreferenceConstants.IS_CELLULAR_DATA_ON, isCellularDataOn
+            )
+            swCellular.isChecked = isCellularDataOn
+            hideCellularDataConfirmationDialog(ivDialogBg)
         }
     }
 

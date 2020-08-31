@@ -20,6 +20,7 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
     private var successDialog: AlertDialog? = null
     private var changePasswordDialog: AlertDialog? = null
     private var logoutDialog: AlertDialog? = null
+    private var cellularDataConfirmationDialog: AlertDialog? = null
     private var emptyDownloadDialog: AlertDialog? = null
 
     override fun onCreateView(
@@ -41,6 +42,10 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         emptyDownloadDialog = mContext.getProgressDialog(
             R.layout.lay_dialog_empty_download,
             dialogType = Constants.EMPTY_DOWNLOAD_DIALOG
+        )
+        cellularDataConfirmationDialog = mContext.getProgressDialog(
+            R.layout.lay_dialog_cellular_data_confirmation,
+            dialogType = Constants.CELLULAR_DATA_CONFIRMATION_DIALOG
         )
 
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -77,23 +82,6 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         if (successDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
             successDialog?.dismiss()
-        }
-    }
-
-    fun showDeleteDialog(
-        rootView: View,
-        ivDialogBg: AppCompatImageView
-    ) {
-        if (!successDialog?.isShowing!!) {
-            mContext.setBlurImage(rootView, ivDialogBg)
-            successDialog?.show()
-        }
-    }
-
-    fun hideDeleteDialog(ivDialogBg: AppCompatImageView) {
-        if (changePasswordDialog?.isShowing!!) {
-            ivDialogBg.visibility = View.GONE
-            changePasswordDialog?.dismiss()
         }
     }
 
@@ -145,6 +133,23 @@ abstract class BaseFragment(layResourceId: Int) : Fragment(layResourceId) {
         if (emptyDownloadDialog?.isShowing!!) {
             ivDialogBg.visibility = View.GONE
             emptyDownloadDialog?.dismiss()
+        }
+    }
+
+    fun showCellularDataConfirmationDialog(
+        rootView: View,
+        ivDialogBg: AppCompatImageView
+    ) {
+        if (!cellularDataConfirmationDialog?.isShowing!!) {
+            mContext.setBlurImage(rootView, ivDialogBg)
+            cellularDataConfirmationDialog?.show()
+        }
+    }
+
+    fun hideCellularDataConfirmationDialog(ivDialogBg: AppCompatImageView) {
+        if (cellularDataConfirmationDialog?.isShowing!!) {
+            ivDialogBg.visibility = View.GONE
+            cellularDataConfirmationDialog?.dismiss()
         }
     }
 }

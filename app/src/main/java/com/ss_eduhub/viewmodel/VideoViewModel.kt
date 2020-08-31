@@ -15,6 +15,7 @@ class VideoViewModel : BaseViewModel() {
 
     val addWishListLiveData = MutableLiveData<BaseResult<String>>()
     val addCommentRatingLiveData = MutableLiveData<BaseResult<String>>()
+    val addDownloadVideoLiveData = MutableLiveData<BaseResult<String>>()
     val videoWatchTimeLiveData = MutableLiveData<BaseResult<List<LocalVideosItem>>>()
 
     fun addToWishList(classId: Int, isAdd: Int) {
@@ -64,6 +65,28 @@ class VideoViewModel : BaseViewModel() {
                 }
             } catch (exception: Exception) {
                 addCommentRatingLiveData.value = BaseResult.Error(IllegalStateException(exception))
+            }
+        }
+    }
+
+    fun addDownloadVideo(videoId: Int, status: Int) {
+        viewModelScope.launch {
+            try {
+                val response =
+                    getApiServiceManager().addDownloadList(
+                        Constants.userProfileData.id,
+                        videoId,
+                        status
+                    )
+                if (response["response"].asBoolean) {
+                    addDownloadVideoLiveData.value =
+                        BaseResult.Success(response["msg"].asString)
+                } else {
+                    addDownloadVideoLiveData.value =
+                        BaseResult.Error(IllegalStateException(), response["msg"].asString)
+                }
+            } catch (exception: Exception) {
+                addDownloadVideoLiveData.value = BaseResult.Error(exception)
             }
         }
     }

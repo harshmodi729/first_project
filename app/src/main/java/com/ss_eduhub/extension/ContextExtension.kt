@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.ParseException
 import android.net.Uri
 import android.os.Build
@@ -28,6 +30,7 @@ import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.model.CommentItem
 import com.ss_eduhub.model.ForgotPasswordItem
+import kotlinx.android.synthetic.main.lay_dialog_cellular_data_confirmation.view.*
 import kotlinx.android.synthetic.main.lay_dialog_change_password.view.*
 import kotlinx.android.synthetic.main.lay_dialog_comment_rating.view.*
 import kotlinx.android.synthetic.main.lay_dialog_delete.view.*
@@ -192,6 +195,14 @@ fun Context.getProgressDialog(
                 onDialogWithDataButtonClick?.invoke(false, null)
             }
         }
+        Constants.CELLULAR_DATA_CONFIRMATION_DIALOG -> {
+            view.btnDone.setOnClickListener {
+                onDialogWithDataButtonClick?.invoke(true, null)
+            }
+            view.btnCancel.setOnClickListener {
+                onDialogWithDataButtonClick?.invoke(false, null)
+            }
+        }
     }
     dialog.setView(view)
     dialog.setCancelable(false)
@@ -303,4 +314,22 @@ fun Context.convertPixelsToDp(px: Float): Float {
 fun Context.convertDpToPixel(dp: Float): Float {
     return dp * (this.resources
         .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+fun Context.isWiFiConnected(): Boolean {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val activeNetwork = connectivityManager.activeNetwork
+        if (activeNetwork != null) {
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+            networkCapabilities!!.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        } else false
+    } else {
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        if (activeNetwork != null) {
+            // connected to the internet
+            activeNetwork.type == ConnectivityManager.TYPE_WIFI
+        } else false
+    }
 }

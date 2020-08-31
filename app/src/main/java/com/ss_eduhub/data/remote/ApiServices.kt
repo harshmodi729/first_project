@@ -94,6 +94,15 @@ interface ApiServices {
         @Field("comments") comments: String
     ): JsonObject
 
+    @FormUrlEncoded
+    @POST(RequestConstants.ADD_DOWNLOAD_LIST)
+    suspend fun addDownloadList(
+        @Field("user_id") userId: Int,
+        @Field("video") videoId: Int,
+        @Field("status") status: Int,
+        @Field("pdf") pdfId: Int = 0
+    ): JsonObject
+
     @GET("e12782f8-224c-48f5-b63e-0ed640272462")
     suspend fun getYourClasses()
             : ApiResponse<ArrayList<PopularClassItem>>

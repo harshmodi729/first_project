@@ -2,6 +2,7 @@ package com.ss_eduhub.common
 
 import com.ss_eduhub.model.PopularTagCategoryItem
 import com.ss_eduhub.model.SignInItem
+import com.ss_eduhub.model.VideosItem
 
 class Constants {
     companion object {
@@ -13,9 +14,11 @@ class Constants {
         const val LOGOUT_DIALOG = "logout_dialog"
         const val EMPTY_DOWNLOAD_DIALOG = "empty_download_dialog"
         const val COMMENT_RATING_DIALOG = "comment_rating_dialog"
+        const val CELLULAR_DATA_CONFIRMATION_DIALOG = "cellular_data_confirmation_dialog"
         const val CLASS_ITEM = "class_item"
         const val VIDEO_ITEM = "video_item"
         const val INSTITUTE_NAME = "institute_name"
+        val downloadingItem = HashMap<Long, VideosItem>()
         var userProfileData = SignInItem()
         var categoryId = PopularTagCategoryItem()
     }

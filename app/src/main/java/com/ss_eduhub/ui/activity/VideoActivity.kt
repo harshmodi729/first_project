@@ -1,11 +1,24 @@
 package com.ss_eduhub.ui.activity
 
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.MediaSource
@@ -24,18 +37,24 @@ import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
+import com.ss_eduhub.common.PreferenceConstants
 import com.ss_eduhub.data.local.model.LocalVideosItem
+import com.ss_eduhub.extension.isWiFiConnected
 import com.ss_eduhub.extension.makeToast
 import com.ss_eduhub.extension.makeToastForServerError
+import com.ss_eduhub.extension.permissionDeniedDialog
 import com.ss_eduhub.model.VideosItem
 import com.ss_eduhub.viewmodel.VideoViewModel
 import com.ss_eduhub.widget.SSEduhubTrackSelectionView
 import kotlinx.android.synthetic.main.activity_video.*
 import kotlinx.android.synthetic.main.lay_dialog_track_selection.view.*
+import kotlinx.android.synthetic.main.lay_dialog_turn_on_wifi.view.*
 import kotlinx.android.synthetic.main.lay_video_playback_control_view.*
+import java.io.File
 
 class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionListener {
 
+    private lateinit var item: VideosItem
     private var playbackPosition = 0L
     private var currentWindow = 0
     private var playWhenReady = true
@@ -45,6 +64,31 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
     private lateinit var overrides: List<SelectionOverride>
     private var isDisabled: Boolean = false
     private lateinit var videoViewModel: VideoViewModel
+    private lateinit var downloadManager: DownloadManager
+    private var filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+    private var downloadReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            if (id == -1L) return
+
+            if (Constants.downloadingItem.containsKey(id)) {
+                val item = Constants.downloadingItem[id]
+                val cursor: Cursor =
+                    downloadManager.query(DownloadManager.Query().setFilterById(id))
+                if (cursor.moveToFirst()) {
+                    val status: Int =
+                        cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        videoViewModel.addDownloadVideo(item!!.videoId, 1)
+                    }
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val PERMISSION_REQUEST = 1003
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,11 +109,21 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                 }
             }
         })
+        videoViewModel.addDownloadVideoLiveData.observe(this, {
+            when (it) {
+                is BaseResult.Success -> {
+                    Log.d("DownloadVideo", it.item)
+                }
+                is BaseResult.Error -> {
+                    Log.d("DownloadVideo", "${it.errorMessage}")
+                }
+            }
+        })
         if (intent.extras != null) {
-            val item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
+            item = intent.getSerializableExtra(Constants.VIDEO_ITEM) as VideosItem
             tvLessonName.text = item.videoTitle
             tvLessonDescription.text = item.videoIntro
-            initializePlayer("https://anyconv.com/api/action/download/3984a382da41e2016817c837150e3242/?name=file_example_MP4_1920_18MG.m3u8")
+            initializePlayer(item.video)
             btnMore.setImageResource(R.drawable.ic_more_disable)
             btnMore.isEnabled = false
         }
@@ -79,6 +133,29 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         }
         btnMore.setOnClickListener {
             getVideoQualityDialog()
+        }
+        btnDownload.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkPermissions()) {
+                    if (!videoViewModel.getBoolean(this, PreferenceConstants.IS_CELLULAR_DATA_ON)) {
+                        if (!isWiFiConnected()) showTurnOnWiFiDialog()
+                        else downloadVideo(item.video)
+                    } else {
+                        makeToast("Video downloading over cellular network.")
+                        downloadVideo(item.video)
+                    }
+                } else {
+                    requestPermission()
+                }
+            } else {
+                if (!videoViewModel.getBoolean(this, PreferenceConstants.IS_CELLULAR_DATA_ON)) {
+                    if (!isWiFiConnected()) showTurnOnWiFiDialog()
+                    else downloadVideo(item.video)
+                } else {
+                    makeToast("Video downloading over cellular network.")
+                    downloadVideo(item.video)
+                }
+            }
         }
         btnFullScreen.setOnCheckedChangeListener { _, isFullScreen ->
             exoPlayer?.let {
@@ -96,6 +173,43 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                 videoView.layoutParams = layParams
             }
         }
+
+        registerReceiver(downloadReceiver, filter)
+    }
+
+    private fun showTurnOnWiFiDialog() {
+        val turnOnWiFiDialog = AlertDialog.Builder(this, R.style.DialogStyle).create()
+        val view = View.inflate(this, R.layout.lay_dialog_turn_on_wifi, null)
+        turnOnWiFiDialog.setView(view)
+        view.btnTurnOnWiFiOkay.setOnClickListener {
+            turnOnWiFiDialog.dismiss()
+        }
+        turnOnWiFiDialog.show()
+    }
+
+    private fun downloadVideo(videoUrl: String) {
+        val uri = Uri.parse(videoUrl)
+        downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val request = DownloadManager.Request(uri)
+        request.setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_MOBILE or
+                    DownloadManager.Request.NETWORK_WIFI
+        )
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setTitle(item.videoTitle)
+        val file =
+            File(
+                Environment.getExternalStorageDirectory().toString() + File.separator
+                        + getString(R.string.app_name) + File.separator + "Video"
+            )
+        if (!file.mkdirs()) {
+            file.mkdirs()
+        }
+        request.setDestinationInExternalPublicDir(file.absolutePath, uri.lastPathSegment)
+        request.setVisibleInDownloadsUi(true)
+
+        val downloadId = downloadManager.enqueue(request)
+        Constants.downloadingItem[downloadId] = item
     }
 
     private fun initializePlayer(videoUrl: String) {
@@ -192,6 +306,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         localVideosItem.watchTime = exoPlayer!!.currentPosition
 //        videoViewModel.saveWatchTime(this, localVideosItem)
         releasePlayer()
+        unregisterReceiver(downloadReceiver)
         super.onDestroy()
     }
 
@@ -254,5 +369,66 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
     ) {
         this.isDisabled = isDisabled
         this.overrides = overrides!!
+    }
+
+    private fun checkPermissions(): Boolean {
+        val writeStorage = ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        return writeStorage == PackageManager.PERMISSION_GRANTED
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ),
+            PERMISSION_REQUEST
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST && grantResults.isNotEmpty()) {
+            val storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+            if (storageAccepted) {
+                if (!videoViewModel.getBoolean(this, PreferenceConstants.IS_CELLULAR_DATA_ON)) {
+                    if (!isWiFiConnected()) showTurnOnWiFiDialog()
+                    else downloadVideo(item.video)
+                } else {
+                    makeToast("Video downloading over cellular network.")
+                    downloadVideo(item.video)
+                }
+                return
+            }
+            if (!storageAccepted) {
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                ) {
+                    permissionDeniedDialog(
+                        "Permission Denied",
+                        "From application settings in permissions block set Storage permission ON. Press \"Settings\" and allow the permission.",
+                        "Settings",
+                        "Cancel"
+                    )
+                } else {
+                    permissionDeniedDialog(
+                        "Permission Denied",
+                        "To download the video please allow the permission. Press \"Retry\" and allow the permission.",
+                        "Retry",
+                        "Cancel"
+                    )
+                }
+            }
+        }
     }
 }
