@@ -8,16 +8,59 @@
     tools:context="com.ss_eduhub.ui.fragment.startup.WelcomeTextFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtPowerName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/welcome_text"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/welcome_text"
-        android:textStyle="normal"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/etude"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtTagline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tagline"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toBottomOf="@id/imgLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSponserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sponsertext"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

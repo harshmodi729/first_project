@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SS EduHub</string>
-    <string name="welcome_text">Welcome!</string>
+    <string name="welcome_text">Powered By</string>
+    <string name="tagline">Your Learning Mate</string>
+    <string name="sponsertext">-Hexabex Technologies</string>
     <string name="skip">Skip</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
