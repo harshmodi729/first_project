@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1006351016593",
+    "firebase_url": "https://sseduhub-43862.firebaseio.com",
+    "project_id": "sseduhub-43862",
+    "storage_bucket": "sseduhub-43862.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006351016593:android:7b24f2c0070f6dffced530",
+        "android_client_info": {
+          "package_name": "com.ss_eduhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006351016593-0s66oanh865c914bnlh70gai16r44l1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdBbcJcXOcAzsrRqjJZednPVHoO-8owJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006351016593-0s66oanh865c914bnlh70gai16r44l1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
