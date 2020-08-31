@@ -20,7 +20,7 @@ class ApiManager {
         fun getApiServices(): ApiServices {
             if (apiServices == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://educationalhub.net.in/edupi/api/")
+                    .baseUrl("https://osmml.com/eduhub/api/")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(
                         GsonConverterFactory.create(

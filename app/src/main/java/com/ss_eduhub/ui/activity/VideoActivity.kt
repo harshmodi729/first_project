@@ -79,6 +79,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                     val status: Int =
                         cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
                     if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        Constants.downloadingItem.remove(id)
                         videoViewModel.addDownloadVideo(item!!.videoId, 1)
                     }
                 }
@@ -188,6 +189,10 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
     }
 
     private fun downloadVideo(videoUrl: String) {
+        Constants.downloadingItem.values.map {
+            if (it.videoId == item.videoId)
+                return
+        }
         val uri = Uri.parse(videoUrl)
         downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val request = DownloadManager.Request(uri)
