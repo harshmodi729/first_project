@@ -127,6 +127,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
             initializePlayer(item.video)
             btnMore.setImageResource(R.drawable.ic_more_disable)
             btnMore.isEnabled = false
+            btnDownload.visibility = if (Constants.isPurchased) View.VISIBLE else View.GONE
         }
 
         btnBack.setOnClickListener {

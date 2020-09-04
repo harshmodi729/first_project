@@ -70,6 +70,8 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
             tvTotalVideos.text = item.videosCount.toString().plus(" Videos")
             tvClassDescription.text = item.shortIntro
             btnFavorite.isChecked = item.wishList == ADD_TO_WISH_LIST
+            Constants.isPurchased = item.isPurchased
+            tvPurchased.visibility = if (Constants.isPurchased) View.VISIBLE else View.GONE
         }
         btnFavorite.setOnCheckedChangeListener(this)
         val adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
