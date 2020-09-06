@@ -145,6 +145,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         btnViewMore.setOnClickListener {
             onViewMoreTagClickListener.onViewMoreTagClick()
         }
+        categoriesAdapter.onCategoryClick = {
+            onViewMoreTagClickListener.onViewMoreTagClick()
+        }
     }
 
     override fun onResume() {

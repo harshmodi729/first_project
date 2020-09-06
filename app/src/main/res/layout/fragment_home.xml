@@ -130,23 +130,34 @@
                 app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
                 app:layout_constraintTop_toBottomOf="@id/rvPopularClasses" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCategories"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/small_margin"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingStart="@dimen/large_margin"
-                android:paddingEnd="@dimen/large_margin"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintTop_toBottomOf="@id/tvCategoriesLabel"
-                app:spanCount="2"
-                tools:itemCount="4"
+                android:layout_marginEnd="@dimen/large_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/lay_categories_home" />
+                app:layout_constraintTop_toBottomOf="@id/tvCategoriesLabel">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/xsmall_margin"
+                    android:paddingEnd="@dimen/xsmall_margin"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCategoriesLabel"
+                    app:spanCount="2"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/lay_categories_home" />
+            </androidx.cardview.widget.CardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnViewMore"
@@ -160,7 +171,7 @@
                 android:textColor="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvCategories" />
+                app:layout_constraintTop_toBottomOf="@id/cvCategories" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.lay_categories_home.view.*
 class HomeCategoryAdapter(private val context: Context) :
     RecyclerView.Adapter<HomeCategoryAdapter.ViewHolder>() {
 
+    var onCategoryClick: (() -> Unit)? = null
+
     private var alCategories = ArrayList<PopularTagCategoryItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(context).inflate(
@@ -24,6 +26,9 @@ class HomeCategoryAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvCategory.text = alCategories[position].categoryName
+        holder.tvCategory.setOnClickListener {
+            onCategoryClick?.invoke()
+        }
     }
 
     fun addData(alCategories: ArrayList<PopularTagCategoryItem>) {
