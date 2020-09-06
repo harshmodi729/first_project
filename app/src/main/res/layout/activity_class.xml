@@ -41,7 +41,7 @@
                     android:background="@drawable/bg_gradient"
                     app:layout_constraintBottom_toBottomOf="@id/ivClass"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintHeight_percent="0.55"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -52,7 +52,7 @@
                     android:ellipsize="end"
                     android:maxWidth="250dp"
                     android:maxLines="1"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
                     android:textSize="@dimen/large_text"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/ratingClass"
@@ -71,7 +71,7 @@
                     android:background="@drawable/bg_rounded_purchased"
                     android:padding="@dimen/xsmall_margin"
                     android:text="@string/purchased"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
                     android:textSize="@dimen/xxsmall_text"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvTutorName"
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/medium_margin"
-                    android:textColor="#8399E8"
+                    android:textColor="#35488C"
                     android:textSize="@dimen/xsmall_text"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/ratingClass"
