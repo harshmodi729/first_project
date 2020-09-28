@@ -3,10 +3,7 @@ package com.ss_eduhub.ui.fragment.startup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -68,23 +65,31 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
         btnToolbarBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        edPhone.setOnEditorActionListener(object : TextView.OnEditorActionListener {
-            override fun onEditorAction(
-                textview: TextView?,
-                actioId: Int,
-                keyEvent: KeyEvent?
-            ): Boolean {
-                if (!edPhone.text.toString().isBlankOrEmpty()) {
-                    if (actioId == EditorInfo.IME_ACTION_DONE) {
-                        forgotPasswordViewModel.verifyMobileNumber(edPhone.text.toString()).apply {
-                            showProgressDialog(layForgotPassword, ivDialogBg)
-                        }
-                        return true
-                    }
-                } else mContext.makeToast("Please enter valid phone number.")
-                return false
-            }
-        })
+//        edPhone.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+//            override fun onEditorAction(
+//                textview: TextView?,
+//                actioId: Int,
+//                keyEvent: KeyEvent?
+//            ): Boolean {
+//                if (!edPhone.text.toString().isBlankOrEmpty()) {
+//                    if (actioId == EditorInfo.IME_ACTION_DONE) {
+//                        forgotPasswordViewModel.verifyMobileNumber(edPhone.text.toString()).apply {
+//                            showProgressDialog(layForgotPassword, ivDialogBg)
+//                        }
+//                        return true
+//                    }
+//                } else mContext.makeToast("Please enter valid phone number.")
+//                return false
+//            }
+//        })
+        btnSubmitNumber.setOnClickListener {
+            if (!edPhone.text.toString().isBlankOrEmpty()) {
+                forgotPasswordViewModel.verifyMobileNumber(edPhone.text.toString()).apply {
+                    showProgressDialog(layForgotPassword, ivDialogBg)
+                }
+            } else mContext.makeToast("Please enter valid phone number.")
+        }
+
         edOldPassword.addTextChangedListener(this)
         edNewPassword.addTextChangedListener(this)
         btnResetPassword.setOnClickListener {
