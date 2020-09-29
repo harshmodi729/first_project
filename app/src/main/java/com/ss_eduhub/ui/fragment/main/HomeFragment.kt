@@ -36,13 +36,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private var homeSliderHandler = Handler()
     private val alSliderItem = ArrayList<SliderItem>()
     private var dots = ArrayList<TextView>()
-    private val titles =
-        arrayOf("Shonda Rhimes", "Gordon Ramsay", "Bear Grylls")
-    private val details = arrayOf(
-        "Shonda describes what fuels her passion.",
-        "Mr. Ramsay teach how to make tastiest cakes.",
-        "Bear Grylls shows how to survive in desert."
-    )
     private lateinit var onViewMoreTagClickListener: OnViewMoreClickListener
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -184,17 +177,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             homePager.currentItem = 0
         else
             homePager.currentItem = homePager.currentItem + 1
-    }
-
-    private fun getSliderItem(): ArrayList<SliderItem> {
-        alSliderItem.clear()
-        for (i in 0..2) {
-            val sliderItem = SliderItem()
-            sliderItem.title = titles[i]
-            sliderItem.detail = details[i]
-            alSliderItem.add(sliderItem)
-        }
-        return alSliderItem
     }
 
     private fun indicatorDots(position: Int) {
