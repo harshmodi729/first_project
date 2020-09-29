@@ -105,7 +105,8 @@
                 android:textSize="@dimen/medium_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
-                app:layout_constraintTop_toBottomOf="@id/layHomePager" />
+                app:layout_constraintTop_toBottomOf="@id/layHomePager"
+                app:layout_goneMarginStart="@dimen/large_margin" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPopularClasses"
@@ -128,7 +129,8 @@
                 android:textSize="@dimen/medium_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/tvNewestClassesLabel"
-                app:layout_constraintTop_toBottomOf="@id/rvPopularClasses" />
+                app:layout_constraintTop_toBottomOf="@id/rvPopularClasses"
+                app:layout_goneMarginStart="@dimen/large_margin" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvCategories"

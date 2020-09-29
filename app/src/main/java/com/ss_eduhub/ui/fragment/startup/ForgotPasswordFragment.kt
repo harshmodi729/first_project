@@ -84,9 +84,10 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
 //        })
         btnSubmitNumber.setOnClickListener {
             if (!edPhone.text.toString().isBlankOrEmpty()) {
-                forgotPasswordViewModel.verifyMobileNumber(edPhone.text.toString()).apply {
-                    showProgressDialog(layForgotPassword, ivDialogBg)
-                }
+                forgotPasswordViewModel.verifyMobileNumber(mContext, edPhone.text.toString())
+                    .apply {
+                        showProgressDialog(layForgotPassword, ivDialogBg)
+                    }
             } else mContext.makeToast("Please enter valid phone number.")
         }
 

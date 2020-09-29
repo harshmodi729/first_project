@@ -8,7 +8,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ss_eduhub.R
@@ -18,6 +17,7 @@ import com.ss_eduhub.adapter.VideoCategoryAdapter
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.common.Constants
+import com.ss_eduhub.extension.hideKeyboard
 import com.ss_eduhub.extension.makeToastForServerError
 import com.ss_eduhub.ui.activity.ClassActivity
 import com.ss_eduhub.viewmodel.SearchViewModel
@@ -93,10 +93,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             }
         )
 
-        val cooking = resources.getStringArray(R.array.cooking_array)
-        val adapter =
-            activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, cooking) }
-        edSearch.setAdapter(adapter)
         edSearch.setDropDownBackgroundDrawable(
             ContextCompat.getDrawable(
                 mContext,
@@ -107,10 +103,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             override fun onEditorAction(
                 textView: TextView,
                 actionId: Int,
-                event: KeyEvent
+                event: KeyEvent?
             ): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-
+                    mContext.hideKeyboard(edSearch)
                     return true
                 }
                 return false
@@ -131,7 +127,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     showProgressDialog(laySearch, ivDialogBg)
                 }
             }
-            searchViewModel.alCategoryWiseFilterItem.observe(viewLifecycleOwner, Observer {
+            searchViewModel.alCategoryWiseFilterItem.observe(viewLifecycleOwner, {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {
@@ -142,11 +138,23 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                         tvTotalResult.visibility = View.VISIBLE
                         rvTag.visibility = View.GONE
                         tvTagView.visibility = View.GONE
+
+                        val data = it.item
+                        val adapter =
+                            activity?.let { fragmentActivity ->
+                                ArrayAdapter(
+                                    fragmentActivity,
+                                    android.R.layout.simple_list_item_1,
+                                    data
+                                )
+                            }
+                        edSearch.setAdapter(adapter)
+
                         tvTotalResult.text = String.format(
                             mContext.getString(R.string.search_result_text),
                             it.item.size.toString()
                         )
-                        popularClassesAdapter.addData(it.item)
+                        popularClassesAdapter.addData(data)
                     }
                     is BaseResult.Error -> {
                         rvSearchResult.visibility = View.GONE

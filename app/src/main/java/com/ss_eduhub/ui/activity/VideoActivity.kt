@@ -161,16 +161,23 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         }
         btnFullScreen.setOnCheckedChangeListener { _, isFullScreen ->
             exoPlayer?.let {
-                videoView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                videoView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 val layParams = videoView.layoutParams as ConstraintLayout.LayoutParams
                 if (isFullScreen) {
+                    window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_IMMERSIVE
+                            or View.SYSTEM_UI_FLAG_FULLSCREEN)
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     layParams.matchConstraintPercentHeight = 1F
-                    layParams.topMargin = 0
                 } else {
+                    window.decorView.systemUiVisibility = (
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            )
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                     layParams.matchConstraintPercentHeight = 0.3F
-                    layParams.topMargin = resources.getDimension(R.dimen.large_margin).toInt()
                 }
                 videoView.layoutParams = layParams
             }

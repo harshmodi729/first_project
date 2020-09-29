@@ -6,7 +6,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +51,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         btnToolbarBack.visibility = View.GONE
         tvToolbarTitle.text = getString(R.string.home)
 
-        homeSliderAdapter = HomeSliderAdapter(mContext, getSliderItem())
+        homeSliderAdapter = HomeSliderAdapter(mContext)
         homePager.adapter = homeSliderAdapter
         homePager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -83,10 +82,30 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
         layHome.post {
             showProgressDialog(layHome, ivDialogBg)
+            homeViewModel.getBanners()
             homeViewModel.getPopularClasses()
             searchViewModel.getPopularCategoryList()
         }
-        homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, Observer {
+        homeViewModel.bannersLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is BaseResult.Success -> {
+                    homeSliderAdapter.addData(it.item)
+                    if (it.item.isNotEmpty()) {
+                        tvNewestClassesLabel.visibility = View.VISIBLE
+                        layHomePager.visibility = View.VISIBLE
+                    } else {
+                        tvNewestClassesLabel.visibility = View.GONE
+                        layHomePager.visibility = View.GONE
+                    }
+                }
+                is BaseResult.Error -> {
+                    tvNewestClassesLabel.visibility = View.GONE
+                    layHomePager.visibility = View.GONE
+                    mContext.makeToastForServerError(it)
+                }
+            }
+        })
+        homeViewModel.popularClassesLiveData.observe(viewLifecycleOwner, {
             hideProgressDialog(ivDialogBg)
             when (it) {
                 is BaseResult.Success -> {
@@ -108,7 +127,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         })
         searchViewModel.alPopularCategoryItem.observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 hideProgressDialog(ivDialogBg)
                 when (it) {
                     is BaseResult.Success -> {

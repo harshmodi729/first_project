@@ -59,6 +59,9 @@ interface ApiServices {
         @Field("password") password: String
     ): ApiResponse<JsonObject>
 
+    @GET(RequestConstants.GET_BANNERS)
+    suspend fun getBanners(@Query("user_id") userId: Int): ApiResponse<ArrayList<SliderItem>>
+
     @FormUrlEncoded
     @POST(RequestConstants.GET_POPULAR_CLASS_DATA)
     suspend fun getPopularClasses(@Field("user_id") userId: Int): ApiResponse<ArrayList<PopularClassesItem>>

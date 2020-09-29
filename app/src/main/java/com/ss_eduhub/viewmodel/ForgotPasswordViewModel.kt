@@ -8,6 +8,7 @@ import com.ss_eduhub.base.BaseViewModel
 import com.ss_eduhub.common.PreferenceConstants
 import com.ss_eduhub.extension.getPreferenceInt
 import com.ss_eduhub.extension.isBlankOrEmpty
+import com.ss_eduhub.extension.setPreferenceInt
 import com.ss_eduhub.model.ForgotPasswordItem
 import kotlinx.coroutines.launch
 
@@ -17,12 +18,21 @@ class ForgotPasswordViewModel : BaseViewModel() {
     val verifyMobileLiveData = MutableLiveData<BaseResult<String>>()
     val resetPasswordLiveData = MutableLiveData<BaseResult<String>>()
 
-    fun verifyMobileNumber(mobile: String) {
+    fun verifyMobileNumber(context: Context, mobile: String) {
         viewModelScope.launch {
             try {
                 val response = getApiServiceManager().forgotPassword(mobile)
                 if (response.success) {
-                    verifyMobileLiveData.value = BaseResult.Success(response.message)
+                    response.data?.let {
+                        getPreferenceManager(context).setPreferenceInt(
+                            PreferenceConstants.USER_ID,
+                            it[0].asJsonObject["id"].asInt
+                        )
+                        verifyMobileLiveData.value = BaseResult.Success(response.message)
+                    } ?: kotlin.run {
+                        verifyMobileLiveData.value =
+                            BaseResult.Error(IllegalStateException(), response.message)
+                    }
                 } else {
                     verifyMobileLiveData.value =
                         BaseResult.Error(IllegalStateException(), response.message)

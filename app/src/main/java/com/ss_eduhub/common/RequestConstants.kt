@@ -9,6 +9,7 @@ class RequestConstants {
         const val CHANGE_PICTURE = "changePic"
         const val CHANGE_MOBILE = "change_mobile"
         const val GET_POPULAR_TAG = "popularTags"
+        const val GET_BANNERS = "getBanners"
         const val GET_POPULAR_CLASS_DATA = "popularPosts"
         const val GET_CATEGORY_WISE_FILTER_DATA="catData"
         const val ADD_WISH_LIST = "addWishList"

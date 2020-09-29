@@ -7,13 +7,30 @@ import com.ss_eduhub.base.BaseViewModel
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.model.PopularClassItem
 import com.ss_eduhub.model.PopularClassesItem
+import com.ss_eduhub.model.SliderItem
 import kotlinx.coroutines.launch
 
 class HomeViewModel : BaseViewModel() {
 
+    val bannersLiveData = MutableLiveData<BaseResult<ArrayList<SliderItem>>>()
     val popularClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
     val favoriteClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassesItem>>>()
     val yourClassesLiveData = MutableLiveData<BaseResult<ArrayList<PopularClassItem>>>()
+
+    fun getBanners() {
+        viewModelScope.launch {
+            try {
+                val response = getApiServiceManager().getBanners(Constants.userProfileData.id)
+                if (response.success) {
+                    bannersLiveData.value = BaseResult.Success(response.data!!)
+                } else
+                    bannersLiveData.value =
+                        BaseResult.Error(IllegalStateException(), response.message)
+            } catch (exception: Exception) {
+                bannersLiveData.value = BaseResult.Error(exception)
+            }
+        }
+    }
 
     fun getPopularClasses() {
         viewModelScope.launch {

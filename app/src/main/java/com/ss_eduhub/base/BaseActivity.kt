@@ -2,10 +2,10 @@ package com.ss_eduhub.base
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import com.jaeger.library.StatusBarUtil
 import com.ss_eduhub.R
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.extension.getProgressDialog
@@ -19,7 +19,9 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        StatusBarUtil.setTransparent(this)
+//        StatusBarUtil.setTransparent(this)
+        // Hide status bar
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         progressDialog = getProgressDialog(R.layout.lay_dialog_progress)
         successDialog = getProgressDialog(
             R.layout.lay_dialog_success,
