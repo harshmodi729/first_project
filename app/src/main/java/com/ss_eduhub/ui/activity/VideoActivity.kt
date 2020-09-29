@@ -165,7 +165,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                 val layParams = videoView.layoutParams as ConstraintLayout.LayoutParams
                 if (isFullScreen) {
                     window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            or View.SYSTEM_UI_FLAG_IMMERSIVE
+                            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                             or View.SYSTEM_UI_FLAG_FULLSCREEN)
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     layParams.matchConstraintPercentHeight = 1F
@@ -184,6 +184,12 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         }
 
         registerReceiver(downloadReceiver, filter)
+    }
+
+    override fun onBackPressed() {
+        if (btnFullScreen.isChecked) {
+            btnFullScreen.isChecked = false
+        } else super.onBackPressed()
     }
 
     private fun showTurnOnWiFiDialog() {
@@ -321,6 +327,14 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         releasePlayer()
         unregisterReceiver(downloadReceiver)
         super.onDestroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        exoPlayer?.let {
+            it.playWhenReady = false
+            it.playbackState
+        }
     }
 
     private fun releasePlayer() {
