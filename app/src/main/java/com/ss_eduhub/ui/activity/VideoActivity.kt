@@ -1,5 +1,14 @@
 package com.ss_eduhub.ui.activity
 
+//import androidx.media2.exoplayer.external.DefaultLoadControl
+//import androidx.media2.exoplayer.external.DefaultRenderersFactory
+//import androidx.media2.exoplayer.external.ExoPlayerFactory
+//import androidx.media2.exoplayer.external.SimpleExoPlayer
+//import androidx.media2.exoplayer.external.trackselection.AdaptiveTrackSelection
+//import androidx.media2.exoplayer.external.trackselection.DefaultTrackSelector
+//import androidx.media2.exoplayer.external.upstream.DefaultHttpDataSource
+//import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -29,9 +38,8 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector.ParametersBuilder
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector.SelectionOverride
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseActivity
@@ -91,6 +99,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         private const val PERMISSION_REQUEST = 1003
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
@@ -232,59 +241,22 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
     }
 
     private fun initializePlayer(videoUrl: String) {
-        trackSelectorParameters = ParametersBuilder().build()
+        trackSelectorParameters = ParametersBuilder(this).build()
         trackSelector =
-            DefaultTrackSelector(AdaptiveTrackSelection.Factory())
+            DefaultTrackSelector(this, AdaptiveTrackSelection.Factory())
         trackSelector.parameters = trackSelectorParameters
         val loadControl = DefaultLoadControl()
         val renderersFactory = DefaultRenderersFactory(this)
 
-        exoPlayer = ExoPlayerFactory.newSimpleInstance(
-            this, renderersFactory, trackSelector, loadControl
-        )
-        exoPlayer!!.addListener(object : Player.EventListener {
-            override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
+        exoPlayer = SimpleExoPlayer.Builder(this, renderersFactory)
+            .setTrackSelector(trackSelector)
+            .setLoadControl(loadControl)
+            .build()
+        exoPlayer!!.addListener(object : Player.Listener {
 
-            }
-
-            override fun onSeekProcessed() {
-
-            }
-
-            override fun onTracksChanged(
-                trackGroups: TrackGroupArray?,
-                trackSelections: TrackSelectionArray?
-            ) {
-
-            }
-
-            override fun onPlayerError(error: ExoPlaybackException) {
-                error.printStackTrace()
-                makeToast("Oops something went wrong. Can not play video.")
-            }
-
-            override fun onLoadingChanged(isLoading: Boolean) {
-
-            }
-
-            override fun onPositionDiscontinuity(reason: Int) {
-
-            }
-
-            override fun onRepeatModeChanged(repeatMode: Int) {
-
-            }
-
-            override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
-
-            }
-
-            override fun onTimelineChanged(timeline: Timeline?, manifest: Any?, reason: Int) {
-
-            }
-
-            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                when (playbackState) {
+            override fun onPlaybackStateChanged(state: Int) {
+                super.onPlaybackStateChanged(state)
+                when (state) {
                     Player.STATE_BUFFERING -> videoView.hideController()
                     Player.STATE_READY -> {
                         videoView.showController()
@@ -299,23 +271,31 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
                     }
                 }
             }
+
+            override fun onPlayerError(error: ExoPlaybackException) {
+                super.onPlayerError(error)
+                error.printStackTrace()
+                makeToast("Oops something went wrong. Can not play video.")
+            }
+
         })
         videoView.player = exoPlayer
 
         val mediaSource =
             buildMediaSource(Uri.parse(videoUrl))
-        exoPlayer!!.prepare(mediaSource, true, false)
+        exoPlayer!!.setMediaSource(mediaSource, true)
+        exoPlayer!!.prepare()
         videoView.showController()
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {
         val userAgent = Util.getUserAgent(this, getString(R.string.app_name))
         return if (uri.lastPathSegment!!.contains("m3u8"))
-            HlsMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
-                .createMediaSource(uri)
+            HlsMediaSource.Factory(DefaultHttpDataSource.Factory().setUserAgent(userAgent))
+                .createMediaSource(MediaItem.fromUri(uri))
         else
-            ProgressiveMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
-                .createMediaSource(uri)
+            ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory().setUserAgent(userAgent))
+                .createMediaSource(MediaItem.fromUri(uri))
     }
 
     override fun onDestroy() {
