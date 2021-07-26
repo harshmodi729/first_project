@@ -11,8 +11,8 @@
         android:label="@string/welcome_text"
         tools:layout="@layout/fragment_welcome_text">
         <action
-            android:id="@+id/action_nav_welcome_to_nav_intro"
-            app:destination="@id/nav_intro"
+            android:id="@+id/action_nav_welcome_to_nav_exam_dashboard"
+            app:destination="@id/nav_exam_dashboard"
             app:enterAnim="@anim/slide_left_to_right" />
     </fragment>
 
@@ -95,4 +95,10 @@
             android:name="phone_number"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_exam_dashboard"
+        android:name="com.ss_eduhub.ui.fragment.main.exam_dashboard.ExamDashboardFragment"
+        android:label="fragment_exam_dashboard"
+        tools:layout="@layout/fragment_exam_dashboard" />
 </navigation>

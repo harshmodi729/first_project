@@ -17,9 +17,10 @@ class StartupActivity : BaseActivity() {
         val navGraph = graphInflater.inflate(R.navigation.nav_edupi_startup)
         val navController = navHostFragment.navController
 
-        val destination = if (intent.getBooleanExtra("isAlreadyVisitIntro", false))
-            R.id.nav_sign_in else R.id.nav_welcome
-        navGraph.startDestination = destination
+//        val destination = if (intent.getBooleanExtra("isAlreadyVisitIntro", false))
+//            R.id.nav_sign_in else R.id.nav_welcome
+//        navGraph.startDestination = destination
+        navGraph.startDestination = R.id.nav_welcome
         navController.graph = navGraph
     }
 }

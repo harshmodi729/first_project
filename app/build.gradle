@@ -5,12 +5,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.ss_eduhub"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 3
         versionName "1.2"
 
@@ -72,10 +72,6 @@ dependencies {
 
     //region OTP PinView
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
-    //endregion
-
-    //region StatusBarUtil
-//    implementation 'com.jaeger.statusbarutil:library:1.5.1'
     //endregion
 
     //region ProgressBar

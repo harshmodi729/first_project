@@ -1,13 +1,5 @@
 package com.ss_eduhub.ui.activity
 
-//import androidx.media2.exoplayer.external.DefaultLoadControl
-//import androidx.media2.exoplayer.external.DefaultRenderersFactory
-//import androidx.media2.exoplayer.external.ExoPlayerFactory
-//import androidx.media2.exoplayer.external.SimpleExoPlayer
-//import androidx.media2.exoplayer.external.trackselection.AdaptiveTrackSelection
-//import androidx.media2.exoplayer.external.trackselection.DefaultTrackSelector
-//import androidx.media2.exoplayer.external.upstream.DefaultHttpDataSource
-//import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
