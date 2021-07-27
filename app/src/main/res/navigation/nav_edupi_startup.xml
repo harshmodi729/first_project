@@ -11,7 +11,12 @@
         android:label="@string/welcome_text"
         tools:layout="@layout/fragment_welcome_text">
         <action
-            android:id="@+id/action_nav_welcome_to_nav_exam_dashboard"
+            android:id="@+id/action_nav_welcome_to_intro"
+            app:destination="@id/nav_intro"
+            app:enterAnim="@anim/slide_left_to_right" />
+
+        <action
+            android:id="@+id/action_nav_welcome_to_exam_dashboard"
             app:destination="@id/nav_exam_dashboard"
             app:enterAnim="@anim/slide_left_to_right" />
     </fragment>

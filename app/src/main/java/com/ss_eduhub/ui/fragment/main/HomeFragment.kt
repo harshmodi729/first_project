@@ -3,6 +3,7 @@ package com.ss_eduhub.ui.fragment.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -33,14 +34,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private lateinit var homeSliderAdapter: HomeSliderAdapter
     private lateinit var popularClassesAdapter: PopularClassesAdapter
     private lateinit var categoriesAdapter: HomeCategoryAdapter
-    private var homeSliderHandler = Handler()
+    private var homeSliderHandler = Handler(Looper.getMainLooper())
     private val alSliderItem = ArrayList<SliderItem>()
     private var dots = ArrayList<TextView>()
     private lateinit var onViewMoreTagClickListener: OnViewMoreClickListener
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         btnToolbarBack.visibility = View.GONE
         tvToolbarTitle.text = getString(R.string.home)
 
