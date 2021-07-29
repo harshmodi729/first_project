@@ -1,5 +1,6 @@
 package com.ss_eduhub.ui.fragment.main.exam_dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -7,10 +8,12 @@ import com.ss_eduhub.R
 import com.ss_eduhub.adapter.ExamDashboardAdapter
 import com.ss_eduhub.base.BaseFragment
 import com.ss_eduhub.model.ExamDashboardItem
+import com.ss_eduhub.ui.activity.SelectCourseActivity
 import kotlinx.android.synthetic.main.fragment_exam_dashboard.*
 import kotlinx.android.synthetic.main.lay_toolbar.*
 
-class ExamDashboardFragment : BaseFragment(R.layout.fragment_exam_dashboard) {
+class ExamDashboardFragment : BaseFragment(R.layout.fragment_exam_dashboard),
+    ExamDashboardAdapter.OnCardClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,8 +49,13 @@ class ExamDashboardFragment : BaseFragment(R.layout.fragment_exam_dashboard) {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_mock_test)!!
             )
         )
-        val adapter = ExamDashboardAdapter()
+        val adapter = ExamDashboardAdapter(this)
         rvExamDashboard.adapter = adapter
         adapter.addData(list)
+    }
+
+    override fun onDashboardCardClick(item: ExamDashboardItem, position: Int) {
+        if (position == 1)
+            mContext.startActivity(Intent(mContext, SelectCourseActivity::class.java))
     }
 }

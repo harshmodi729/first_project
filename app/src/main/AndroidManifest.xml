@@ -13,10 +13,10 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
@@ -24,9 +24,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.ss_eduhub.ui.activity.StartupActivity" />
+        <activity android:name=".ui.activity.StartupActivity" />
         <activity
-            android:name="com.ss_eduhub.ui.activity.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/SplashFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,15 +34,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ss_eduhub.ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
         <activity
-            android:name="com.ss_eduhub.ui.activity.ClassActivity"
+            android:name=".ui.activity.ClassActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.ss_eduhub.ui.activity.VideoActivity"
+            android:name=".ui.activity.VideoActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode" />
-        <activity android:name="com.ss_eduhub.ui.activity.InstituteProfileActivity" />
-        <activity android:name="com.ss_eduhub.ui.activity.PurchaseClassActivity" />
+        <activity android:name=".ui.activity.InstituteProfileActivity" />
+        <activity android:name=".ui.activity.PurchaseClassActivity" />
+        <activity android:name=".ui.activity.SelectCourseActivity" />
     </application>
 
 </manifest>
