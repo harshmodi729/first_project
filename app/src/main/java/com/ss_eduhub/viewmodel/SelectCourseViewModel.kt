@@ -1,9 +1,12 @@
 package com.ss_eduhub.viewmodel
 
+import android.content.Intent
 import com.ss_eduhub.adapter.SelectCourseAdapter
 import com.ss_eduhub.base.BaseViewModel
+import com.ss_eduhub.common.Constants
 import com.ss_eduhub.databinding.ActivitySelectCourseBinding
-import com.ss_eduhub.model.CourserItem
+import com.ss_eduhub.model.CourseItem
+import com.ss_eduhub.ui.activity.CourseTestActivity
 import com.ss_eduhub.ui.activity.SelectCourseActivity
 import java.lang.ref.WeakReference
 
@@ -29,17 +32,22 @@ class SelectCourseViewModel : BaseViewModel(), SelectCourseAdapter.OnCardClickLi
         adapter.addData(getList())
     }
 
-    private fun getList(): ArrayList<CourserItem> {
-        val list = ArrayList<CourserItem>()
+    private fun getList(): ArrayList<CourseItem> {
+        val list = ArrayList<CourseItem>()
 
-        list.add(CourserItem(1, "JEE Main"))
-        list.add(CourserItem(2, "NEET"))
-        list.add(CourserItem(3, "MH-CET"))
-        list.add(CourserItem(4, "CAT"))
+        list.add(CourseItem(1, "JEE Main"))
+        list.add(CourseItem(2, "NEET"))
+        list.add(CourseItem(3, "MH-CET"))
+        list.add(CourseItem(4, "CAT"))
         return list
     }
 
-    override fun onDashboardCardClick(item: CourserItem, position: Int) {
-
+    override fun onCourseSelected(item: CourseItem) {
+        activity.get()!!.startActivity(
+            Intent(activity.get()!!, CourseTestActivity::class.java).putExtra(
+                Constants.COURSE_ITEM,
+                item
+            )
+        )
     }
 }

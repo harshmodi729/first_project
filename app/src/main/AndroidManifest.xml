@@ -44,6 +44,7 @@
         <activity android:name=".ui.activity.InstituteProfileActivity" />
         <activity android:name=".ui.activity.PurchaseClassActivity" />
         <activity android:name=".ui.activity.SelectCourseActivity" />
+        <activity android:name=".ui.activity.CourseTestActivity" />
     </application>
 
 </manifest>

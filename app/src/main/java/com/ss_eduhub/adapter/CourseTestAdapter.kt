@@ -3,19 +3,19 @@ package com.ss_eduhub.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ss_eduhub.databinding.LaySelectCourseItemBinding
-import com.ss_eduhub.model.CourseItem
+import com.ss_eduhub.databinding.LayCourseTestItemBinding
+import com.ss_eduhub.model.CourseTestItem
 
-class SelectCourseAdapter(private val listener: OnCardClickListener) :
-    RecyclerView.Adapter<SelectCourseAdapter.ViewHolder>() {
-    private var list = ArrayList<CourseItem>()
+class CourseTestAdapter(private val listener: OnCardClickListener) :
+    RecyclerView.Adapter<CourseTestAdapter.ViewHolder>() {
+    private var list = ArrayList<CourseTestItem>()
 
-    class ViewHolder(val binding: LaySelectCourseItemBinding) :
+    class ViewHolder(val binding: LayCourseTestItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LaySelectCourseItemBinding.inflate(
+            LayCourseTestItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -34,10 +34,10 @@ class SelectCourseAdapter(private val listener: OnCardClickListener) :
     override fun getItemCount() = list.size
 
     interface OnCardClickListener {
-        fun onCourseSelected(item: CourseItem)
+        fun onCourseSelected(item: CourseTestItem)
     }
 
-    fun addData(list: ArrayList<CourseItem>) {
+    fun addData(list: ArrayList<CourseTestItem>) {
         this.list = list
         notifyDataSetChanged()
     }

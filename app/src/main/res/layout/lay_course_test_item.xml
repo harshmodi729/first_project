@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.ss_eduhub.model.CourseItem" />
+            type="com.ss_eduhub.model.CourseTestItem" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -23,11 +23,11 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCourseName"
+                android:id="@+id/tvTestName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
-                android:text="@{item.courseName}"
+                android:text="@{item.testName}"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/medium_text"
                 android:textStyle="bold"
@@ -36,7 +36,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:text="Course Name" />
+                tools:text="Test Name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

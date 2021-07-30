@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_course_test.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_select_course.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/fragment_exam_dashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android/first_project/app/src/main/res/layout/lay_course_test_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/lay_exam_dashboard_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/lay_select_course_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/lay_toolbar.xml" value="0.20416666666666666" />
