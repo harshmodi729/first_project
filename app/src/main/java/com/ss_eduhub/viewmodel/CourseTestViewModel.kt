@@ -8,6 +8,7 @@ import com.ss_eduhub.databinding.ActivityCourseTestBinding
 import com.ss_eduhub.model.CourseItem
 import com.ss_eduhub.model.CourseTestItem
 import com.ss_eduhub.ui.activity.CourseTestActivity
+import com.ss_eduhub.ui.activity.TestListActivity
 import java.lang.ref.WeakReference
 
 class CourseTestViewModel : BaseViewModel(), CourseTestAdapter.OnCardClickListener {
@@ -50,6 +51,12 @@ class CourseTestViewModel : BaseViewModel(), CourseTestAdapter.OnCardClickListen
     }
 
     override fun onCourseSelected(item: CourseTestItem) {
-
+        activity.get()!!.startActivity(
+            Intent(
+                activity.get()!!,
+                TestListActivity::class.java
+            ).putExtra(Constants.COURSE_TEST_ITEM, item)
+                .putExtra("prefix", binding.toolbar.tvToolbarTitle.text.toString())
+        )
     }
 }

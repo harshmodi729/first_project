@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity
+            android:name=".ui.activity.TestListActivity"
+            android:exported="true" />
 
         <uses-library
             android:name="org.apache.http.legacy"
