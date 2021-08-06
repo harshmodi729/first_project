@@ -54,6 +54,10 @@
         <action
             android:id="@+id/action_nav_settings_to_nav_app_settings"
             app:destination="@id/nav_app_settings" />
+
+        <action
+            android:id="@+id/action_nav_settings_to_exam_dashboard"
+            app:destination="@id/nav_exam_dashboard" />
     </fragment>
 
     <fragment
@@ -77,4 +81,10 @@
             android:id="@+id/action_nav_app_settings_to_nav_settings"
             app:destination="@id/nav_settings" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_exam_dashboard"
+        android:name="com.ss_eduhub.ui.fragment.main.exam_dashboard.ExamDashboardFragment"
+        android:label="fragment_exam_dashboard"
+        tools:layout="@layout/fragment_exam_dashboard" />
 </navigation>

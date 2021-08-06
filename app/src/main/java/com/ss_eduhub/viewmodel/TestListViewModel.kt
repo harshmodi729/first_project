@@ -8,15 +8,17 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.ss_eduhub.R
+import com.ss_eduhub.adapter.TestListAdapter
 import com.ss_eduhub.base.BaseViewModel
 import com.ss_eduhub.common.Constants
 import com.ss_eduhub.databinding.ActivityTestListBinding
 import com.ss_eduhub.extension.hideKeyboard
 import com.ss_eduhub.model.CourseTestItem
+import com.ss_eduhub.model.TestListItem
 import com.ss_eduhub.ui.activity.TestListActivity
 import java.lang.ref.WeakReference
 
-class TestListViewModel : BaseViewModel() {
+class TestListViewModel : BaseViewModel(), TestListAdapter.OnCardClickListener {
 
     private lateinit var activity: WeakReference<TestListActivity>
     private lateinit var binding: ActivityTestListBinding
@@ -73,5 +75,22 @@ class TestListViewModel : BaseViewModel() {
                 )
             }
         binding.tvSubject.setAdapter(adapter)
+        val listAdapter = TestListAdapter(this)
+        binding.rvTest.adapter = listAdapter
+        listAdapter.addData(getData())
+    }
+
+    private fun getData(): ArrayList<TestListItem> {
+        val list = ArrayList<TestListItem>()
+        list.add(TestListItem(1, "NLM(Without friction) Practice Set", true))
+        list.add(TestListItem(2, "Units, Dimension and Analysis Practice Set", false))
+        list.add(TestListItem(3, "Relative Motion Practice Set", false))
+        list.add(TestListItem(4, "2 D Motion Practice Set", false))
+        list.add(TestListItem(5, "1 D Motion Practice Set", true))
+        return list
+    }
+
+    override fun onCourseSelected(item: TestListItem) {
+
     }
 }

@@ -14,11 +14,6 @@
             android:id="@+id/action_nav_welcome_to_intro"
             app:destination="@id/nav_intro"
             app:enterAnim="@anim/slide_left_to_right" />
-
-        <action
-            android:id="@+id/action_nav_welcome_to_exam_dashboard"
-            app:destination="@id/nav_exam_dashboard"
-            app:enterAnim="@anim/slide_left_to_right" />
     </fragment>
 
     <fragment
@@ -100,10 +95,4 @@
             android:name="phone_number"
             app:argType="string" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_exam_dashboard"
-        android:name="com.ss_eduhub.ui.fragment.main.exam_dashboard.ExamDashboardFragment"
-        android:label="fragment_exam_dashboard"
-        tools:layout="@layout/fragment_exam_dashboard" />
 </navigation>

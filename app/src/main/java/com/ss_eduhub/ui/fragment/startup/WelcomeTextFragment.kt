@@ -15,7 +15,7 @@ class WelcomeTextFragment : BaseFragment(R.layout.fragment_welcome_text) {
         lifecycleScope.launchWhenResumed {
             Handler(Looper.getMainLooper()).run {
                 postDelayed({
-                    findNavController().navigate(R.id.action_nav_welcome_to_exam_dashboard)
+                    findNavController().navigate(R.id.action_nav_welcome_to_intro)
                 }, 1500)
             }
         }
