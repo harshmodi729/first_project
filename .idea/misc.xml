@@ -6,8 +6,14 @@
         <entry key="..\:/Android/first_project/app/src/main/res/drawable/bg_attempt_rounded_btn.xml" value="0.2203125" />
         <entry key="..\:/Android/first_project/app/src/main/res/drawable/bg_resume_rounded_btn.xml" value="0.2203125" />
         <entry key="..\:/Android/first_project/app/src/main/res/drawable/bg_test_rounded_btn.xml" value="0.2203125" />
+        <entry key="..\:/Android/first_project/app/src/main/res/drawable/ic_arrow_left_white.xml" value="0.2203125" />
+        <entry key="..\:/Android/first_project/app/src/main/res/drawable/ic_check_checked.xml" value="0.2203125" />
+        <entry key="..\:/Android/first_project/app/src/main/res/drawable/ic_settings.xml" value="0.2203125" />
+        <entry key="..\:/Android/first_project/app/src/main/res/drawable/ic_timer.xml" value="0.2203125" />
+        <entry key="..\:/Android/first_project/app/src/main/res/drawable/ic_wrong_ans.xml" value="0.2203125" />
         <entry key="..\:/Android/first_project/app/src/main/res/drawable/layout_bg_dropdown.xml" value="0.2203125" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_course_test.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_question.xml" value="0.1935185185185185" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_select_course.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/activity_test_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/first_project/app/src/main/res/layout/fragment_exam_dashboard.xml" value="0.20416666666666666" />

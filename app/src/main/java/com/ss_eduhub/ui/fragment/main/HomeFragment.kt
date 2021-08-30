@@ -7,7 +7,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -71,8 +71,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         if (!Constants.userProfileData.profile.isBlankOrEmpty()) {
             mContext.loadImage(Constants.userProfileData.profile, ivUserProfile)
         }
-        val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
-        val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
+        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         layHome.post {
             showProgressDialog(layHome, ivDialogBg)
             homeViewModel.getBanners()

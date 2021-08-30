@@ -20,7 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -96,7 +96,7 @@ class VideoActivity : BaseActivity(), SSEduhubTrackSelectionView.TrackSelectionL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
-        videoViewModel = ViewModelProviders.of(this)[VideoViewModel::class.java]
+        videoViewModel = ViewModelProvider(this)[VideoViewModel::class.java]
         videoViewModel.videoWatchTimeLiveData.observe(this, {
             when (it) {
                 is BaseResult.Success -> {

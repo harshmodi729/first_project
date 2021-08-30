@@ -1,7 +1,7 @@
 package com.ss_eduhub.ui.activity
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.databinding.ActivityTestListBinding
 import com.ss_eduhub.viewmodel.TestListViewModel
@@ -16,7 +16,7 @@ class TestListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProviders.of(this)[TestListViewModel::class.java]
+        viewModel = ViewModelProvider(this)[TestListViewModel::class.java]
         viewModel.setBinding(WeakReference(this), binding, intent)
     }
 }

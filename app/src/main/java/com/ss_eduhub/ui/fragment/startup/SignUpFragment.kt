@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ss_eduhub.R
@@ -26,7 +26,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         tvToolbarTitle.text = getString(R.string.sign_up)
         tvTermCondition.movementMethod = LinkMovementMethod.getInstance()
 
-        val signUpViewModel = ViewModelProviders.of(this)[SignUpViewModel::class.java]
+        val signUpViewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
         signUpViewModel.registrationLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {

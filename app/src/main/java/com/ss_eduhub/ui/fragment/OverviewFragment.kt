@@ -7,7 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ss_eduhub.R
 import com.ss_eduhub.adapter.CommentAdapter
 import com.ss_eduhub.base.BaseFragment
@@ -46,7 +46,7 @@ class OverviewFragment(private val classesItem: PopularClassesItem) :
 
         mContext.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        videoViewModel = ViewModelProviders.of(this)[VideoViewModel::class.java]
+        videoViewModel = ViewModelProvider(this)[VideoViewModel::class.java]
         videoViewModel.addCommentRatingLiveData.observe(viewLifecycleOwner, {
             hideProgressDialog(ivDialogBg)
             when (it) {

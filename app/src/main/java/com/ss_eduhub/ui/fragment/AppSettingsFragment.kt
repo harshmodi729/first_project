@@ -3,7 +3,7 @@ package com.ss_eduhub.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseFragment
@@ -28,7 +28,7 @@ class AppSettingsFragment : BaseFragment(R.layout.fragment_app_settings),
         super.onViewCreated(view, savedInstanceState)
         tvToolbarTitle.text = getString(R.string.app_setting)
 
-        appSettingsViewModel = ViewModelProviders.of(this)[AppSettingsViewModel::class.java]
+        appSettingsViewModel = ViewModelProvider(this)[AppSettingsViewModel::class.java]
         appSettingsViewModel.getAppSettingsPreference(mContext)
         appSettingsViewModel.preferenceLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {

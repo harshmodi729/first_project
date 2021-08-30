@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.base.BaseResult
@@ -17,7 +17,7 @@ class SplashActivity : BaseActivity() {
         setContentView(R.layout.activity_splash)
 
         val splashViewModel =
-            ViewModelProviders.of(this)[SplashViewModel::class.java]
+            ViewModelProvider(this)[SplashViewModel::class.java]
         splashViewModel.isUserLogin(this)
         splashViewModel.isLoginLiveData.observe(this, Observer {
             Handler().postDelayed({

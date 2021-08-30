@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseFragment
@@ -35,7 +35,7 @@ class ForgotPasswordFragment : BaseFragment(R.layout.fragment_forgot_password), 
         activity?.onBackPressedDispatcher!!.addCallback(viewLifecycleOwner, backButtonCallback)
 
         val forgotPasswordViewModel =
-            ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
+            ViewModelProvider(this)[ForgotPasswordViewModel::class.java]
         forgotPasswordViewModel.verifyMobileLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {

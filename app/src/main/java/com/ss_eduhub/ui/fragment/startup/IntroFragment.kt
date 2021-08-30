@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.ss_eduhub.R
@@ -33,7 +33,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
         super.onViewCreated(view, savedInstanceState)
 
         val signInViewModel =
-            ViewModelProviders.of(this)[SignInViewModel::class.java]
+            ViewModelProvider(this)[SignInViewModel::class.java]
         signInViewModel.visitIntroLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is BaseResult.Success -> {

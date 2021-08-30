@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.ss_eduhub.R
@@ -50,9 +50,9 @@ class AccountSettingsFragment : BaseFragment(R.layout.fragment_account_settings)
         tvToolbarTitle.text = getString(R.string.account_settings)
 
         accountSettingsViewModel =
-            ViewModelProviders.of(this)[AccountSettingsViewModel::class.java]
+            ViewModelProvider(this)[AccountSettingsViewModel::class.java]
         val changePasswordViewModel =
-            ViewModelProviders.of(this)[ForgotPasswordViewModel::class.java]
+            ViewModelProvider(this)[ForgotPasswordViewModel::class.java]
 
         item = Constants.userProfileData
         tvUserName.text = item.name

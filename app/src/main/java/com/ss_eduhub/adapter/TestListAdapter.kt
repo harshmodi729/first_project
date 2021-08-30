@@ -36,9 +36,6 @@ class TestListAdapter(private val listener: OnCardClickListener) :
         holder.binding.btnAttemptResume.isChecked = list[position].attempted
         holder.binding.btnAttemptResume.setOnCheckedChangeListener { view, b ->
             if (b) view.text = "Resume" else view.text = "Attempt"
-        }
-
-        holder.binding.root.setOnClickListener {
             listener.onCourseSelected(list[position])
         }
     }

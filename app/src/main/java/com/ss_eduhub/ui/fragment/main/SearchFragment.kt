@@ -8,7 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ss_eduhub.R
 import com.ss_eduhub.adapter.PopularClassesAdapter
@@ -41,7 +41,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
         videoCategoryAdapter = VideoCategoryAdapter(mContext)
         rvVideoCategory.adapter = videoCategoryAdapter
-        val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.getVideoCategories().apply {
             laySearch.post {
                 showProgressDialog(laySearch, ivDialogBg)

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ss_eduhub.R
 import com.ss_eduhub.adapter.DownloadAdapter
 import com.ss_eduhub.adapter.FavoriteClassesAdapter
@@ -41,8 +41,8 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile) {
         }
         tvToolbarTitle.text = Constants.userProfileData.name
 
-        val homeViewModel = ViewModelProviders.of(this)[HomeViewModel::class.java]
-        val searchViewModel = ViewModelProviders.of(this)[SearchViewModel::class.java]
+        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         homeViewModel.getFavoriteClasses().apply {
             layUserProfile.post {

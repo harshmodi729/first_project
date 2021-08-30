@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.ss_eduhub.R
 import com.ss_eduhub.base.BaseFragment
@@ -26,7 +26,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         btnToolbarBack.visibility = View.GONE
         tvToolbarTitle.text = getString(R.string.sign_in)
 
-        signInViewModel = ViewModelProviders.of(this)[SignInViewModel::class.java]
+        signInViewModel = ViewModelProvider(this)[SignInViewModel::class.java]
         signInViewModel.signInLiveData.observe(viewLifecycleOwner, Observer {
             hideProgressDialog(ivDialogBg)
             when (it) {

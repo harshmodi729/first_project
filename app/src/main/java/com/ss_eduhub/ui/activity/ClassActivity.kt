@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -44,7 +44,7 @@ class ClassActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class)
 
-        videoViewModel = ViewModelProviders.of(this)[VideoViewModel::class.java]
+        videoViewModel = ViewModelProvider(this)[VideoViewModel::class.java]
         videoViewModel.addWishListLiveData.observe(this, Observer {
             hideProgressDialog(ivDialogBg)
             btnFavorite.setOnCheckedChangeListener(null)

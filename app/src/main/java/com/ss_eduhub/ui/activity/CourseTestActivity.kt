@@ -1,7 +1,7 @@
 package com.ss_eduhub.ui.activity
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ss_eduhub.base.BaseActivity
 import com.ss_eduhub.databinding.ActivityCourseTestBinding
 import com.ss_eduhub.viewmodel.CourseTestViewModel
@@ -16,7 +16,7 @@ class CourseTestActivity : BaseActivity() {
         binding = ActivityCourseTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProviders.of(this)[CourseTestViewModel::class.java]
+        viewModel = ViewModelProvider(this)[CourseTestViewModel::class.java]
         viewModel.setBinding(WeakReference(this), binding, intent)
     }
 }
