@@ -3,6 +3,7 @@ package com.ss_eduhub.data.remote
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.ss_eduhub.adapter.SelectCourseAdapter
 import com.ss_eduhub.common.RequestConstants
 import com.ss_eduhub.model.*
 import okhttp3.MultipartBody
@@ -112,4 +113,9 @@ interface ApiServices {
 
     @GET("8aa3d6ee-bb06-46ea-8614-1f49846ce2de")
     suspend fun getVideoCategory(): DummyApiResponse<ArrayList<VideoCategoryItem>>
+
+    @FormUrlEncoded
+    @POST(RequestConstants.GET_COURSES_LIST)
+    suspend fun getCoursesList(): ApiResponse<ArrayList<CourseItem>>
+
 }

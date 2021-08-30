@@ -16,5 +16,6 @@ class RequestConstants {
         const val GET_WISH_LIST = "getWishList"
         const val ADD_COMMENT = "addComment"
         const val ADD_DOWNLOAD_LIST = "addDownloadList"
+        const val GET_COURSES_LIST = "courses"
     }
 }

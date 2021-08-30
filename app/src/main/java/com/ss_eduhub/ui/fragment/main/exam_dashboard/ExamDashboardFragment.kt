@@ -42,13 +42,13 @@ class ExamDashboardFragment : BaseFragment(R.layout.fragment_exam_dashboard),
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_mock_test)!!
             )
         )
-        list.add(
-            ExamDashboardItem(
-                "Notifications",
-                "It updates you with all the information for upcoming events exams etc.",
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_mock_test)!!
-            )
-        )
+//        list.add(
+//            ExamDashboardItem(
+//                "Notifications",
+//                "It updates you with all the information for upcoming events exams etc.",
+//                ContextCompat.getDrawable(requireContext(), R.drawable.ic_mock_test)!!
+//            )
+//        )
         val adapter = ExamDashboardAdapter(this)
         rvExamDashboard.adapter = adapter
         adapter.addData(list)
