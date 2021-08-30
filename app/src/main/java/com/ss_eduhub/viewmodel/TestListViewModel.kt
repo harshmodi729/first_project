@@ -38,7 +38,7 @@ class TestListViewModel : BaseViewModel(), TestListAdapter.OnCardClickListener {
             courseTestItem =
                 intent.getSerializableExtra(Constants.COURSE_TEST_ITEM) as CourseTestItem
             binding.toolbar.tvToolbarTitle.text =
-                "${intent.getStringExtra("prefix")} - ${courseTestItem!!.testName}"
+                "${intent.getStringExtra("prefix")} - ${courseTestItem!!.paper}"
         } ?: kotlin.run {
             binding.toolbar.tvToolbarTitle.text = "Select Test"
         }
@@ -97,6 +97,7 @@ class TestListViewModel : BaseViewModel(), TestListAdapter.OnCardClickListener {
                 activity.get()!!,
                 QuestionActivity::class.java
             ).putExtra(Constants.QUESTION_ITEM, item)
+                .putExtra(Constants.COURSE_TEST_ITEM, courseTestItem)
         )
     }
 }

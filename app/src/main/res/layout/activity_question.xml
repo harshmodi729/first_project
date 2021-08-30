@@ -3,7 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ss_eduhub.viewmodel.QuestionViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layQuestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activity.QuestionActivity">
@@ -33,6 +41,7 @@
             android:maxLines="1"
             android:padding="@dimen/small_margin"
             android:textSize="@dimen/small_text"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -44,9 +53,9 @@
             android:layout_margin="@dimen/medium_margin"
             android:drawableStart="@drawable/ic_timer"
             android:drawablePadding="@dimen/small_margin"
-            android:text="59 min, 54 sec"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSubject" />
+            app:layout_constraintTop_toBottomOf="@id/tvSubject"
+            tools:text="59 min, 54 sec" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
@@ -66,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#8C8C8C"
-                    android:padding="@dimen/default_margin"
+                    android:padding="12dp"
                     android:text="1"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp"
@@ -81,12 +90,12 @@
                     android:layout_marginStart="@dimen/medium_margin"
                     android:drawableStart="@drawable/ic_check_checked"
                     android:drawablePadding="@dimen/xsmall_margin"
-                    android:text="4"
                     android:textColor="#1A8C12"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvCnt"
-                    app:layout_constraintStart_toEndOf="@id/tvCnt" />
+                    app:layout_constraintStart_toEndOf="@id/tvCnt"
+                    tools:text="4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvWrongAns"
@@ -95,12 +104,12 @@
                     android:layout_marginStart="@dimen/small_margin"
                     android:drawableStart="@drawable/ic_wrong_ans"
                     android:drawablePadding="@dimen/xsmall_margin"
-                    android:text="3"
                     android:textColor="#8C1212"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@id/tvCnt"
-                    app:layout_constraintStart_toEndOf="@id/tvRightAns" />
+                    app:layout_constraintStart_toEndOf="@id/tvRightAns"
+                    tools:text="3" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/chkReviewLater"
@@ -109,8 +118,96 @@
                     android:paddingEnd="@dimen/small_margin"
                     android:text="Review Later"
                     android:textColor="@color/colorPrimary"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="12dp"
+                    android:fillViewport="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCnt">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvQuestion"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@tools:sample/lorem" />
+
+                        <View
+                            android:id="@+id/dividerQuestion"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/divider_height"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/colorDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvQuestion" />
+
+                        <!--<include
+                            android:id="@+id/layOption1"
+                            layout="@layout/lay_answer_item"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dividerQuestion" />
+
+                        <include
+                            android:id="@+id/layOption2"
+                            layout="@layout/lay_answer_item"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layOption1" />
+
+                        <include
+                            android:id="@+id/layOption3"
+                            layout="@layout/lay_answer_item"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layOption2" />
+
+                        <include
+                            android:id="@+id/layOption4"
+                            layout="@layout/lay_answer_item"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layOption3" />-->
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvAnswers"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dividerQuestion"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/lay_answer_item" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.core.widget.NestedScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -120,6 +217,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/xsmall_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:backgroundTint="#AF934F"
             android:text="Back"
             android:textAllCaps="false"
@@ -135,8 +233,18 @@
             android:layout_marginEnd="@dimen/small_margin"
             android:text="Next"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnBack" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDialogBg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

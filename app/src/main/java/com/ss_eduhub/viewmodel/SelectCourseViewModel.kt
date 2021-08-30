@@ -18,8 +18,8 @@ class SelectCourseViewModel : BaseViewModel(), SelectCourseAdapter.OnCardClickLi
 
     private lateinit var activity: WeakReference<SelectCourseActivity>
     private lateinit var binding: ActivitySelectCourseBinding
-    val alCourseItem = MutableLiveData<BaseResult<ArrayList<CourseItem>>>()
-
+    private lateinit var adapter: SelectCourseAdapter
+    private val alCourseItem = MutableLiveData<BaseResult<ArrayList<CourseItem>>>()
 
     fun setBinding(
         activity: WeakReference<SelectCourseActivity>,
@@ -33,9 +33,12 @@ class SelectCourseViewModel : BaseViewModel(), SelectCourseAdapter.OnCardClickLi
             activity.get()!!.onBackPressed()
         }
 
-        val adapter = SelectCourseAdapter(this)
+        adapter = SelectCourseAdapter(this)
         binding.rvCourse.adapter = adapter
-        adapter.addData(alCourseItem)
+    }
+
+    fun getLiveData(): MutableLiveData<BaseResult<ArrayList<CourseItem>>> {
+        return alCourseItem
     }
 
     fun getCourseList() {
@@ -45,6 +48,7 @@ class SelectCourseViewModel : BaseViewModel(), SelectCourseAdapter.OnCardClickLi
                 if (response.success) {
                     response.data?.let {
                         alCourseItem.value = BaseResult.Success(it)
+                        adapter.addData(it)
                     } ?: kotlin.run {
                         alCourseItem.value =
                             BaseResult.Error(IllegalStateException("Oops something went wrong."))

@@ -11,11 +11,13 @@ class RequestConstants {
         const val GET_POPULAR_TAG = "popularTags"
         const val GET_BANNERS = "getBanners"
         const val GET_POPULAR_CLASS_DATA = "popularPosts"
-        const val GET_CATEGORY_WISE_FILTER_DATA="catData"
+        const val GET_CATEGORY_WISE_FILTER_DATA = "catData"
         const val ADD_WISH_LIST = "addWishList"
         const val GET_WISH_LIST = "getWishList"
         const val ADD_COMMENT = "addComment"
         const val ADD_DOWNLOAD_LIST = "addDownloadList"
         const val GET_COURSES_LIST = "courses"
+        const val GET_PAPER_LIST = "papers"
+        const val GET_QUESTION_LIST = "questions"
     }
 }

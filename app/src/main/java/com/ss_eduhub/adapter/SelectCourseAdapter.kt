@@ -2,17 +2,13 @@ package com.ss_eduhub.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.ss_eduhub.base.BaseResult
 import com.ss_eduhub.databinding.LaySelectCourseItemBinding
 import com.ss_eduhub.model.CourseItem
 
 class SelectCourseAdapter(private val listener: OnCardClickListener) :
     RecyclerView.Adapter<SelectCourseAdapter.ViewHolder>() {
     private var list = ArrayList<CourseItem>()
-    val alCourseItem = MutableLiveData<BaseResult<ArrayList<CourseItem>>>()
-
 
     class ViewHolder(val binding: LaySelectCourseItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -41,7 +37,7 @@ class SelectCourseAdapter(private val listener: OnCardClickListener) :
         fun onCourseSelected(item: CourseItem)
     }
 
-    fun addData(list: MutableLiveData<BaseResult<ArrayList<CourseItem>>>) {
+    fun addData(list: ArrayList<CourseItem>) {
         this.list = list
         notifyDataSetChanged()
     }
