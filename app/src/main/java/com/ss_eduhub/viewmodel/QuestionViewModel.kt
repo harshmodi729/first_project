@@ -23,6 +23,7 @@ import com.ss_eduhub.model.CourseTestItem
 import com.ss_eduhub.model.QuestionItem
 import com.ss_eduhub.model.TestListItem
 import com.ss_eduhub.ui.activity.QuestionActivity
+import com.ss_eduhub.ui.activity.ResultActivity
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
@@ -113,6 +114,13 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
                 cnt++
                 binding.tvQuestion.text = questionList[cnt].question
                 binding.tvCnt.text = "${cnt + 1}"
+            } else {
+                binding.btnNext.text = "Finish"
+                activity.get()!!.startActivity(
+                    Intent(activity.get()!!, ResultActivity::class.java)
+                        .putExtra(Constants.QUESTION_ITEM, testListItem)
+                )
+                activity.get()!!.finish()
             }
         }
     }
@@ -140,6 +148,8 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
                             }
                         }
                         questionList = it
+                        if (cnt == questionList.size - 1)
+                            binding.btnNext.text = "Finish"
                         binding.tvQuestion.text = questionList[cnt].question
                         binding.tvCnt.text = "${cnt + 1}"
                         adapter.addData(questionList[cnt])
@@ -222,3 +232,4 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
         }, 1500)
     }
 }
+
