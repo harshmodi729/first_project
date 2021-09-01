@@ -45,7 +45,7 @@ class AnswerAdapter(private val onCardClickListener: OnCardClickListener) :
         holder.tvAnswer.text = item.answer
         holder.tvAnswer.isChecked = item.isChecked
         holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-        if (questionItem.isAnswered && item.isAnswered)
+        if (questionItem.isAttempted && item.isAnswered)
             if (item.isCorrect) {
                 holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#8CEA7C"))
             } else {
@@ -53,7 +53,7 @@ class AnswerAdapter(private val onCardClickListener: OnCardClickListener) :
             }
 
         holder.tvAnswer.setOnClickListener {
-            if (!questionItem.isAnswered && !item.isAnswered) {
+            if (!item.isAnswered) {
                 if (selectedPosition != -1) {
                     item.isChecked = false
                 }

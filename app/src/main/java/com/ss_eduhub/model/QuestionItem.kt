@@ -10,10 +10,11 @@ data class QuestionItem(
 //    @SerializedName("data")
 //    val dataX: DataX,
     @SerializedName("options")
-    val options: List<String>,
+    val options: ArrayList<String>,
     @SerializedName("question")
     val question: String
 ) : Serializable {
+    var isAttempted = false
     var isAnswered = false
     var answers = ArrayList<Answers>()
 }

@@ -107,6 +107,7 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
                 cnt--
                 binding.tvQuestion.text = questionList[cnt].question
                 binding.tvCnt.text = "${cnt + 1}"
+                adapter.addData(questionList[cnt])
             }
         }
         binding.btnNext.setOnClickListener {
@@ -114,11 +115,15 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
                 cnt++
                 binding.tvQuestion.text = questionList[cnt].question
                 binding.tvCnt.text = "${cnt + 1}"
+                adapter.addData(questionList[cnt])
+                if (cnt == questionList.size - 1)
+                    binding.btnNext.text = "Finish"
             } else {
                 binding.btnNext.text = "Finish"
                 activity.get()!!.startActivity(
                     Intent(activity.get()!!, ResultActivity::class.java)
                         .putExtra(Constants.QUESTION_ITEM, testListItem)
+                        .putExtra(Constants.QUESTION_LIST, questionList)
                 )
                 activity.get()!!.finish()
             }
@@ -216,18 +221,19 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
         activity.get()!!.showProgressDialog(binding.layQuestion, binding.ivDialogBg)
         Handler(Looper.getMainLooper()).postDelayed({
             activity.get()!!.hideProgressDialog(binding.ivDialogBg)
-            item.isCorrect = item.answer == questionList[cnt].ans
+            item.isCorrect = (position + 1).toString() == questionList[cnt].ans
 
-            if (!questionList[cnt].isAnswered) {
-                if (item.isCorrect)
+            if (!questionList[cnt].isAttempted) {
+                if (item.isCorrect) {
                     rightCnt++
-                else wrongCnt++
+                    questionList[cnt].isAnswered = true
+                } else wrongCnt++
             }
             binding.tvRightAns.text = "$rightCnt"
             binding.tvWrongAns.text = "$wrongCnt"
 
             item.isAnswered = true
-            questionList[cnt].isAnswered = true
+            questionList[cnt].isAttempted = true
             adapter.notifyItemChanged(position)
         }, 1500)
     }

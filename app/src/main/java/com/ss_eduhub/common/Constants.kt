@@ -21,6 +21,7 @@ class Constants {
         const val COURSE_ITEM = "course_item"
         const val COURSE_TEST_ITEM = "course_test_item"
         const val QUESTION_ITEM = "question_item"
+        const val QUESTION_LIST = "question_list"
         var isPurchased = false
         val downloadingItem = HashMap<Long, VideosItem>()
         var userProfileData = SignInItem()
