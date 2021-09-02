@@ -42,7 +42,8 @@ class ResultViewModel : BaseViewModel() {
             questionList.forEach {
                 if (it.isAttempted) {
                     totalAttempt++
-                    if (it.isAnswered)
+                    val selectedAnswer = it.answers.find { answer -> answer.isChecked }
+                    if ((it.answers.indexOf(selectedAnswer) + 1).toString() == it.ans)
                         correct++
                     else wrong++
                 } else wrong++

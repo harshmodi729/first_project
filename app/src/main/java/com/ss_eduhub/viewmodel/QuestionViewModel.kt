@@ -234,8 +234,8 @@ class QuestionViewModel : BaseViewModel(), AnswerAdapter.OnCardClickListener {
 
             item.isAnswered = true
             questionList[cnt].isAttempted = true
-            adapter.notifyItemChanged(position)
-        }, 1500)
+//            adapter.notifyItemChanged(position)
+        }, 800)
     }
 }
 

@@ -1,7 +1,6 @@
 package com.ss_eduhub.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckedTextView
@@ -44,24 +43,25 @@ class AnswerAdapter(private val onCardClickListener: OnCardClickListener) :
         holder.tvCnt.text = "${position + 1}"
         holder.tvAnswer.text = item.answer
         holder.tvAnswer.isChecked = item.isChecked
-        holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+        /*holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
         if (questionItem.isAttempted && item.isAnswered)
             if (item.isCorrect) {
                 holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#8CEA7C"))
             } else {
                 holder.cvAnswer.setCardBackgroundColor(Color.parseColor("#ED7070"))
-            }
+            }*/
 
-        holder.tvAnswer.setOnClickListener {
-            if (!item.isAnswered) {
-                if (selectedPosition != -1) {
-                    item.isChecked = false
-                }
-                selectedPosition = position
-                holder.tvAnswer.isChecked = true
-                item.isChecked = true
-                onCardClickListener.onAnswerSelected(item, position)
+        holder.cvAnswer.setOnClickListener {
+//            if (!questionItem.isAnswered) {
+            if (selectedPosition != -1) {
+                questionItem.answers[selectedPosition].isChecked = false
+                notifyItemChanged(selectedPosition)
             }
+            selectedPosition = position
+            holder.tvAnswer.isChecked = true
+            item.isChecked = true
+            onCardClickListener.onAnswerSelected(item, position)
+//            }
         }
     }
 
